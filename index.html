@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Kemstay | منصة السكن للمغتربين</title>
+
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+
+     <div class="logo">Kemstay</div>
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- القائمة الأفقية (للكمبيوتر) -->
+  <nav class="main-nav">
+    <a href="#">الرئيسية</a>
+    <a href="#">الوحدات</a>
+    <a href="#">عن الشركة</a>
+    <a href="#">تواصل معنا</a>
+    <a href="#">تسجيل الدخول</a>
+  </nav>
+
+  <!-- القائمة الجانبية (للموبايل) -->
+  <div id="sideMenu" class="side-menu">
+    <button class="close-btn" onclick="closeMenu()">✖</button>
+    <nav>
+      <a href="#">الرئيسية</a>
+      <a href="#">الوحدات</a>
+      <a href="#">عن الشركة</a>
+      <a href="#">تواصل معنا</a>
+      <a href="#">تسجيل الدخول</a>
+    </nav>
+  </div>
+
+  </header>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" placeholder="ابحث عن مدينة أو حي...">
+    <input type="date">
+    <input type="date">
+    <button onclick="alert('جاري تنفيذ البحث...')">بحث</button>
+  </div>
+
+  <!-- Listings -->
+  <section class="listing-section">
+    <div class="listing-card">
+      <img src="https://source.unsplash.com/400x300/?room,apartment" alt="Room Image">
+      <div class="listing-details">
+        <h3>غرفة مفروشة في مدينة نصر</h3>
+        <p>2500 جنيه / شهريًا</p>
+      </div>
+    </div>
+
+    <div class="listing-card">
+      <img src="https://source.unsplash.com/400x300/?bedroom,cairo" alt="Room Image">
+      <div class="listing-details">
+        <h3>ستوديو راقي بالقرب من الجامعة الألمانية</h3>
+        <p>3200 جنيه / شهريًا</p>
+      </div>
+    </div>
+
+    <div class="listing-card">
+      <img src="https://source.unsplash.com/400x300/?student,room" alt="Room Image">
+      <div class="listing-details">
+        <h3>سكن طلابي مشترك في المعادي</h3>
+        <p>1800 جنيه / شهريًا</p>
+      </div>
+    </div>
+
+    <div class="listing-card">
+      <img src="https://source.unsplash.com/400x300/?hostel,dorm" alt="Room Image">
+      <div class="listing-details">
+        <h3>سكن موظفين في 6 أكتوبر</h3>
+        <p>2000 جنيه / شهريًا</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Kemstay. جميع الحقوق محفوظة.</p>
+  </footer>
+<script src="script.js"></script>
+
+</body>
+</html>
