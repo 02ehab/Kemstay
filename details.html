@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تفاصيل الوحدة - Kemstay</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+
+     <div class="logo">Kemstay</div>
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- القائمة الأفقية (للكمبيوتر) -->
+  <nav class="main-nav">
+    <a href="index.html">الرئيسية</a>
+    <a href="details.html">الوحدات</a>
+    <a href="#">عن الشركة</a>
+    <a href="#">تواصل معنا</a>
+    <a href="login.html">تسجيل الدخول</a>
+  </nav>
+
+  <!-- القائمة الجانبية (للموبايل) -->
+  <div id="sideMenu" class="side-menu">
+    <button class="close-btn" onclick="closeMenu()">✖</button>
+    <nav>
+      <a href="#">الرئيسية</a>
+      <a href="details.html">الوحدات</a>
+      <a href="#">عن الشركة</a>
+      <a href="#">تواصل معنا</a>
+      <a href="login.html">تسجيل الدخول</a>
+    </nav>
+  </div>
+
+  </header>
+
+  <main class="unit-details-container">
+    <div class="unit-image">
+      <img src="home.jpg" alt="صورة الوحدة" />
+    </div>
+
+    <div class="unit-info">
+      <h2>غرفة مميزة بإطلالة رائعة</h2>
+      <p class="unit-description">
+        هذه الوحدة توفر كل وسائل الراحة للمغتربين. قريبة من الجامعة والمواصلات، وتحتوي على سرير مريح، مكتب، تكييف، وحمام خاص.
+      </p>
+      <p><strong>السعر:</strong> 2500 جنيه/شهريًا</p>
+      <p><strong>السعة:</strong> 2 أفراد</p>
+
+      <button class="reserve-btn">احجز الآن</button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    جميع الحقوق محفوظة لـ Kemstay © 2025
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
