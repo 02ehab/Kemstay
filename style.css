@@ -1,3 +1,4 @@
+
 *{
       box-sizing: border-box;
       font-family: Arial, sans-serif;
@@ -27,6 +28,7 @@ body {
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      direction: ltr;
     }
 
     .logo {
@@ -61,7 +63,7 @@ body {
 
     .search-bar input, .search-bar button {
       flex: 1;
-      padding: 0.75rem;
+      padding: 15px 30px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
@@ -201,4 +203,182 @@ body {
   nav:not(.side-menu nav) {
     display: none; /* إخفاء القائمة العادية على الموبايل */
   }
+}
+/* تسجيل الدخول وانشاء الحساب*/
+/* From Uiverse.io by JohnnyCSilva */
+ 
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #ffffff;
+  padding: 30px;
+  height: auto;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+::placeholder {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.form button {
+  align-self: flex-end;
+}
+
+.flex-column > label {
+  color: #151717;
+  font-weight: 600;
+}
+
+.inputForm {
+  border: 1.5px solid #ecedec;
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.input {
+  margin-left: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.inputForm:focus-within {
+  border: 1.5px solid #2d79f3;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.flex-row > div > label {
+  font-size: 14px;
+  color: black;
+  font-weight: 400;
+}
+
+.span {
+  font-size: 14px;
+  margin-left: 5px;
+  color: #2d79f3;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button-submit {
+ margin: 20px auto 10px auto; /* توسيط أفقي */
+  background-color: #151717;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  height: 50px;
+  width: 200px; /* أو جرب 40% حسب التصميم */
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+
+.p {
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.btn {
+  margin-top: 10px;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  gap: 10px;
+  border: 1px solid #ededef;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.btn:hover {
+  border: 1px solid #2d79f3;
+  ;
+}
+@media (max-width: 500px) {
+  .form {
+    width: 90%;
+    padding: 20px;
+  }
+}
+
+
+    
+/*تفاصيل الوحدة*/
+.unit-details-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.unit-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.unit-info h2 {
+  font-size: 1.6rem;
+  color: #e91e63;
+  margin-bottom: 1rem;
+}
+
+.unit-description {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.reserve-btn {
+  margin-top: 1.5rem;
+  background-color: #e91e63;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.reserve-btn:hover {
+  background-color: #d81b60;
 }
