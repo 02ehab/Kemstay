@@ -1,0 +1,89 @@
+*{
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      direction: ltr;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #e91e63;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+
+.notifications-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.notification {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.notification:last-child {
+  border-bottom: none;
+}
+
+.notification.unread {
+  background: #fff3f6;
+  border-right: 3px solid #e91e63;
+}
+
+.notification p {
+  margin: 0;
+}
+
+.notification span {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.footer {
+  background-color: #222;
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+  margin-top: auto; /* هذا يجعل الفوتر يلتصق بأسفل الصفحة */
+}
