@@ -7,42 +7,21 @@ function closeMenu() {
 }
 
 // تسجيل الدخول وإنشاء حساب
-function showForm(type) {
-  const loginForm = document.getElementById("loginForm");
-  const registerForm = document.getElementById("registerForm");
-  const loginTab = document.getElementById("loginTab");
-  const registerTab = document.getElementById("registerTab");
-
-  if (type === "login") {
-    loginForm.classList.remove("hidden");
-    registerForm.classList.add("hidden");
-    loginTab.classList.add("active");
-    registerTab.classList.remove("active");
-  } else {
-    loginForm.classList.add("hidden");
-    registerForm.classList.remove("hidden");
-    loginTab.classList.remove("active");
-    registerTab.classList.add("active");
-  }
+function showLogin() {
+  document.getElementById("loginForm").classList.add("active");
+  document.getElementById("registerForm").classList.remove("active");
+  document.getElementById("btn-indicator").style.right = "0%";
 }
 
-// تسجيل الدخول
-const loginForm = document.querySelector("#loginForm");
-if (loginForm) {
-  loginForm.addEventListener("submit", function(e) {
-    e.preventDefault();
-    window.location.href = "index.html";
-  });
+function showRegister() {
+  document.getElementById("loginForm").classList.remove("active");
+  document.getElementById("registerForm").classList.add("active");
+  document.getElementById("btn-indicator").style.right = "50%";
+}
+function loginWithGoogle() {
+  alert("تم الضغط على تسجيل باستخدام Google (ربط Google OAuth يأتي لاحقًا)");
 }
 
-// إنشاء حساب
-const registerForm = document.querySelector("#registerForm");
-if (registerForm) {
-  registerForm.addEventListener("submit", function(e) {
-    e.preventDefault();
-    window.location.href = "index.html";
-  });
-}
 
 // صفحة تفاصيل الوحدة وحجز وهمي
 document.addEventListener("DOMContentLoaded", () => {
