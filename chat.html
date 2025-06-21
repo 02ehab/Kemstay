@@ -7,13 +7,34 @@
   <link rel="stylesheet" href="chat.css">
 </head>
 <body>
-  <header>
-    <div class="logo">Kemstay</div>
+   <header>
+
+     <div class="logo">Kemstay</div>
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- القائمة الأفقية (للكمبيوتر) -->
+  <nav class="main-nav">
+    <a href="index.html">الرئيسية</a>
+    <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
+    <a href="notifications.html">الاشعارات</a>
+    <a href="chat.html">الدردشة </a>
+    <a href="login.html" id="authLink">تسجيل الدخول</a>
+  </nav>
+
+  <!-- القائمة الجانبية (للموبايل) -->
+  <div id="sideMenu" class="side-menu">
+    <button class="close-btn" onclick="closeMenu()">✖</button>
     <nav>
       <a href="index.html">الرئيسية</a>
-      <a href="notifications.html">الإشعارات</a>
-      <a href="chat.html">الدردشة</a>
+      <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
+      <a href="notifications.html">الاشعارات</a>
+    <a href="chat.html">الدردشة </a>
+    <a href="login.html" id="authLink">تسجيل الدخول</a>
     </nav>
+  </div>
+
   </header>
 
   <main class="chat-container">
@@ -27,6 +48,7 @@
       <button>إرسال</button>
     </div>
   </main>
+  <script src="chat.js"></script>
 
   <footer class="footer">
     <p>© 2025 Kemstay</p>
