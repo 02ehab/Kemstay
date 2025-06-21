@@ -21,7 +21,42 @@ function showRegister() {
 function loginWithGoogle() {
   alert("تم الضغط على تسجيل باستخدام Google (ربط Google OAuth يأتي لاحقًا)");
 }
+// تحقق من حالة تسجيل الدخول من localStorage
+document.addEventListener("DOMContentLoaded", () => {
+  const authLink = document.getElementById("authLink");
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
+  if (isLoggedIn === "true") {
+    authLink.textContent = "البروفايل";
+    authLink.href = "profile.html";
+  } else {
+    authLink.textContent = "تسجيل الدخول";
+    authLink.href = "login.html";
+  }
+});
+// بعد نجاح تسجيل الدخول
+//localStorage.setItem("isLoggedIn", "true");
+//window.location.href = "index.html";
+
+function logout() {
+  localStorage.removeItem("isLoggedIn");
+  window.location.href = "index.html";
+}
+
+//تغيير حالة تسجيل الدخول
+document.addEventListener("DOMContentLoaded", function () {
+  const authLink = document.getElementById("authLink");
+
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  if (isLoggedIn === "true") {
+    authLink.textContent = "الملف الشخصي";
+    authLink.href = "profile.html";
+  } else {
+    authLink.textContent = "تسجيل الدخول";
+    authLink.href = "login.html";
+  }
+});
 
 // صفحة تفاصيل الوحدة وحجز وهمي
 document.addEventListener("DOMContentLoaded", () => {
@@ -32,4 +67,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
