@@ -35,7 +35,7 @@ body {
       font-weight: bold;
       color: #e91e63;
     }
-
+    
     nav {
       display: flex;
       gap: 1rem;
@@ -47,6 +47,71 @@ body {
       color: #333;
       font-weight: 500;
     }
+     .menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.side-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
+  max-width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  padding: 2rem 1rem;
+  z-index: 999;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.side-menu nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.side-menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.side-menu .close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  align-self: flex-end;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.side-menu.open {
+  display: flex;
+}
+
+@media (max-width: 600px) {
+  header > nav {
+    display: none; /* إخفاء القائمة الأصلية فقط على الشاشات الصغيرة */
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+
+  nav:not(.side-menu nav) {
+    display: none; /* إخفاء القائمة العادية على الموبايل */
+  }
+}
 
 
 .notifications-container {
