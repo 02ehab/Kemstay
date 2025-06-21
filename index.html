@@ -17,22 +17,24 @@
 
   <!-- القائمة الأفقية (للكمبيوتر) -->
   <nav class="main-nav">
-    <a href="#">الرئيسية</a>
-    <a href="details.html">الوحدات</a>
+    <a href="index.html">الرئيسية</a>
+    <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
     <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html">تسجيل الدخول</a>
+    <a href="login.html" id="authLink">تسجيل الدخول</a>
   </nav>
 
   <!-- القائمة الجانبية (للموبايل) -->
   <div id="sideMenu" class="side-menu">
     <button class="close-btn" onclick="closeMenu()">✖</button>
     <nav>
-      <a href="#">الرئيسية</a>
-      <a href="details.html">الوحدات</a>
+      <a href="index.html">الرئيسية</a>
+      <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
       <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-      <a href="login.html">تسجيل الدخول</a>
+    <a href="login.html" id="authLink">تسجيل الدخول</a>
     </nav>
   </div>
 
@@ -46,7 +48,8 @@
   <button onclick="alert('جاري تنفيذ البحث...')">بحث</button>
 </div>
 
-<!-- Listings -->
+<!-- Units -->
+      <h2 style="padding: 1rem 2rem 0; color: #e91e63;">الشقق</h2>
 <section class="listing-section">
   <div class="listing-card">
     <img src="home.jpg" alt="Room Image">
@@ -66,6 +69,26 @@
   </div>
 </section>
 
+<!-- Hostels -->
+      <h2 style="padding: 1rem 2rem 0; color: #e91e63;">الفنادق</h2>
+<section class="listing-section">
+  <div class="listing-card">
+    <img src="home.jpg" alt="Room Image">
+    <div class="listing-details">
+      <h3>غرفة مفروشة في مدينة نصر</h3>
+      <p>2500 جنيه / شهريًا</p>
+      <a href="details.html" class="details-btn">عرض التفاصيل</a>
+    </div>
+  </div>
+  <div class="listing-card">
+    <img src="home.jpg" alt="Room Image">
+    <div class="listing-details">
+      <h3>غرفة مفروشة في مدينة نصر</h3>
+      <p>2500 جنيه / شهريًا</p>
+      <a href="details.html" class="details-btn">عرض التفاصيل</a>
+    </div>
+  </div>
+</section>
 
   <!-- Footer -->
   <footer class="footer">
