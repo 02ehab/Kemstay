@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>تفاصيل الوحدة - Kemstay</title>
-  <link rel="stylesheet" href="details.css" />
+  <link rel="stylesheet" href="apartments.css" />
 </head>
 <body>
-    <header>
+     <header>
 
      <div class="logo">Kemstay</div>
   <button class="menu-toggle" onclick="openMenu()">☰</button>
@@ -15,21 +15,23 @@
   <!-- القائمة الأفقية (للكمبيوتر) -->
   <nav class="main-nav">
     <a href="index.html">الرئيسية</a>
-    <a href="details.html">الوحدات</a>
+    <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
     <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html">تسجيل الدخول</a>
+    <a href="login.html" id="authLink">تسجيل الدخول</a>
   </nav>
 
   <!-- القائمة الجانبية (للموبايل) -->
   <div id="sideMenu" class="side-menu">
     <button class="close-btn" onclick="closeMenu()">✖</button>
     <nav>
-      <a href="#">الرئيسية</a>
-      <a href="details.html">الوحدات</a>
+      <a href="index.html">الرئيسية</a>
+      <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
       <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-      <a href="login.html">تسجيل الدخول</a>
+    <a href="login.html" id="authLink">تسجيل الدخول</a>
     </nav>
   </div>
 
@@ -56,6 +58,6 @@
     جميع الحقوق محفوظة لـ Kemstay © 2025
   </footer>
 
-  <script src="detals.js"></script>
+  <script src="apartments.js"></script>
 </body>
 </html>
