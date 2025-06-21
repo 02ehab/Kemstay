@@ -1,18 +1,41 @@
-document.getElementById("addUnitForm").addEventListener("submit", function(event) {
-      event.preventDefault();
+function openMenu() {
+  document.getElementById("sideMenu").classList.add("open");
+}
 
-      const unitData = {
-        title: this.title.value.trim(),
-        description: this.description.value.trim(),
-        price: Number(this.price.value),
-        capacity: Number(this.capacity.value),
-        imageUrl: this.imageUrl.value.trim(),
-      };
+function closeMenu() {
+  document.getElementById("sideMenu").classList.remove("open");
+}
 
-      // هنا تقدر ترسل البيانات لـ API أو تخزنها محلياً
-      console.log("تم إضافة الوحدة:", unitData);
+document.getElementById("addUnitForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-      alert("تمت إضافة الوحدة بنجاح!");
+  const title = this.title.value;
+  const description = this.description.value;
+  const price = this.price.value;
+  const capacity = this.capacity.value;
+  const imageFile = this.image.files[0];
 
-      this.reset(); // إعادة ضبط الفورم
-    });
+  if (!imageFile) {
+    alert("يرجى اختيار صورة");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function () {
+    const imageDataURL = reader.result;
+
+    const unit = {
+      title,
+      description,
+      price,
+      capacity,
+      image: imageDataURL, // الصورة بصيغة base64
+    };
+
+    console.log("الوحدة المُضافة:", unit);
+    alert("تمت إضافة الوحدة بنجاح!");
+    // هنا ممكن تبعت البيانات لسيرفر أو Firebase
+  };
+
+  reader.readAsDataURL(imageFile);
+});
