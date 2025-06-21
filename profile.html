@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="profile.css">
+  <title>Kemstay | منصة السكن للمغتربين</title>
+
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+
+     <div class="logo">Kemstay</div>
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- القائمة الأفقية (للكمبيوتر) -->
+  <nav class="main-nav">
+    <a href="index.html">الرئيسية</a>
+    <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
+    <a href="notifications.html">الاشعارات</a>
+    <a href="chat.html">الدردشة </a>
+    <a href="login.html" id="authLink">تسجيل الدخول</a>
+  </nav>
+
+  <!-- القائمة الجانبية (للموبايل) -->
+  <div id="sideMenu" class="side-menu">
+    <button class="close-btn" onclick="closeMenu()">✖</button>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
+      <a href="notifications.html">الاشعارات</a>
+    <a href="chat.html">الدردشة </a>
+    <a href="login.html" id="authLink">تسجيل الدخول</a>
+    </nav>
+  </div>
+
+  </header>
+  <div class="profile-container">
+    <div class="profile-card">
+      <img src="home.jpg" alt="الصورة الشخصية" class="profile-img" />
+      <h2>ايهاب عبداللاه</h2>
+      <p>البريد: ehab@kemstay.com</p>
+      <p>المدينة: القاهرة</p>
+      <p>النوع: صاحب عقار</p>
+      <p>تاريخ الانضمام: يناير 2025</p>
+      <div class="profile-actions">
+        <button class="add-unit-btn" onclick="openUnitTypePopup()">إضافة وحدة</button>
+        <button class="edit-btn">تعديل البيانات</button>
+        
+        <button class="logout-btn" onclick="location.href='login.html'">تسجيل الخروج</button>
+      </div>
+    </div>
+  </div>
+
+<div id="unitTypePopup" class="popup-overlay hidden">
+  <div class="popup-content">
+    <h3>اختر نوع الوحدة</h3>
+    <button onclick="redirectTo('add_apartments.html')">شقة</button>
+    <button onclick="redirectTo('add_hostels.html')">هوستيل</button>
+    <button onclick="closeUnitTypePopup()">إلغاء</button>
+  </div>
+</div>
+
+</body>
+  <script src="profile.js"></script>
+</html>
