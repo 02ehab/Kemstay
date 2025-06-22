@@ -39,3 +39,16 @@ document.getElementById("addUnitForm").addEventListener("submit", function (e) {
 
   reader.readAsDataURL(imageFile);
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const authLink = document.getElementById("authLink");
+
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  if (isLoggedIn === "true") {
+    authLink.textContent = "الملف الشخصي";
+    authLink.href = "profile.html";
+  } else {
+    authLink.textContent = "تسجيل الدخول";
+    authLink.href = "login.html";
+  }
+});
