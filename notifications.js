@@ -69,4 +69,3 @@ document.addEventListener("DOMContentLoaded", function () {
     authLink.href = "login.html";
   }
 });
-
