@@ -57,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
     authLink.href = "login.html";
   }
 });
-
 // صفحة تفاصيل الوحدة وحجز وهمي
 document.addEventListener("DOMContentLoaded", () => {
   const reserveBtn = document.querySelector(".reserve-btn");
