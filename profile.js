@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     authLink.href = "login.html";
   }
 });
+
 // اضافة وحدة
 function openUnitTypePopup() {
   document.getElementById('unitTypePopup').classList.remove('hidden');
