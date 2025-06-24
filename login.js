@@ -1,58 +1,53 @@
-// تسجيل الدخول أو إنشاء حساب
 function handleAuthSuccess() {
-  // حفظ الحالة
   localStorage.setItem("isLoggedIn", "true");
-
-  // تحويل للملف الشخصي
+  localStorage.setItem("username", "ايهاب عبداللاه");
   window.location.href = "profile.html";
+}
+
+function showLogin() {
+  document.getElementById("loginForm").classList.add("active");
+  document.getElementById("registerForm").classList.remove("active");
+  document.getElementById("btn-indicator").style.right = "0%";
+}
+
+function showRegister() {
+  document.getElementById("loginForm").classList.remove("active");
+  document.getElementById("registerForm").classList.add("active");
+  document.getElementById("btn-indicator").style.right = "50%";
+}
+
+function loginWithGoogle() {
+  alert("تم الضغط على تسجيل باستخدام Google (ربط Google لاحقًا)");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
   const registerForm = document.getElementById("registerForm");
 
-  // نموذج تسجيل الدخول
   if (loginForm) {
     loginForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      // هنا تضيف تحقق فعلي لو كنت بتربطه بقاعدة بيانات
       handleAuthSuccess();
     });
   }
 
-  // نموذج إنشاء حساب
   if (registerForm) {
     registerForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      // برضو تحقق حقيقي لو عندك قاعدة بيانات
       handleAuthSuccess();
     });
   }
 
-  // تعديل الهيدر بناءً على حالة تسجيل الدخول
-  const authLink = document.getElementById("authLink");
-  if (authLink) {
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const authLinks = document.querySelectorAll(".auth-link");
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-    if (isLoggedIn) {
-      authLink.textContent = "الملف الشخصي";
-      authLink.href = "profile.html";
+  authLinks.forEach(link => {
+    if (isLoggedIn === "true") {
+      link.textContent = "الملف الشخصي";
+      link.href = "profile.html";
     } else {
-      authLink.textContent = "تسجيل الدخول";
-      authLink.href = "login.html";
+      link.textContent = "تسجيل الدخول";
+      link.href = "login.html";
     }
-  }
-});
-
-// زر تسجيل الخروج
-function logout() {
-  localStorage.removeItem("isLoggedIn");
-  window.location.href = "index.html";
-}
-document.querySelector("#loginForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  // تخزين حالة الدخول
-  localStorage.setItem("isLoggedIn", "true");
-  localStorage.setItem("username", "ايهاب عبداللاه"); // أو الاسم الذي تم إدخاله
-  window.location.href = "profile.html"; // أو index.html حسب رغبتك
+  });
 });
