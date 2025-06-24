@@ -12,6 +12,7 @@ html, body {
 }
 
 body {
+  direction: rtl;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -168,3 +169,188 @@ body {
   text-align: center;
   margin-top: auto; /* هذا يجعل الفوتر يلتصق بأسفل الصفحة */
 }
+/* search bar */
+.search-bar-airbnb {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 50px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 10px 20px;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 2rem auto;
+  direction: rtl;
+  font-family: Arial, sans-serif;
+}
+
+.search-item {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 120px;
+}
+
+.search-item label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #888;
+  margin-bottom: 4px;
+  user-select: none;
+}
+
+.search-item input[type="text"],
+.search-item input[type="date"],
+.search-item input[type="number"] {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 30px;
+  background-color: #f7f7f7;
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.search-item input:focus {
+  box-shadow: 0 0 0 2px #e91e63;
+  background-color: #fff;
+}
+
+/* فاصل بين العناصر */
+.search-item:not(:last-child) {
+  border-right: 1px solid #ddd;
+  padding-right: 16px;
+  margin-right: 16px;
+}
+
+/* زرار البحث */
+.search-btn {
+  background-color: #e91e63;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #d81b60;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .search-bar-airbnb {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .search-item {
+    min-width: 100%;
+    border-right: none !important;
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .search-btn {
+    width: 100%;
+    border-radius: 12px;
+    font-size: 1rem;
+    height: 40px;
+  }
+}
+
+
+/*عرض الوحدات*/
+.listing-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 كروت على اللابتوب */
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+/* على الشاشات الصغيرة (موبايل) نخليها 2 كارت */
+@media (max-width: 768px) {
+  .listing-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* على الشاشات الصغيرة جدًا (جوال صغير) كارت واحد فقط */
+@media (max-width: 480px) {
+  .listing-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+    .listing-card {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;  /* عمودي */
+  cursor: pointer;
+  height: 100%;
+}
+
+    .listing-card:hover {
+      transform: translateY(-4px);
+    }
+
+   .listing-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+    .listing-details {
+      padding: 1rem;
+    }
+
+    .listing-details h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+    .listing-details p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .details-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 0.5rem 1rem;
+  background-color: #e91e63;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.details-btn:hover {
+  background-color: #d81b60;
+}
+
+
+    @media (max-width: 600px) {
+      .search-bar {
+        flex-direction: column;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
