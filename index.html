@@ -40,12 +40,30 @@
 
   </header>
 
-  <!-- Search Bar -->
-  <div class="search-bar">
-  <input type="text" placeholder="ابحث عن مدينة أو حي...">
-  <input type="date">
-  <input type="date">
-  <button onclick="alert('جاري تنفيذ البحث...')">بحث</button>
+  <div class="search-bar-airbnb">
+  <div class="search-item">
+    <label>المكان</label>
+    <input type="text" placeholder="أين تريد الإقامة؟" />
+  </div>
+
+  <div class="search-item">
+    <label>تسجيل الوصول</label>
+    <input type="date" />
+  </div>
+
+  <div class="search-item">
+    <label>تسجيل المغادرة</label>
+    <input type="date" />
+  </div>
+
+  <div class="search-item">
+    <label>الضيوف</label>
+    <input type="number" min="1" value="1" />
+  </div>
+
+  <button class="search-btn" onclick="alert('جاري تنفيذ البحث...')">
+    🔍 
+  </button>
 </div>
 
 <!-- Units -->
