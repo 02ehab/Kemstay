@@ -48,18 +48,20 @@ function logout() {
 
 //تغيير حالة تسجيل الدخول
 document.addEventListener("DOMContentLoaded", function () {
-  const authLink = document.getElementById("authLink");
-
+  const authLinks = document.querySelectorAll(".auth-link");
   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-  if (isLoggedIn === "true") {
-    authLink.textContent = "الملف الشخصي";
-    authLink.href = "profile.html";
-  } else {
-    authLink.textContent = "تسجيل الدخول";
-    authLink.href = "login.html";
-  }
+  authLinks.forEach(link => {
+    if (isLoggedIn === "true") {
+      link.textContent = "الملف الشخصي";
+      link.href = "profile.html";
+    } else {
+      link.textContent = "تسجيل الدخول";
+      link.href = "login.html";
+    }
+  });
 });
+
 
 // اضافة وحدة
 function openUnitTypePopup() {
