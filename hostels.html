@@ -37,22 +37,54 @@
 
   </header>
 
-  <main class="unit-details-container">
-    <div class="unit-image">
-      <img src="home.jpg" alt="صورة الوحدة" />
-    </div>
+   <!-- Search Bar -->
+  
+<div class="search-bar-airbnb">
+  <div class="search-item">
+    <label>المكان</label>
+    <input type="text" placeholder="أين تريد الإقامة؟" />
+  </div>
 
-    <div class="unit-info">
-      <h2>غرفة مميزة بإطلالة رائعة</h2>
-      <p class="unit-description">
-        هذه الوحدة توفر كل وسائل الراحة للمغتربين. قريبة من الجامعة والمواصلات، وتحتوي على سرير مريح، مكتب، تكييف، وحمام خاص.
-      </p>
-      <p><strong>السعر:</strong> 2500 جنيه/شهريًا</p>
-      <p><strong>السعة:</strong> 2 أفراد</p>
+  <div class="search-item">
+    <label>تسجيل الوصول</label>
+    <input type="date" />
+  </div>
 
-      <button class="reserve-btn">احجز الآن</button>
+  <div class="search-item">
+    <label>تسجيل المغادرة</label>
+    <input type="date" />
+  </div>
+
+  <div class="search-item">
+    <label>الضيوف</label>
+    <input type="number" min="1" value="1" />
+  </div>
+
+  <button class="search-btn" onclick="alert('جاري تنفيذ البحث...')">
+    🔍 
+  </button>
+</div>
+
+<!-- Units -->
+<section class="listing-section">
+  <div class="listing-card">
+    <img src="home.jpg" alt="Room Image">
+    <div class="listing-details">
+      <h3>غرفة مفروشة في مدينة نصر</h3>
+      <p>2500 جنيه / شهريًا</p>
+      <a href="apartments.html" class="details-btn">عرض التفاصيل</a>
     </div>
-  </main>
+  </div>
+  <div class="listing-card">
+    <img src="home.jpg" alt="Room Image">
+    <div class="listing-details">
+      <h3>غرفة مفروشة في مدينة نصر</h3>
+      <p>2500 جنيه / شهريًا</p>
+      <a href="apartments.html" class="details-btn">عرض التفاصيل</a>
+    </div>
+  </div>
+</section>
+
 
   <footer class="footer">
     جميع الحقوق محفوظة لـ Kemstay © 2025
