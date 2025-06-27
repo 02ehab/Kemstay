@@ -33,7 +33,7 @@ body {
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: #e91e63;
+      color: #40e0d0;
     }
     
     nav {
@@ -142,7 +142,7 @@ body {
 }
 
 .message.user {
-  background: #e91e63;
+  background: #40e0d0;
   color: white;
   align-self: flex-end;
   border-bottom-right-radius: 0;
@@ -169,7 +169,7 @@ body {
 }
 
 .chat-input button {
-  background: #e91e63;
+  background: #40e0d0;
   color: white;
   border: none;
   padding: 0 1.5rem;
