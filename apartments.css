@@ -36,7 +36,7 @@ body {
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: #e91e63;
+      color: #40e0d0;
     }
     
     nav {
@@ -137,7 +137,7 @@ body {
 
 .unit-info h2 {
   font-size: 1.6rem;
-  color: #e91e63;
+  color: #40e0d0;
   margin-bottom: 1rem;
 }
 
@@ -150,7 +150,7 @@ body {
 
 .reserve-btn {
   margin-top: 1.5rem;
-  background-color: #e91e63;
+  background-color: #40e0d0;
   color: white;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
@@ -160,7 +160,7 @@ body {
 }
 
 .reserve-btn:hover {
-  background-color: #d81b60;
+  background-color: #5f5f5f;
 }
  .footer {
   background-color: #222;
@@ -212,7 +212,7 @@ body {
 }
 
 .search-item input:focus {
-  box-shadow: 0 0 0 2px #e91e63;
+  box-shadow: 0 0 0 2px #40e0d0;
   background-color: #fff;
 }
 
@@ -225,7 +225,7 @@ body {
 
 /* زرار البحث */
 .search-btn {
-  background-color: #e91e63;
+  background-color: #40e0d0;
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -240,7 +240,7 @@ body {
 }
 
 .search-btn:hover {
-  background-color: #d81b60;
+  background-color: #5f5f5f;
 }
 
 /* Responsive */
@@ -330,7 +330,7 @@ body {
   display: inline-block;
   margin-top: 10px;
   padding: 0.5rem 1rem;
-  background-color: #e91e63;
+  background-color: #40e0d0;
   color: white;
   text-decoration: none;
   border-radius: 6px;
@@ -339,7 +339,7 @@ body {
 }
 
 .details-btn:hover {
-  background-color: #d81b60;
+  background-color: #5f5f5f;
 }
 
 
