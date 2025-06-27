@@ -33,7 +33,7 @@ body {
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: #e91e63;
+      color: #40e0d0;
     }
     
     nav {
@@ -44,7 +44,7 @@ body {
 
     nav a {
       text-decoration: none;
-      color: #333;
+      color: #010101;
       font-weight: 500;
     }
      .menu-toggle {
@@ -133,7 +133,7 @@ body {
 
 .notification.unread {
   background: #fff3f6;
-  border-right: 3px solid #e91e63;
+  border-right: 3px solid #40e0d0;
 }
 
 .notification p {
