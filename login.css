@@ -2,7 +2,7 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background: linear-gradient(to right, #e91e63, #f06292);
+  background: linear-gradient(to right, #40e0d0, #5f5f5f);
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -46,7 +46,7 @@ body {
   right: 0;
   width: 50%;
   height: 100%;
-  background: #e91e63;
+  background: #40e0d0;
   border-radius: 30px;
   transition: 0.4s ease;
   z-index: 0;
@@ -63,7 +63,7 @@ body {
 
 .form h2 {
   margin-bottom: 20px;
-  color: #e91e63;
+  color: #ffffff;
 }
 
 .form input {
@@ -77,7 +77,7 @@ body {
 .form button {
   width: 100%;
   padding: 12px;
-  background-color: #e91e63;
+  background-color: #010101;
   border: none;
   color: #fff;
   border-radius: 8px;
@@ -87,7 +87,7 @@ body {
 }
 
 .form button:hover {
-  background-color: #d81b60;
+  background-color: #5f5f5f;
 }
 
 @keyframes fadeIn {
@@ -135,14 +135,14 @@ body {
   display: block;
   text-align: center;
   margin-top: 20px;
-  color: #e91e63;
+  color: #010101;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.2s;
 }
 
 .back-home:hover {
-  color: #c2185b;
+  color: #5f5f5f;
 }
 
 
