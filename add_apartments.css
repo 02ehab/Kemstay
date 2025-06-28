@@ -1,3 +1,5 @@
+
+/* Header*/
 *{
       box-sizing: border-box;
       font-family: Arial, sans-serif;
@@ -10,15 +12,14 @@ html, body {
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
-  min-height: 100vh;
+  direction: rtl;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
 }
-
 
 
     header {
@@ -37,7 +38,7 @@ body {
       font-weight: bold;
       color: #40e0d0;
     }
-
+    
     nav {
       display: flex;
       gap: 1rem;
@@ -49,7 +50,6 @@ body {
       color: #333;
       font-weight: 500;
     }
-
      .menu-toggle {
   display: none;
   background: none;
@@ -116,83 +116,77 @@ body {
   }
 }
 
-html, body {
-  height: 100%;
+/*اضافة وحدة */
+body {
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
-  direction: rtl;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-body {
-  padding: 0;
-}
-
-form {
-  max-width: 500px;
-  width: 100%;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  position: relative;  /* نحدد أن الزر سيكون بداخله */
-  padding-bottom: 4rem; /* نترك مساحة للزر */
-}
-
-    label {
-      display: block;
-      margin-bottom: 0.4rem;
-      font-weight: bold;
-      color: #555;
-    }
-    input[type="text"],
-    input[type="number"],
-    input[type="url"],
-    textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin-bottom: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-    button {
-      background-color: #40e0d0;
-      color: white;
-      border: none;
-      padding: 0.7rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      position: absolute;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-    }
-
-    button:hover {
-      background-color: #5f5f5f;
-    }
-    input[type="file"] {
-  margin-bottom: 2.5rem;
-}
-main.form-wrapper {
+main {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 2rem;
+  align-items: flex-start; /* أو center لو عايزها في نص الشاشة */
+  padding-top: 3rem; /* تنزل الفورم تحت الهيدر */
+}
+
+/* أساسيات */
+*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+h2{margin:0 0 1.5rem}
+h4{margin:1.5rem 0 .5rem;font-size:1rem;color:#555}
+
+.form-container{
+  max-width:1200px;background:#fff;margin:auto;padding:2rem;
+  border-radius:10px;box-shadow:0 3px 12px rgba(0,0,0,.12)
+}
+
+/* شبكة العمودين */
+.form-grid{display:flex;gap:2rem;flex-wrap:wrap}
+.col{flex:1;min-width:320px}
+
+/* صفوف مرنة */
+.row-4, .row-3, .row-2{display:flex;gap:.8rem;margin-bottom:1rem}
+.row-4>*{flex:1}
+.row-3>*{flex:1}
+.row-2>*{flex:1}
+
+/* الحقول */
+input,textarea{
+  width:100%;padding:.6rem;border:1px solid #ccc;border-radius:6px
+}
+textarea{resize:vertical}
+
+/* رفع الصور */
+.upload-main{
+  border:2px dashed #bbb;border-radius:8px;height:180px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:#777;font-size:.9rem;margin-bottom:1rem
 }
 
 
- .footer {
+/* أزرار */
+.plus{background:#FF5A5F;color:#fff;border:none;border-radius:6px;
+      padding:.4rem 1rem;cursor:pointer;font-weight:bold}
+.plus.mini{padding:.3rem .8rem;font-size:.8rem}
+.buttons{display:flex;gap:1rem;margin-top:1.5rem}
+.add{background:#00A699;color:#fff;border:none;border-radius:6px;padding:.7rem 1.5rem}
+.cancel{background:#fff;color:#FF5A5F;border:1px solid #FF5A5F;border-radius:6px;padding:.7rem 1.5rem}
+
+/* مربّع اختيار */
+.chk{display:flex;align-items:center;gap:.4rem;margin:.5rem 0}
+.chk a{color:#00A699;text-decoration:none;font-size:.85rem}
+
+/* تجاوب للموبايل */
+@media(max-width:600px){
+  .row-4, .row-3, .row-2{flex-direction:column}
+}
+
+     .footer {
   background-color: #222;
   color: #fff;
   padding: 2rem;
