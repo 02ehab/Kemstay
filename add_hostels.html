@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الدردشة - Kemstay</title>
-  <link rel="stylesheet" href="add_hostels.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>عرض الوحدة - Kemstay</title>
+  <link rel="stylesheet" href="add_hostels.css" />
 </head>
 <body>
-   <header>
+     <header>
 
      <div class="logo">Kemstay</div>
   <button class="menu-toggle" onclick="openMenu()">☰</button>
@@ -36,33 +36,59 @@
   </div>
 
   </header>
+<div class="form-container" dir="rtl">
+  <h2>إضافة هوستيل</h2>
+  <form action="#" method="POST">
+    <div class="form-grid">
+      <!-- القسم الأيسر: البيانات -->
+      <div class="left">
+        <label>الاسم<input type="text" name="name" /></label>
+        <label>البريد الإلكتروني<input type="email" name="email" /></label>
+        <label>رقم الهاتف<input type="tel" name="phone" placeholder="+20" /></label>
+        <label>العملة<input type="text" name="currency" /></label>
+        <label>الوصف<textarea name="description" rows="3"></textarea></label>
 
-  <main class="form-wrapper">
-    <div class="form-container">
+        <label>العنوان</label>
+        <div class="address-group">
+          <input type="text" placeholder="المحافظة" />
+          <input type="text" placeholder="الشارع" />
+          <input type="text" placeholder="رقم العقار" />
+          <input type="text" placeholder="رقم الدور" />
+          <input type="text" placeholder="بالقرب من" />
+          <input type="text" placeholder="علامة مميزة" />
+        </div>
 
-  <h2>إضافة وحدة سكنية جديدة</h2>
+        <label>خدمات مجانية<input type="text" placeholder="واي فاي مجاني" /></label>
 
-  <form id="addUnitForm">
-    <label for="title">عنوان الوحدة</label>
-    <input type="text" id="title" name="title" placeholder="مثلاً: غرفة مفروشة في مدينة نصر" required />
+        <label>
+          <input type="checkbox" required />
+          أوافق على <a href="#">الشروط والأحكام</a>
+        </label>
 
-    <label for="description">وصف الوحدة</label>
-    <textarea id="description" name="description" placeholder="صف الوحدة هنا..." required></textarea>
+        <div class="btns">
+          <button type="submit" class="add">إضافة الوحدة</button>
+          <button type="button" class="cancel">إلغاء</button>
+        </div>
+      </div>
 
-    <label for="price">السعر الشهري (جنيه)</label>
-    <input type="number" id="price" name="price" placeholder="مثلاً: 2500" min="0" required />
+      <!-- القسم الأيمن: الصور والخدمات -->
+      <div class="right">
+        <div class="image-upload">
+          <p>📤 اسحب الصورة هنا<br>أو اختر صورة من جهازك</p>
+        </div>
 
-    <label for="capacity">عدد الأشخاص</label>
-    <input type="number" id="capacity" name="capacity" placeholder="مثلاً: 2" min="1" required />
-
-    <label for="image">رفع صورة الوحدة</label>
-    <input type="file" id="image" name="image" accept="image/*" required />
-
-    <button type="submit">إضافة الوحدة</button>
+        <label>الخدمات العامة<input type="text" placeholder="تكييف" /></label>
+        <label>خدمات الفندق<input type="text" placeholder="تنظيف يومي" /></label>
+        <label>خدمات الطعام<input type="text" placeholder="إفطار" /></label>
+      </div>
+    </div>
   </form>
 </div>
-  </main>
-</body>
-  <script src="add_apartments.js"></script>
 
+  <footer class="footer">
+    جميع الحقوق محفوظة لـ Kemstay © 2025
+  </footer>
+
+  <script src="add_hostels.js"></script>
+</body>
 </html>
