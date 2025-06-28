@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الدردشة - Kemstay</title>
-  <link rel="stylesheet" href="add_apartments.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>عرض الوحدة - Kemstay</title>
+  <link rel="stylesheet" href="add_apartments.css" />
 </head>
 <body>
-   <header>
+     <header>
 
      <div class="logo">Kemstay</div>
   <button class="menu-toggle" onclick="openMenu()">☰</button>
@@ -31,38 +31,99 @@
       <a href="hostels.html">هوستيل</a>
       <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-   <a href="login.html" class="auth-link">تسجيل الدخول</a>
+    <a href="login.html" class="auth-link">تسجيل الدخول</a>
     </nav>
   </div>
 
   </header>
 
- <main class="form-wrapper">
-    <div class="form-container">
+  <main>
+<div class="form-container">
+    <h2>إضافة وحدة</h2>
 
-  <h2>إضافة وحدة سكنية جديدة</h2>
+    <form method="POST" action="#">
+      <div class="form-grid">
 
-  <form id="addUnitForm">
-    <label for="title">عنوان الوحدة</label>
-    <input type="text" id="title" name="title" placeholder="مثلاً: غرفة مفروشة في مدينة نصر" required />
+        <!-- العمود الأيمن (النصوص) -->
+        <div class="col">
+          <div class="row-4">
+            <input type="text" placeholder="نوع الوحدة">
+            <input type="text" placeholder="التصنيف">
+            <input type="number" placeholder="عدد الأفراد">
+            <label class="chk"><input type="checkbox"> مفروشة</label>
+          </div>
 
-    <label for="description">وصف الوحدة</label>
-    <textarea id="description" name="description" placeholder="صف الوحدة هنا..." required></textarea>
+          <div class="row-3">
+            <input type="text" placeholder="الشهر/اليوم">
+            <input type="number" placeholder="السعر">
+            <input type="number" placeholder="عدد المساحات">
+          </div>
 
-    <label for="price">السعر الشهري (جنيه)</label>
-    <input type="number" id="price" name="price" placeholder="مثلاً: 2500" min="0" required />
+          <label>الوصف
+            <textarea rows="4"></textarea>
+          </label>
 
-    <label for="capacity">عدد الأشخاص</label>
-    <input type="number" id="capacity" name="capacity" placeholder="مثلاً: 2" min="1" required />
+          <h4>التوافر</h4>
+          <div class="row-3">
+            <input type="date" placeholder="متاح من">
+            <input type="date" placeholder="متاح إلى">
+            <button type="button" class="plus">＋</button>
+          </div>
 
-    <label for="image">رفع صورة الوحدة</label>
-    <input type="file" id="image" name="image" accept="image/*" required />
+          <h4>العنوان</h4>
+          <div class="row-2">
+            <input type="text" placeholder="المحافظة">
+            <input type="text" placeholder="الشارع">
+          </div>
+          <div class="row-2">
+            <input type="text" placeholder="رقم العقار">
+            <input type="text" placeholder="رقم الدور">
+          </div>
+          <div class="row-2">
+            <input type="text" placeholder="قريب من">
+            <input type="text" placeholder="علامة مميزة">
+          </div>
 
-    <button type="submit">إضافة الوحدة</button>
-  </form>
-</div>
-  </main>
-</body>
+          <h4>المميزات</h4>
+          <div class="row-2">
+            <input type="text" placeholder="أضف ميزة">
+            <button type="button" class="plus">＋</button>
+          </div>
+          <label class="chk">
+            <input type="checkbox" required> أوافق على <a href="#">الشروط والأحكام</a>
+          </label>
+          <div class="buttons">
+            <button type="submit" class="add">إضافة الوحدة</button>
+            <button type="reset"  class="cancel">إلغاء</button>
+          </div>
+        </div>
+
+        <!-- العمود الأيسر (الصور والشروط) -->
+        <div class="col">
+          <div class="upload-main">
+            <p>اسحب الصورة هنا<br>أو اختر صورة</p>
+          </div>
+
+          <div class="row-2">
+            <input type="text" placeholder="شروط المالك">
+            <button type="button" class="plus mini">＋ إضافة</button>
+          </div>
+
+          <label>قواعد المالك
+            <textarea rows="5"></textarea>
+          </label>
+
+        </div>
+
+      </div>
+    </form>
+  </div>
+</main>
+
+  <footer class="footer">
+    جميع الحقوق محفوظة لـ Kemstay © 2025
+  </footer>
+
   <script src="add_apartments.js"></script>
-
+</body>
 </html>
