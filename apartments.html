@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>تفاصيل الوحدة - Kemstay</title>
   <link rel="stylesheet" href="apartments.css" />
+   <link rel="stylesheet" href="chatbot.css">
 </head>
 <body>
      <header>
@@ -85,12 +86,33 @@
     </div>
   </div>
 </section>
+<div id="chatbot-container">
+<!-- أيقونة الشات -->
+ <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
 
+  <!-- نافذة الشات -->
+  <div id="chatPopup" class="chatbot-popup hidden">
+    <div class="chatbot-header">
+      <span>Kemstay  🤖</span>
+      <button onclick="toggleChatbox()">✖</button>
+    </div>
+    <div class="chatbot-messages" id="chatMessages">
+      <p>👋 مرحبًا بك! كيف يمكنني مساعدتك؟</p>
+    </div>
+    <input
+      type="text"
+      id="chatInput"
+      placeholder="اكتب رسالتك..."
+      onkeydown="if(event.key==='Enter') sendChatMessage()"
+    />
+    <button onclick="sendChatMessage()">إرسال</button>
+  </div>
 
   <footer class="footer">
     جميع الحقوق محفوظة لـ Kemstay © 2025
   </footer>
 
   <script src="apartments.js"></script>
+  <script src="chatbot.js"></script>
 </body>
 </html>
