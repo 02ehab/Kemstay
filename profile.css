@@ -393,3 +393,10 @@ body {
 .booking-requests-card .unit-card {
   background-color: #eef9f8;
 }
+.footer {
+  background-color: #222;
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+  margin-top: auto; /* هذا يجعل الفوتر يلتصق بأسفل الصفحة */
+}
