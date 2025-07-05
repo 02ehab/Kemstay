@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>عرض الوحدة - Kemstay</title>
   <link rel="stylesheet" href="add_apartments.css" />
-  <link rel="stylesheet" href="chatbot.css">
 </head>
 <body>
      <header>
@@ -38,7 +37,6 @@
 
   </header>
 
-  <main>
 <div class="form-container">
     <h2>إضافة وحدة</h2>
 
@@ -48,16 +46,45 @@
         <!-- العمود الأيمن (النصوص) -->
         <div class="col">
           <div class="row-4">
-            <input type="text" placeholder="نوع الوحدة">
-            <input type="text" placeholder="التصنيف">
-            <input type="number" placeholder="عدد الأفراد">
+            <label>
+    نوع الوحدة
+    <select name="unitType" required>
+      <option value="">اختر نوع الوحدة</option>
+      <option value="apartment">شقة</option>
+      <option value="room">غرفة</option>
+    </select>
+  </label>
+            <label>
+    التصنيف
+    <select name="category" required>
+      <option value="">اختر التصنيف</option>
+      <option value="residential">سكني</option>
+      <option value="commercial">تجاري</option>
+    </select>
+  </label>
+            <label>
+    عدد الأفراد
+    <select name="capacity" required>
+      <option value="">اختر العدد</option>
+      <!-- نستخدم حلقة JS لاحقًا لو حبيت، أو يدوي -->
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+  </label>
             <label class="chk"><input type="checkbox"> مفروشة</label>
           </div>
 
           <div class="row-3">
             <input type="text" placeholder="الشهر/اليوم">
             <input type="number" placeholder="السعر">
-            <input type="number" placeholder="عدد المساحات">
           </div>
 
           <label>الوصف
@@ -65,11 +92,13 @@
           </label>
 
           <h4>التوافر</h4>
-          <div class="row-3">
-            <input type="date" placeholder="متاح من">
-            <input type="date" placeholder="متاح إلى">
-            <button type="button" class="plus">＋</button>
-          </div>
+
+<div class="vertical-3">
+  <input type="date" id="availableFrom" placeholder="متاح من">
+  <input type="date" id="availableTo" placeholder="متاح إلى">
+  <button type="button" onclick="addAvailability()" class="plus">＋ إضافة</button>
+</div>
+<ul id="addAvailabilityList" class="tags-list"></ul>
 
           <h4>العنوان</h4>
           <div class="row-2">
@@ -87,65 +116,50 @@
 
           <h4>المميزات</h4>
           <div class="row-2">
-            <input type="text" placeholder="أضف ميزة">
-            <button type="button" class="plus">＋</button>
+  <input type="text" id="featureInput" placeholder="أضف ميزة">
+  <button type="button" onclick="addFeature()">＋ إضافة</button>
+</div>
+<ul id="featuresList" class="tags-list"></ul>
+
+<!-- العمود الأيسر (الصور والشروط) -->
+        <div class="col">
+          <div class="upload-main">
+            <p>اسحب الصورة هنا<br>أو اختر صورة</p>
           </div>
-          <label class="chk">
-            <input type="checkbox" required> أوافق على <a href="#">الشروط والأحكام</a>
-          </label>
+
+
+<div class="row-2">
+  <input type="text" id="ownerConditionInput" placeholder="أضف شروطك">
+  <button type="button" onclick="addOwnerCondition()">＋ إضافة</button>
+</div>
+<ul id="ownerConditionsList" class="tags-list"></ul>
+          
+        </div>
+
+        <div class="row-2 align-items-center">
+  <label class="chk">
+  <input type="checkbox" required>
+  أوافق على <a href="#">الشروط والأحكام</a>
+</label>
+</div>
+
+
           <div class="buttons">
             <button type="submit" class="add">إضافة الوحدة</button>
             <button type="reset"  class="cancel">إلغاء</button>
           </div>
         </div>
 
-        <!-- العمود الأيسر (الصور والشروط) -->
-        <div class="col">
-          <div class="upload-main">
-            <p>اسحب الصورة هنا<br>أو اختر صورة</p>
-          </div>
-
-          <div class="row-2">
-            <input type="text" placeholder="شروط المالك">
-            <button type="button" class="plus mini">＋ إضافة</button>
-          </div>
-
-          <label>قواعد المالك
-            <textarea rows="5"></textarea>
-          </label>
-
-        </div>
-
+        
       </div>
     </form>
   </div>
 </main>
-<div id="chatbot-container">
-<!-- أيقونة الشات -->
- <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
 
-  <!-- نافذة الشات -->
-  <div id="chatPopup" class="chatbot-popup hidden">
-    <div class="chatbot-header">
-      <span>Kemstay  🤖</span>
-      <button onclick="toggleChatbox()">✖</button>
-    </div>
-    <div class="chatbot-messages" id="chatMessages">
-      <p>👋 مرحبًا بك! كيف يمكنني مساعدتك؟</p>
-    </div>
-    <input
-      type="text"
-      id="chatInput"
-      placeholder="اكتب رسالتك..."
-      onkeydown="if(event.key==='Enter') sendChatMessage()"
-    />
-    <button onclick="sendChatMessage()">إرسال</button>
-  </div>
   <footer class="footer">
     جميع الحقوق محفوظة لـ Kemstay © 2025
   </footer>
 
   <script src="add_apartments.js"></script>
-  <script src="chatbot.js"></script>
 </body>
 </html>
