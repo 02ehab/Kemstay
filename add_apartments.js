@@ -6,89 +6,150 @@ function closeMenu() {
   document.getElementById("sideMenu").classList.remove("open");
 }
 
-
-// صفحة تفاصيل الوحدة وحجز وهمي
 document.addEventListener("DOMContentLoaded", () => {
+  // زر الحجز الوهمي
   const reserveBtn = document.querySelector(".reserve-btn");
   if (reserveBtn) {
     reserveBtn.addEventListener("click", () => {
       alert("تم إرسال طلب الحجز بنجاح! سيتم التواصل معك قريبًا.");
     });
   }
-});
 
-
-//تغيير حالة تسجيل الدخول
-document.addEventListener("DOMContentLoaded", () => {
+  // تغيير حالة تسجيل الدخول بناءً على localStorage
   const authLinks = document.querySelectorAll(".auth-link");
   const isLoggedIn = localStorage.getItem("isLoggedIn");
+  if (authLinks.length > 0) {
+    authLinks.forEach(link => {
+      if (isLoggedIn === "true") {
+        link.textContent = "الملف الشخصي";
+        link.href = "profile.html";
+      } else {
+        link.textContent = "تسجيل الدخول";
+        link.href = "login.html";
+      }
+    });
+  }
 
-  if (authLinks.length === 0) return; // ما فيش عناصر، نخرج بأمان
+  // منطقة رفع الصورة مع عرض المعاينة
+  const uploadArea = document.querySelector(".upload-main");
+  if (uploadArea) {
+    const imageInput = document.createElement("input");
+    imageInput.type = "file";
+    imageInput.accept = "image/*";
+    imageInput.hidden = true;
 
-  authLinks.forEach(link => {
-    if (isLoggedIn === "true") {
-      link.textContent = "الملف الشخصي";
-      link.href = "profile.html";
-    } else {
-      link.textContent = "تسجيل الدخول";
-      link.href = "login.html";
-    }
+    const imagePreview = document.createElement("img");
+    imagePreview.style.display = "none";
+    imagePreview.style.marginTop = "1rem";
+    imagePreview.style.maxWidth = "100%";
+
+    uploadArea.appendChild(imageInput);
+    uploadArea.appendChild(imagePreview);
+
+    uploadArea.style.cursor = "pointer";
+    uploadArea.addEventListener("click", () => {
+      imageInput.click();
+    });
+
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          imagePreview.src = e.target.result;
+          imagePreview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  // أزرار + لإضافة حقول جديدة (تكرر الحقول داخل نفس الأب)
+  document.querySelectorAll(".plus").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const parent = btn.parentElement;
+      const firstInput = parent.querySelector("input");
+      if (firstInput) {
+        const clone = firstInput.cloneNode(true);
+        clone.value = "";
+        parent.insertBefore(clone, btn);
+      }
+    });
   });
+
+  // التحقق من الموافقة على الشروط قبل الإرسال
+  const form = document.querySelector("form");
+  if (form) {
+    form.addEventListener("submit", e => {
+      const agreement = form.querySelector('input[type="checkbox"][required]');
+      if (agreement && !agreement.checked) {
+        e.preventDefault();
+        alert("يجب الموافقة على الشروط والأحكام قبل إرسال النموذج.");
+      }
+    });
+  }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    // إضافة ميزة جديدة
-    const featuresSection = document.querySelector('h4:contains("المميزات")').nextElementSibling;
-    const featureInput = featuresSection.querySelector('input');
-    const featureBtn = featuresSection.querySelector('button');
+// دوال إضافة وحذف المميزات والشروط والقائمة
 
-    featureBtn.addEventListener("click", () => {
-      const value = featureInput.value.trim();
-      if (value !== "") {
-        const newFeature = document.createElement("p");
-        newFeature.textContent = "• " + value;
-        featuresSection.parentElement.insertBefore(newFeature, featuresSection.nextElementSibling);
-        featureInput.value = "";
-      }
-    });
+function addFeature() {
+  const input = document.getElementById("featureInput");
+  const value = input?.value.trim();
+  if (value) {
+    const li = document.createElement("li");
+    li.innerHTML = `${value} <button class="remove" onclick="this.parentElement.remove()">×</button>`;
+    document.getElementById("featuresList").appendChild(li);
+    input.value = "";
+  }
+}
 
-    // إضافة شروط المالك
-    const ownerRulesSection = document.querySelector(".col .row-2 + label");
-    const ownerConditionInput = document.querySelector('.col .row-2 input');
-    const addOwnerConditionBtn = document.querySelector('.col .row-2 button');
+function addRule() {
+  const input = document.getElementById("ruleInput");
+  const value = input?.value.trim();
+  if (value) {
+    const li = document.createElement("li");
+    li.innerHTML = `${value} <button class="remove" onclick="this.parentElement.remove()">×</button>`;
+    document.getElementById("rulesList").appendChild(li);
+    input.value = "";
+  }
+}
 
-    addOwnerConditionBtn.addEventListener("click", () => {
-      const value = ownerConditionInput.value.trim();
-      if (value !== "") {
-        const existingTextArea = ownerRulesSection.querySelector("textarea");
-        existingTextArea.value += (existingTextArea.value ? "\n• " : "• ") + value;
-        ownerConditionInput.value = "";
-      }
-    });
+function addAvailability() {
+  const from = document.getElementById("availableFrom")?.value;
+  const to = document.getElementById("availableTo")?.value;
 
-    // إضافة فترة توافر جديدة
-    const availabilitySection = document.querySelector('h4:contains("التوافر")').nextElementSibling;
-    const availabilityBtn = availabilitySection.querySelector("button");
+  if (from && to) {
+    const li = document.createElement("li");
+    li.textContent = `من ${from} إلى ${to}`;
 
-    availabilityBtn.addEventListener("click", () => {
-      const newRow = document.createElement("div");
-      newRow.classList.add("row-3");
-      newRow.innerHTML = `
-        <input type="date" placeholder="متاح من">
-        <input type="date" placeholder="متاح إلى">
-        <button type="button" class="remove">－</button>
-      `;
-      availabilitySection.parentElement.insertBefore(newRow, availabilitySection.nextElementSibling);
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "remove";
+    removeBtn.innerHTML = "×";
+    removeBtn.onclick = () => li.remove();
 
-      // زر الحذف
-      newRow.querySelector("button").addEventListener("click", () => {
-        newRow.remove();
-      });
-    });
+    li.appendChild(removeBtn);
+    document.getElementById("availabilityList").appendChild(li);
 
-    // المعاينة المستقبلية لصورة — Placeholder فقط إذا أضفت خاصية رفع الصور لاحقًا
-    const uploadMain = document.querySelector(".upload-main");
-    uploadMain.addEventListener("click", () => {
-      alert("سيتم هنا إضافة رفع صورة عند الحاجة.");
-    });
-  });
+    document.getElementById("availableFrom").value = "";
+    document.getElementById("availableTo").value = "";
+  }
+}
+
+function addOwnerCondition() {
+  const input = document.getElementById("ownerConditionInput");
+  const value = input?.value.trim();
+
+  if (value) {
+    const li = document.createElement("li");
+    li.textContent = value;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "remove";
+    removeBtn.innerHTML = "×";
+    removeBtn.onclick = () => li.remove();
+
+    li.appendChild(removeBtn);
+    document.getElementById("ownerConditionsList").appendChild(li);
+    input.value = "";
+  }
+}
