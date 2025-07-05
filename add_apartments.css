@@ -116,7 +116,9 @@ body {
   }
 }
 
-/*اضافة وحدة */
+/* إضافة وحدة */
+/* تم حذف الإضافات التفاعلية الخاصة بالوسوم والقوائم الديناميكية لتبسيط التنسيق */
+
 body {
   background-color: #f9f9f9;
   font-family: Arial, sans-serif;
@@ -131,60 +133,117 @@ main {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* أو center لو عايزها في نص الشاشة */
-  padding-top: 3rem; /* تنزل الفورم تحت الهيدر */
+  align-items: flex-start;
+  padding-top: 3rem;
 }
 
 /* أساسيات */
-*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-h2{margin:0 0 1.5rem}
-h4{margin:1.5rem 0 .5rem;font-size:1rem;color:#555}
+h2 { margin: 0 0 1.5rem; }
+h4 { margin: 1.5rem 0 .5rem; font-size: 1rem; color: #555; }
 
-.form-container{
-  max-width:1200px;background:#fff;margin:auto;padding:2rem;
-  border-radius:10px;box-shadow:0 3px 12px rgba(0,0,0,.12)
+.form-container {
+  max-width: 1200px;
+  background: #fff;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.12);
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 
-/* شبكة العمودين */
-.form-grid{display:flex;gap:2rem;flex-wrap:wrap}
-.col{flex:1;min-width:320px}
-
-/* صفوف مرنة */
-.row-4, .row-3, .row-2{display:flex;gap:.8rem;margin-bottom:1rem}
-.row-4>*{flex:1}
-.row-3>*{flex:1}
-.row-2>*{flex:1}
-
-/* الحقول */
-input,textarea{
-  width:100%;padding:.6rem;border:1px solid #ccc;border-radius:6px
+.form-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
-textarea{resize:vertical}
-
-/* رفع الصور */
-.upload-main{
-  border:2px dashed #bbb;border-radius:8px;height:180px;
-  display:flex;align-items:center;justify-content:center;text-align:center;
-  color:#777;font-size:.9rem;margin-bottom:1rem
+.col {
+  flex: 1;
+  min-width: 320px;
 }
 
-
-/* أزرار */
-.plus{background:#FF5A5F;color:#fff;border:none;border-radius:6px;
-      padding:.4rem 1rem;cursor:pointer;font-weight:bold}
-.plus.mini{padding:.3rem .8rem;font-size:.8rem}
-.buttons{display:flex;gap:1rem;margin-top:1.5rem}
-.add{background:#00A699;color:#fff;border:none;border-radius:6px;padding:.7rem 1.5rem}
-.cancel{background:#fff;color:#FF5A5F;border:1px solid #FF5A5F;border-radius:6px;padding:.7rem 1.5rem}
-
-/* مربّع اختيار */
-.chk{display:flex;align-items:center;gap:.4rem;margin:.5rem 0}
-.chk a{color:#00A699;text-decoration:none;font-size:.85rem}
-
-/* تجاوب للموبايل */
-@media(max-width:600px){
-  .row-4, .row-3, .row-2{flex-direction:column}
+.row-4, .row-3, .row-2 {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
 }
+.row-4 > * { flex: 1; }
+.row-3 > * { flex: 1; }
+.row-2 > * { flex: 1; }
+
+input, textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+textarea {
+  resize: vertical;
+}
+
+.upload-main {
+  border: 2px dashed #bbb;
+  border-radius: 8px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #777;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.plus {
+  background: #FF5A5F;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+.plus.mini {
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.add {
+  background: #00A699;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.5rem;
+}
+
+.cancel {
+  background: #fff;
+  color: #FF5A5F;
+  border: 1px solid #FF5A5F;
+  border-radius: 6px;
+  padding: 0.7rem 1.5rem;
+}
+.chk {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.chk input[type="checkbox"] {
+  vertical-align: middle;
+  width: 18px; /* حجم الأيقونة */
+  height: 18px;
+}
+
+
 
      .footer {
   background-color: #222;
