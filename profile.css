@@ -393,6 +393,12 @@ body {
 .booking-requests-card .unit-card {
   background-color: #eef9f8;
 }
+
+.add-unit-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .footer {
   background-color: #222;
   color: #fff;
