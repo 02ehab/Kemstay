@@ -32,6 +32,12 @@
         <input type="text" placeholder="الاسم الكامل" required />
         <input type="email" placeholder="البريد الإلكتروني" required />
         <input type="password" placeholder="كلمة المرور" required />
+         
+        <select id="userType" name="userType" required>
+        <option value="">اختر النوع</option>
+        <option value="tenant">مستأجر</option>
+        <option value="owner">مالك</option>
+        </select>
         <button type="submit">تسجيل</button>
         <p class="or-line">أو التسجيل باستخدام</p>
         <button type="button" class="google-btn" onclick="loginWithGoogle()">
