@@ -74,6 +74,17 @@ body {
   border-radius: 8px;
 }
 
+.form select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+   color: #5f5f5f;
+}
+
+
+
 .form button {
   width: 100%;
   padding: 12px;
@@ -144,5 +155,4 @@ body {
 .back-home:hover {
   color: #5f5f5f;
 }
-
 
