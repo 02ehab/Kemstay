@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="profile.css">
-  <link rel="stylesheet" href="chatbot.css">
   <title>Kemstay | منصة السكن للمغتربين</title>
 
 </head>
@@ -65,32 +64,59 @@
     <button onclick="closeUnitTypePopup()">إلغاء</button>
   </div>
 </div>
-<div id="chatbot-container">
-<!-- أيقونة الشات -->
- <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
 
-  <!-- نافذة الشات -->
-  <div id="chatPopup" class="chatbot-popup hidden">
-    <div class="chatbot-header">
-      <span>Kemstay  🤖</span>
-      <button onclick="toggleChatbox()">✖</button>
+<section class="profile-sections-row">
+
+  <!-- الوحدات المضافة -->
+  <div class="accordion-card added-units-card">
+    <div class="accordion-header added-units-header" onclick="toggleSection('addedUnits')">
+      <h3>الوحدات المضافة</h3>
+      <span class="arrow-icon" id="arrow-addedUnits"></span>
     </div>
-    <div class="chatbot-messages" id="chatMessages">
-      <p>👋 مرحبًا بك! كيف يمكنني مساعدتك؟</p>
-    </div>
-    <input
-      type="text"
-      id="chatInput"
-      placeholder="اكتب رسالتك..."
-      onkeydown="if(event.key==='Enter') sendChatMessage()"
-    />
-    <button onclick="sendChatMessage()">إرسال</button>
+    <div class="accordion-content hidden" id="addedUnits">
+      <div class="units-grid">
+        <div class="unit-card">
+  <img src="home.jpg" alt="شقة مفروشة">
+  <div class="unit-card-body">
+    <h4 class="unit-title">شقة مفروشة في المهندسين</h4>
+    <p class="unit-location">المهندسين، الجيزة</p>
+    <p class="unit-price">السعر: 350 جنيه / الليلة</p>
+    <button class="unit-btn">عرض التفاصيل</button>
   </div>
-<!-- Footer -->
+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- الطلبات -->
+  <div class="accordion-card booking-requests-card">
+    <div class="accordion-header booking-requests-header" onclick="toggleSection('bookingRequests')">
+      <h3>طلبات الحجز</h3>
+      <span class="arrow-icon" id="arrow-bookingRequests"></span>
+    </div>
+    <div class="accordion-content hidden" id="bookingRequests">
+      <div class="units-grid">
+        <div class="request-card">
+  <div class="request-info">
+    <h4 class="request-title">طلب حجز - شقة المهندسين</h4>
+    <p>الضيف: محمد أحمد</p>
+    <p>من: 10 يوليو</p>
+    <p>إلى: 13 يوليو</p>
+    <p class="request-status pending">الحالة: قيد المراجعة</p>
+  </div>
+  <button class="request-btn">عرض التفاصيل</button>
+</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+ <!-- Footer -->
   <footer class="footer">
     <p>&copy; 2025 Kemstay. جميع الحقوق محفوظة.</p>
   </footer>
-   <script src="profile.js"></script>
-  <script src="chatbot.js"></script>
+
 </body>
+  <script src="profile.js"></script>
 </html>
