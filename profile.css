@@ -33,7 +33,7 @@ body {
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: #40e0d0;
+      color: #964B00;
     }
     
     nav {
@@ -140,7 +140,7 @@ body {
 }
 
 .profile-card h2 {
-  color: #40e0d0;
+  color: #964B00;
   margin-bottom: 0.5rem;
 }
 
@@ -164,7 +164,7 @@ body {
 }
 
 .edit-btn {
-  background-color: #40e0d0;
+  background-color: #964B00;
   color: white;
 }
 .edit-btn:hover {
@@ -204,7 +204,7 @@ body {
   margin: 0.5rem;
   padding: 0.7rem 1.5rem;
   border: none;
-  background-color: #40e0d0;
+  background-color: #964B00;
   color: white;
   border-radius: 6px;
   cursor: pointer;
@@ -226,7 +226,7 @@ body {
   font-size: 1rem;
   font-weight: 600;
   color: white;
-  background-color: #40e0d0;
+  background-color: #964B00;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -289,7 +289,7 @@ body {
 
 .accordion-header h3 {
   font-size: 1.2rem;
-  color: var(--primary, #40e0d0);
+  color: var(--primary, #964B00);
   margin: 0;
 }
 
