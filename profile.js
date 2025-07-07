@@ -78,6 +78,79 @@ function redirectTo(page) {
   window.location.href = page;
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const unitCards = document.querySelectorAll(".unit-card");
+
+  unitCards.forEach((card) => {
+    const editBtn = card.querySelector(".edit-btn");
+    const deleteBtn = card.querySelector(".delete-btn");
+
+    editBtn.addEventListener("click", () => {
+      alert("فتح صفحة تعديل الوحدة (يفضل فتح صفحة أو Popup)");
+      // يمكنك استخدام: window.location.href = `edit_unit.html?id=123`;
+    });
+
+    deleteBtn.addEventListener("click", () => {
+      const confirmed = confirm("هل أنت متأكد من حذف هذه الوحدة؟");
+      if (confirmed) {
+        card.remove(); // حذف من الواجهة فقط
+        alert("تم حذف الوحدة.");
+        // لاحقًا: أرسل طلب حذف للسيرفر أو قاعدة البيانات
+      }
+    });
+  });
+});
+
+//عرض او تعديل بيانات الوحدة
+document.addEventListener("DOMContentLoaded", () => {
+  // زر عرض التفاصيل
+  const viewBtns = document.querySelectorAll(".view-btn");
+  viewBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const unitId = btn.getAttribute("data-id");
+      window.location.href = `details_apartments.html?id=${unitId}`;
+    });
+  });
+
+  // زر تعديل
+  const editBtns = document.querySelectorAll(".edit-btn");
+  editBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const unitId = btn.getAttribute("data-id");
+      window.location.href = `edit_apartments.html?id=${unitId}`;
+    });
+  });
+});
+//حذف الوحدة
+const deleteBtns = document.querySelectorAll(".delete-btn");
+deleteBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const unitId = btn.getAttribute("data-id");
+
+    const confirmed = confirm("هل أنت متأكد من حذف هذه الوحدة؟");
+    if (confirmed) {
+      // مثال حذف من localStorage
+      let units = JSON.parse(localStorage.getItem("units")) || [];
+      units = units.filter(unit => unit.id != unitId);
+      localStorage.setItem("units", JSON.stringify(units));
+
+      // حذف من الصفحة
+      btn.closest(".unit-card").remove();
+
+      alert("تم حذف الوحدة بنجاح.");
+    }
+  });
+});
+
+// في صفحة unit_details.html أو edit_unit.html
+const params = new URLSearchParams(window.location.search);
+const unitId = params.get("id");
+
+let units = JSON.parse(localStorage.getItem("units")) || [];
+const unit = units.find(u => u.id == unitId);
+
+// ثم اعرض بيانات الوحدة في HTML
+
 // الوحدات المضافة
 function toggleSection(sectionId) {
   const section = document.getElementById(sectionId);
