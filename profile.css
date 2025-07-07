@@ -352,11 +352,14 @@ body {
 }
 
 /* الوحدات المضافة */
-.added-units-card {
+.added-units-card  {
   background-color: #fff;
-  border: 2px solid #A0522D;
-  border-radius: 10px;
-  flex: 1 1 48%;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
 }
 
 .added-units-header {
@@ -365,12 +368,47 @@ body {
   font-weight: bold;
 }
 
+.unit-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  
+}
+
+.unit-actions .edit-btn,
+.unit-actions .delete-btn,.unit-btn, .request-btn {
+  padding: 0.7rem 1.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.unit-actions .edit-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.unit-actions .delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.unit-btn, .request-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
 /* الطلبات */
-.booking-requests-card {
-  background-color: #f7f7f7;
-  border: 2px solid #4B8F8C;
-  border-radius: 10px;
-  flex: 1 1 48%;
+.booking-requests-card  {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
 }
 
 .booking-requests-header {
@@ -398,6 +436,9 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
+
 
 .footer {
   background-color: #222;
