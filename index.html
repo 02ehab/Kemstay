@@ -1,8 +1,37 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <!-- اللغة واتجاه النص -->
+<meta charset="UTF-8">
+<meta http-equiv="Content-Language" content="ar">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- وصف الصفحة (Description) -->
+<meta name="description" content="Kemstay هو موقع سكني يساعدك في العثور على شقق مفروشة وهوستيلات للطلاب والمغتربين في مصر بسهولة.">
+
+<!-- الكلمات المفتاحية (Keywords) -->
+<meta name="keywords" content="شقق مفروشة, سكن طلابي, هوستيل, القاهرة, مصر, ايجار شقة, kemstay, سكن مغتربين, وحدات سكنية">
+
+<!-- اسم الموقع أو المؤسسة -->
+<meta name="author" content="Kemstay Team">
+
+<!-- التحكم في عناكب البحث -->
+<meta name="robots" content="index, follow">
+
+<!-- عنوان يظهر في المشاركة الاجتماعية -->
+<meta property="og:title" content="Kemstay | سكن طلابي وشقق مفروشة في مصر">
+<meta property="og:description" content="استأجر شقتك المفروشة أو مكانك في هوستيل بسهولة مع Kemstay.">
+<meta property="og:image" content="https://02ehab.github.io/images/og-cover.jpg">
+<meta property="og:url" content="https://02ehab.github.io">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kemstay | أفضل موقع للسكن الطلابي في مصر">
+<meta name="twitter:description" content="ابحث عن شقة مفروشة أو سكن في هوستيل بسهولة وسرعة.">
+<meta name="twitter:image" content="https://02ehab.github.io/images/twitter-card.jpg">
+
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="chatbot.css">
   <title>Kemstay | منصة السكن للمغتربين</title>
@@ -78,7 +107,7 @@
     <div class="listing-details">
       <h3>غرفة مفروشة في مدينة نصر</h3>
       <p>2500 جنيه / شهريًا</p>
-      <a href="apartments_details.html" class="details-btn">عرض التفاصيل</a>
+      <a href="apartments.html" class="details-btn">عرض التفاصيل</a>
     </div>
   </div>
   <div class="listing-card">
@@ -162,6 +191,7 @@
     <!-- أضف خدمات إضافية هنا -->
   </div>
 </section>
+
 <div id="chatbot-container">
 <!-- أيقونة الشات -->
  <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
@@ -169,7 +199,7 @@
   <!-- نافذة الشات -->
   <div id="chatPopup" class="chatbot-popup hidden">
     <div class="chatbot-header">
-      <span>Kemchat  🤖</span>
+      <span>Kemstay  🤖</span>
       <button onclick="toggleChatbox()">✖</button>
     </div>
     <div class="chatbot-messages" id="chatMessages">
@@ -183,6 +213,7 @@
     />
     <button onclick="sendChatMessage()">إرسال</button>
   </div>
+
   <!-- Footer -->
   <footer class="footer">
     <p>&copy; 2025 Kemstay. جميع الحقوق محفوظة.</p>
