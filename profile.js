@@ -86,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteBtn = card.querySelector(".delete-btn");
 
     editBtn.addEventListener("click", () => {
-      alert("فتح صفحة تعديل الوحدة (يفضل فتح صفحة أو Popup)");
       // يمكنك استخدام: window.location.href = `edit_unit.html?id=123`;
     });
 
@@ -108,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
   viewBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       const unitId = btn.getAttribute("data-id");
-      window.location.href = `details_apartments.html?id=${unitId}`;
+      window.location.href = `apartments_details.html?id=${unitId}`;
     });
   });
 
