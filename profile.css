@@ -1,3 +1,4 @@
+
 *{
       box-sizing: border-box;
       font-family: Arial, sans-serif;
@@ -19,16 +20,23 @@ body {
 }
 
 
+   
     header {
-      background-color: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      direction: ltr;
-    }
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ظل أعمق */
+  padding: 1rem 2rem;
+  margin: 20px auto; /* يبعد الهيدر عن حواف الصفحة */
+  width: 95%;
+  max-width: 1200px;
+  border-radius: 10px; /* حواف دائرية */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  direction: ltr; /* تُغيّرها للعربي إذا أردت */
+  z-index: 10;
+  position: relative;
+}
 
     .logo {
       font-size: 1.5rem;
@@ -179,6 +187,7 @@ body {
   background-color: #5f5f5f;
   transform: translateY(-2px);
 }
+
 /* اضافة وحدة*/
 .popup-overlay {
   position: fixed;
@@ -333,6 +342,87 @@ body {
   color: #333;
 }
 
+/*hostel*/
+.hostel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.hostel-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hostel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.hostel-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.hostel-title {
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+.added-hostels-card  {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.added-hostels-header {
+  background-color: #fef4ed;
+  color: #A0522D;
+  font-weight: bold;
+}
+
+.hostel-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  
+}
+
+.hostel-actions .edit-btn,
+.hostel-actions .delete-btn,.hostel-btn, .request-btn {
+  padding: 0.7rem 1.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.hostel-actions .edit-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.hostel-actions .delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.hostel-btn, .request-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
 @media (max-width: 768px) {
   .profile-sections {
     flex-direction: column;
@@ -436,6 +526,8 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
 
 
 
