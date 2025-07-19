@@ -21,18 +21,22 @@ body {
   line-height: 1.6;
 }
 
-
-    header {
-      background-color: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      direction: ltr;
-    }
-
+ header {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ظل أعمق */
+  padding: 1rem 2rem;
+  margin: 20px auto; /* يبعد الهيدر عن حواف الصفحة */
+  width: 95%;
+  max-width: 1200px;
+  border-radius: 10px; /* حواف دائرية */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  direction: ltr; /* تُغيّرها للعربي إذا أردت */
+  z-index: 10;
+  position: relative;
+}
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
