@@ -186,14 +186,15 @@ document.getElementById("editForm").addEventListener("submit", function (e) {
     // أضف أي حقول إضافية
   };
 
+  
   // حفظ التعديل في localStorage (أو أرسله لـ Firebase)
   localStorage.setItem("selectedApartment", JSON.stringify(updatedApartment));
 
   alert("تم تعديل بيانات الوحدة بنجاح");
-  window.location.href = "add_hostels.html"; // رجوع للصفحة الرئيسية أو قائمة الوحدات
+  window.location.href = "add_apartments.html"; // رجوع للصفحة الرئيسية أو قائمة الوحدات
 });
 
 function goToEditPage(apartment) {
   localStorage.setItem("selectedApartment", JSON.stringify(apartment));
-  window.location.href = "edit_hostels.html";
+  window.location.href = "edit_apartments.html";
 }
