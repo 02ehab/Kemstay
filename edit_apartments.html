@@ -87,6 +87,12 @@
             <input type="number" placeholder="السعر">
           </div>
 
+           <div class="upload-container">
+    <h2>ارفع الصور</h2>
+    <input type="file" id="imageInput" multiple accept="image/*">
+    <div id="preview" class="preview"></div>
+  </div>
+
           <label>الوصف
             <textarea rows="4"></textarea>
           </label>
@@ -121,12 +127,6 @@
 </div>
 <ul id="featuresList" class="tags-list"></ul>
 
-<!-- العمود الأيسر (الصور والشروط) -->
-        <div class="col">
-          <div class="upload-main">
-            <p>اسحب الصورة هنا<br>أو اختر صورة</p>
-          </div>
-
 
 <div class="row-2">
   <input type="text" id="ownerConditionInput" placeholder="أضف شروطك">
@@ -136,26 +136,24 @@
           
         </div>
 
-        <div class="row-2 align-items-center">
-  <label class="chk">
-  <input type="checkbox" required>
-  أوافق على <a href="#">الشروط والأحكام</a>
-</label>
-</div>
+       <div class="form-footer">
+    <div class="row-2 align-items-center">
+      <label class="chk">
+        <input type="checkbox" required>
+        أوافق على <a href="#">الشروط والأحكام</a>
+      </label>
+    </div>
 
-
-          <div class="buttons">
-            <button type="submit" class="edit">تعديل الوحدة</button>
-            <button type="reset"  class="cancel">إلغاء</button>
-          </div>
-        </div>
-
-        
-      </div>
-    </form>
+    <div class="buttons">
+      <button type="submit" class="edit">تعديل الوحدة</button>
+      <button type="reset" class="cancel">إلغاء</button>
+    </div>
   </div>
-</main>
+</form>
+  </div>
 
+</main>
+  </div>
   <footer class="footer">
     جميع الحقوق محفوظة لـ Kemstay © 2025
   </footer>
