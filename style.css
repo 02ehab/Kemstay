@@ -55,6 +55,39 @@ body {
       font-weight: 500;
     }
 
+    .btn-signin {
+  padding: 8px 20px;
+  background-color: #fff;
+  color: #1a1a1a;
+  border-radius: 30px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-signup {
+  padding: 8px 20px;
+  background-color: #ff5520;
+  color: #fff;
+  border-radius: 30px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  transition: background-color 0.3s;
+ margin-top: 10px;
+}
+
+.btn-signup:hover {
+  background-color: #e8491b;
+}
+
+.btn-signin:hover {
+  background-color: #f0f0f0;
+}
+
+
      .menu-toggle {
   display: none;
   background: none;
