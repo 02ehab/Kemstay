@@ -186,6 +186,7 @@ document.getElementById("editForm").addEventListener("submit", function (e) {
     // أضف أي حقول إضافية
   };
 
+  
   // حفظ التعديل في localStorage (أو أرسله لـ Firebase)
   localStorage.setItem("selectedApartment", JSON.stringify(updatedApartment));
 
