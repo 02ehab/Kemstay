@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>عرض الوحدة - Kemstay</title>
-  <link rel="stylesheet" href="add_hostels.css" />
-   <link rel="stylesheet" href="chatbot.css">
+  <link rel="stylesheet" href="add_apartments.css" />
 </head>
 <body>
      <header>
@@ -37,80 +36,131 @@
   </div>
 
   </header>
-<div class="form-container" dir="rtl">
-  <h2>إضافة هوستيل</h2>
-  <form action="#" method="POST">
-    <div class="form-grid">
-      <!-- القسم الأيسر: البيانات -->
-      <div class="left">
-        <label>الاسم<input type="text" name="name" /></label>
-        <label>البريد الإلكتروني<input type="email" name="email" /></label>
-        <label>رقم الهاتف<input type="tel" name="phone" placeholder="+20" /></label>
-        <label>العملة<input type="text" name="currency" /></label>
-        <label>الوصف<textarea name="description" rows="3"></textarea></label>
 
-        <label>العنوان</label>
-        <div class="address-group">
-          <input type="text" placeholder="المحافظة" />
-          <input type="text" placeholder="الشارع" />
-          <input type="text" placeholder="رقم العقار" />
-          <input type="text" placeholder="رقم الدور" />
-          <input type="text" placeholder="بالقرب من" />
-          <input type="text" placeholder="علامة مميزة" />
-        </div>
+<div class="form-container">
+    <h2>إضافة وحدة</h2>
 
-        <label>خدمات مجانية<input type="text" placeholder="واي فاي مجاني" /></label>
+    <form method="POST" action="#">
+      <div class="form-grid">
 
-        <label>
-          <input type="checkbox" required />
-          أوافق على <a href="#">الشروط والأحكام</a>
-        </label>
+        <!-- العمود الأيمن (النصوص) -->
+        <div class="col">
+          <div class="row-4">
+            <label>
+    نوع الوحدة
+    <select name="unitType" required>
+      <option value="">اختر نوع الوحدة</option>
+      <option value="apartment">شقة</option>
+      <option value="room">غرفة</option>
+    </select>
+  </label>
+            <label>
+    التصنيف
+    <select name="category" required>
+      <option value="">اختر التصنيف</option>
+      <option value="residential">سكني</option>
+      <option value="commercial">تجاري</option>
+    </select>
+  </label>
+            <label>
+    عدد الأفراد
+    <select name="capacity" required>
+      <option value="">اختر العدد</option>
+      <!-- نستخدم حلقة JS لاحقًا لو حبيت، أو يدوي -->
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+  </label>
+            <label class="chk"><input type="checkbox"> مفروشة</label>
+          </div>
 
-        <div class="btns">
-          <button type="submit" class="add">إضافة الوحدة</button>
-          <button type="button" class="cancel">إلغاء</button>
-        </div>
-      </div>
-
-      <!-- القسم الأيمن: الصور والخدمات -->
-      <div class="right">
-        <div class="image-upload">
-          <p>📤 اسحب الصورة هنا<br>أو اختر صورة من جهازك</p>
-        </div>
-
-        <label>الخدمات العامة<input type="text" placeholder="تكييف" /></label>
-        <label>خدمات الفندق<input type="text" placeholder="تنظيف يومي" /></label>
-        <label>خدمات الطعام<input type="text" placeholder="إفطار" /></label>
-      </div>
-    </div>
-  </form>
-</div>
-<div id="chatbot-container">
-<!-- أيقونة الشات -->
- <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
-
-  <!-- نافذة الشات -->
-  <div id="chatPopup" class="chatbot-popup hidden">
-    <div class="chatbot-header">
-      <span>Kemstay  🤖</span>
-      <button onclick="toggleChatbox()">✖</button>
-    </div>
-    <div class="chatbot-messages" id="chatMessages">
-      <p>👋 مرحبًا بك! كيف يمكنني مساعدتك؟</p>
-    </div>
-    <input
-      type="text"
-      id="chatInput"
-      placeholder="اكتب رسالتك..."
-      onkeydown="if(event.key==='Enter') sendChatMessage()"
-    />
-    <button onclick="sendChatMessage()">إرسال</button>
+          <div class="row-3">
+            <input type="text" placeholder="الشهر/اليوم">
+            <input type="number" placeholder="السعر">
+          </div>
+<!-- العمود الأيسر (الصور والشروط) -->
+         <div class="upload-container">
+    <h2>ارفع الصور</h2>
+    <input type="file" id="imageInput" multiple accept="image/*">
+    <div id="preview" class="preview"></div>
   </div>
+          <label>الوصف
+            <textarea rows="4"></textarea>
+          </label>
+
+          <h4>التوافر</h4>
+
+<div class="vertical-3">
+  <input type="date" id="availableFrom" placeholder="متاح من">
+  <input type="date" id="availableTo" placeholder="متاح إلى">
+  <button type="button" onclick="addAvailability()" class="plus">＋ إضافة</button>
+</div>
+<ul id="addAvailabilityList" class="tags-list"></ul>
+
+          <h4>العنوان</h4>
+          <div class="row-2">
+            <input type="text" placeholder="المحافظة">
+            <input type="text" placeholder="الشارع">
+          </div>
+          <div class="row-2">
+            <input type="text" placeholder="رقم العقار">
+            <input type="text" placeholder="رقم الدور">
+          </div>
+          <div class="row-2">
+            <input type="text" placeholder="قريب من">
+            <input type="text" placeholder="علامة مميزة">
+          </div>
+
+          <h4>المميزات</h4>
+          <div class="row-2">
+  <input type="text" id="featureInput" placeholder="أضف ميزة">
+  <button type="button" onclick="addFeature()">＋ إضافة</button>
+</div>
+<ul id="featuresList" class="tags-list"></ul>
+
+
+
+
+<div class="row-2">
+  <input type="text" id="ownerConditionInput" placeholder="أضف شروطك">
+  <button type="button" onclick="addOwnerCondition()">＋ إضافة</button>
+</div>
+<ul id="ownerConditionsList" class="tags-list"></ul>
+          
+        </div>
+
+        <div class="form-footer">
+    <div class="row-2 align-items-center">
+      <label class="chk">
+        <input type="checkbox" required>
+        أوافق على <a href="#">الشروط والأحكام</a>
+      </label>
+    </div>
+
+    <div class="buttons">
+      <button type="submit" class="add">إضافة الوحدة</button>
+      <button type="reset" class="cancel">إلغاء</button>
+    </div>
+  </div>
+</form>
+        
+      </div>
+    </form>
+  </div>
+</main>
+
   <footer class="footer">
     جميع الحقوق محفوظة لـ Kemstay © 2025
   </footer>
 
-  <script src="add_hostels.js"></script>
-  <script src="chatbot.js"></script>
+  <script src="add_apartments.js"></script>
 </body>
 </html>
