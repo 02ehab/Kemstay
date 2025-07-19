@@ -22,7 +22,8 @@ body {
 }
 
 
-   header {
+   
+    header {
   background-color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ظل أعمق */
   padding: 1rem 2rem;
@@ -38,7 +39,6 @@ body {
   z-index: 10;
   position: relative;
 }
-
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
@@ -138,9 +138,7 @@ h2 { margin: 0 0 1.5rem; }
 h4 { margin: 1.5rem 0 .5rem; font-size: 1rem; color: #555; }
 
 .form-container {
-  width: 100%;
-  max-width: 800px; /* أقصى عرض */
-  min-width: 300px; /* أقل عرض */
+  max-width: 1200px;
   background: #fff;
   margin: auto;
   padding: 2rem;
@@ -148,9 +146,7 @@ h4 { margin: 1.5rem 0 .5rem; font-size: 1rem; color: #555; }
   box-shadow: 0 3px 12px rgba(0,0,0,.12);
   margin-top: 4rem;
   margin-bottom: 4rem;
-  box-sizing: border-box;
 }
-
 
 .form-grid {
   display: flex;
@@ -181,6 +177,7 @@ textarea {
   resize: vertical;
 }
 
+
 .upload-container {
   background: white;
   padding: 20px;
@@ -209,6 +206,7 @@ input[type="file"] {
   border-radius: 8px;
   border: 1px solid #ccc;
 }
+
 
 .plus {
   background: #FF5A5F;
@@ -251,7 +249,7 @@ form {
 }
 
 button.add {
-  background-color: #4CAF50;
+  background-color: #007bff;
   color: white;
   padding: 10px 20px;
   border-radius: 8px;
@@ -268,21 +266,14 @@ button.cancel {
 
 
 
-.add {
+.edit {
   background: #00A699;
   color: #fff;
   border: none;
   border-radius: 6px;
   padding: 0.7rem 1.5rem;
-}
+}  
 
-.cancel {
-  background: #fff;
-  color: #FF5A5F;
-  border: 1px solid #FF5A5F;
-  border-radius: 6px;
-  padding: 0.7rem 1.5rem;
-}
 .chk {
   display: flex;
   align-items: center;
