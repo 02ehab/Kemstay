@@ -1,3 +1,4 @@
+
 function openMenu() {
   document.getElementById("sideMenu").classList.add("open");
 }
@@ -30,39 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // منطقة رفع الصورة مع عرض المعاينة
-  const uploadArea = document.querySelector(".upload-main");
-  if (uploadArea) {
-    const imageInput = document.createElement("input");
-    imageInput.type = "file";
-    imageInput.accept = "image/*";
-    imageInput.hidden = true;
-
-    const imagePreview = document.createElement("img");
-    imagePreview.style.display = "none";
-    imagePreview.style.marginTop = "1rem";
-    imagePreview.style.maxWidth = "100%";
-
-    uploadArea.appendChild(imageInput);
-    uploadArea.appendChild(imagePreview);
-
-    uploadArea.style.cursor = "pointer";
-    uploadArea.addEventListener("click", () => {
-      imageInput.click();
-    });
-
-    imageInput.addEventListener("change", () => {
-      const file = imageInput.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = e => {
-          imagePreview.src = e.target.result;
-          imagePreview.style.display = "block";
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  }
+ 
 
   // أزرار + لإضافة حقول جديدة (تكرر الحقول داخل نفس الأب)
   document.querySelectorAll(".plus").forEach(btn => {
@@ -153,3 +122,24 @@ function addOwnerCondition() {
     input.value = "";
   }
 }
+
+//الصور
+document.getElementById('imageInput').addEventListener('change', function(event) {
+  const preview = document.getElementById('preview');
+  preview.innerHTML = ""; // مسح الصور السابقة
+
+  const files = event.target.files;
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      preview.appendChild(img);
+    }
+
+    reader.readAsDataURL(file);
+  }
+});
