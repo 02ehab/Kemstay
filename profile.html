@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="chatbot.css">
   <title>Kemstay | منصة السكن للمغتربين</title>
 
 </head>
@@ -49,7 +50,7 @@
       <p>تاريخ الانضمام: يناير 2025</p>
       <div class="profile-actions">
         <button class="add-unit-btn" onclick="openUnitTypePopup()">إضافة وحدة</button>
-        <button class="edit-btn">تعديل البيانات</button>
+       <a href="edit_profile.html" class="edit-btn">تعديل البيانات</a>
         
         <button class="logout-btn" onclick="location.href='login.html'">تسجيل الخروج</button>
       </div>
@@ -81,9 +82,9 @@
     <h4 class="unit-title">شقة مفروشة في المهندسين</h4>
     <p class="unit-location">المهندسين، الجيزة</p>
     <p class="unit-price">السعر: 350 جنيه / الليلة</p>
-   <button class="unit-btn view-btn" data-id="1">عرض التفاصيل</button>
+   <button class="unit-btn view-btn" data-id="1" onclick="location.href='apartments_details.html'">عرض التفاصيل</button>
     <div class="unit-actions">
-      <button class="edit-btn" data-id="1">تعديل</button>
+      <button class="edit-btn" data-id="1" onclick="location.href='edit_apartments.html'">تعديل</button>
       <button class="delete-btn" data-id="1">حذف</button>
     </div>
   </div>
@@ -95,22 +96,22 @@
 
   <section class="profile-sections-row">
 
-  <!-- الوحدات المضافة -->
-  <div class="accordion-card added-units-card">
-    <div class="accordion-header added-units-header" onclick="toggleSection('addedUnits')">
+  <!-- الفنادق المضافة -->
+  <div class="accordion-card added-hostels-card">
+    <div class="accordion-header added-hostels-header" onclick="toggleSection('addedhostels')">
       <h3>الفنادق المضافة</h3>
-      <span class="arrow-icon" id="arrow-addedUnits"></span>
+      <span class="arrow-icon" id="arrow-addedhostels"></span>
     </div>
-    <div class="accordion-content hidden" id="addedUnits">
-      <div class="units-grid">
-        <div class="unit-card">
+    <div class="accordion-content hidden" id="addedhostels">
+      <div class="hostels-grid">
+        <div class="hostel-card">
   <img src="home.jpg" alt="هوستيل ">
-  <div class="unit-card-body">
-    <h4 class="unit-title">  هوستيل في وسط البلد </h4>
-    <p class="unit-location">وسط البلد القاهرة</p>
-    <p class="unit-price">السعر: 350 جنيه / الليلة</p>
-   <button class="unit-btn view-btn" data-id="1" onclick="location.href='hostels_details.html'">عرض التفاصيل</button>
-    <div class="unit-actions">
+  <div class="hostel-card-body">
+    <h4 class="hostel-title">  هوستيل في وسط البلد </h4>
+    <p class="hostel-location">وسط البلد القاهرة</p>
+    <p class="hostel-price">السعر: 350 جنيه / الليلة</p>
+   <button class="hostel-btn view-btn" data-id="1" onclick="location.href='hostels_details.html'">عرض التفاصيل</button>
+    <div class="hostel-actions">
       <button class="edit-btn" data-id="1" onclick="location.href='edit_hostels.html'">تعديل</button>
       <button class="delete-btn" data-id="1">حذف</button>
     </div>
@@ -146,6 +147,27 @@
 
 </section>
 
+<div id="chatbot-container">
+<!-- أيقونة الشات -->
+ <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
+
+  <!-- نافذة الشات -->
+  <div id="chatPopup" class="chatbot-popup hidden">
+    <div class="chatbot-header">
+      <span>Kemstay  🤖</span>
+      <button onclick="toggleChatbox()">✖</button>
+    </div>
+    <div class="chatbot-messages" id="chatMessages">
+      <p>👋 مرحبًا بك! كيف يمكنني مساعدتك؟</p>
+    </div>
+    <input
+      type="text"
+      id="chatInput"
+      placeholder="اكتب رسالتك..."
+      onkeydown="if(event.key==='Enter') sendChatMessage()"
+    />
+    <button onclick="sendChatMessage()">إرسال</button>
+  </div>
  <!-- Footer -->
   <footer class="footer">
     <p>&copy; 2025 Kemstay. جميع الحقوق محفوظة.</p>
@@ -153,4 +175,5 @@
 
 </body>
   <script src="profile.js"></script>
+  <script src="chatbot.js"></script>
 </html>
