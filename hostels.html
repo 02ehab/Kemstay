@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>تفاصيل الوحدة - Kemstay</title>
   <link rel="stylesheet" href="hostels.css" />
-  <link rel="stylesheet" href="chatbot.css">
 </head>
 <body>
      <header>
@@ -71,48 +70,69 @@
   <div class="listing-card">
     <img src="home.jpg" alt="Room Image">
     <div class="listing-details">
-      <h3>غرفة مفروشة في مدينة نصر</h3>
-      <p>2500 جنيه / شهريًا</p>
+      <h3> فندق في مدينة نصر</h3>
+      <p>2500 جنيه / يوم</p>
       <a href="hostels_details.html" class="details-btn">عرض التفاصيل</a>
     </div>
   </div>
   <div class="listing-card">
     <img src="home.jpg" alt="Room Image">
     <div class="listing-details">
-      <h3>غرفة مفروشة في مدينة نصر</h3>
-      <p>2500 جنيه / شهريًا</p>
+      <h3> فندق في مدينة نصر</h3>
+      <p>2500 جنيه / يوم</p>
       <a href="hostels_details.html" class="details-btn">عرض التفاصيل</a>
     </div>
   </div>
 </section>
-<div id="chatbot-container">
-<!-- أيقونة الشات -->
- <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
 
-  <!-- نافذة الشات -->
-  <div id="chatPopup" class="chatbot-popup hidden">
-    <div class="chatbot-header">
-      <span>Kemstay  🤖</span>
-      <button onclick="toggleChatbox()">✖</button>
+<!-- الفنادق المميزة -->
+<section class="featured-section">
+  <h2>الفنادق المميزة</h2>
+  <div class="slider-wrapper">
+    <button class="nav-btn left" onclick="slideLeft('hotelSlider')">‹</button>
+    <div class="slider" id="hotelSlider">
+      <a href="hostels_details.html" class="slide">
+        <img src="home.jpg" alt="فندق 1">
+        <p>فندق في القاهرة</p>
+      </a>
+      <a href="hostels_details.html" class="slide">
+        <img src="home.jpg" alt="فندق 2">
+        <p>فندق في الإسكندرية</p>
+      </a>
+      <a href="hostels_details.html" class="slide">
+        <img src="home.jpg" alt="فندق 3">
+        <p>فندق في الجيزة</p>
+      </a>
+      <a href="hostels_details.html" class="slide">
+        <img src="home.jpg" alt="فندق 1">
+        <p>فندق في القاهرة</p>
+      </a>
+      <a href="hostels_details.html" class="slide">
+        <img src="home.jpg" alt="فندق 2">
+        <p>فندق في الإسكندرية</p>
+      </a>
+      <a href="hostels_details.html" class="slide">
+        <img src="home.jpg" alt="فندق 3">
+        <p>فندق في الجيزة</p>
+      </a>
     </div>
-    <div class="chatbot-messages" id="chatMessages">
-      <p>👋 مرحبًا بك! كيف يمكنني مساعدتك؟</p>
-    </div>
-    <input
-      type="text"
-      id="chatInput"
-      placeholder="اكتب رسالتك..."
-      onkeydown="if(event.key==='Enter') sendChatMessage()"
-    />
-    <button onclick="sendChatMessage()">إرسال</button>
+    <button class="nav-btn right" onclick="slideRight('hotelSlider')">›</button>
   </div>
+</section>
 
 
-  <footer class="footer">
-    جميع الحقوق محفوظة لـ Kemstay © 2025
-  </footer>
+ <footer class="footer">
+    <div class="footer-container">
+        <ul class="footer-links">
+            <li><a href="#">سياسة الاستخدام</a></li>
+            <li><a href="#">الأسئلة الشائعة</a></li>
+            <li><a href="#">المدونة</a></li>
+            <li><a href="#">الشروط والأحكام</a></li>
+        </ul>
+        <p class="footer-copy">© 2025 Kemstay. جميع الحقوق محفوظة.</p>
+    </div>
+</footer>
 
   <script src="hostels.js"></script>
-  <script src="chatbot.js"></script>
 </body>
 </html>
