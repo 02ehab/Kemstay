@@ -383,49 +383,101 @@ body {
   color: #333;
 }
 
-/* Picture Ads Section */
-.ads-section {
-  margin: 40px 0;
-  padding: 20px 0;
-  background: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+
+/*عرض شقق مميزة */
+
+.featured-section {
+  margin: 3rem auto;
+  padding: 1rem;
+  max-width: 1000px;
+  width: 100%;
+  box-sizing: border-box;
 }
-.ads-title {
-  text-align: center;
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 24px;
+
+.featured-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: right;
 }
-.ads-grid {
+
+/* سلايدر wrapper */
+.slider-wrapper {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  max-width: 100%;
+  margin: 0 auto;
 }
-.ad-item {
+
+/* زر التنقل */
+.nav-btn {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0 10px;
+  height: 100%;
+  transition: background 0.3s ease;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.nav-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.nav-btn.left {
+  left: 0;
+}
+
+.nav-btn.right {
+  right: 0;
+}
+
+/* السلايدر */
+.slider {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
-  padding: 16px;
   width: 220px;
+  max-width: 90vw;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   text-align: center;
-  transition: box-shadow 0.2s;
+   display: block;
+  text-decoration: none;
+  color: inherit;
 }
-.ad-item:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-}
-.ad-img {
+
+.slide img {
   width: 100%;
-  height: 140px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 12px;
+  border-radius: 10px 10px 0 0;
 }
-.ad-caption {
-  font-size: 1.1rem;
-  color: #444;
-  margin: 0;
+
+.slide p {
+  padding: 0.5rem;
+  font-weight: bold;
 }
 
 
