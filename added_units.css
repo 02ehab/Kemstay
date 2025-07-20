@@ -126,8 +126,9 @@ body {
 
   /* هيرو */
 .hero {
-  background: linear-gradient(to left, #0066cc, #0099cc);
-  color: white;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
   padding: 3rem 1rem;
   text-align: center;
 }
