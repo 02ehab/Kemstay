@@ -22,7 +22,7 @@ body {
 }
 
 
-   header {
+    header {
   background-color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ظل أعمق */
   padding: 1rem 2rem;
@@ -167,13 +167,7 @@ body {
 .reserve-btn:hover {
   background-color: #5f5f5f;
 }
- .footer {
-  background-color: #222;
-  color: #fff;
-  padding: 2rem;
-  text-align: center;
-  margin-top: auto; /* هذا يجعل الفوتر يلتصق بأسفل الصفحة */
-}
+ 
 /* search bar */
 .search-bar-airbnb {
   display: flex;
@@ -359,3 +353,143 @@ body {
         gap: 0.5rem;
       }
     }
+
+    /*عرض شقق مميزة */
+
+.featured-section {
+  margin: 3rem auto;
+  padding: 1rem;
+  max-width: 1000px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.featured-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+/* سلايدر wrapper */
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* زر التنقل */
+.nav-btn {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0 10px;
+  height: 100%;
+  transition: background 0.3s ease;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.nav-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.nav-btn.left {
+  left: 0;
+}
+
+.nav-btn.right {
+  right: 0;
+}
+
+/* السلايدر */
+.slider {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 10px;
+  width: 220px;
+  max-width: 90vw;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+   display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.slide img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.slide p {
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+
+ .footer {
+    background-color: #0e0e0e;
+    color: #999;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 50px;
+    border-radius: 3px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links li a {
+    color: #999;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-links li a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-copy {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
