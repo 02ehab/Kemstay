@@ -149,6 +149,13 @@ body {
   margin: auto;
 }
 
+.hostels-section {
+  padding: 2rem 1rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+
 .units-section h2 {
   margin-bottom: 1rem;
   font-size: 1.5rem;
@@ -168,6 +175,17 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+.hostels-slider {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+  -webkit-overflow-scrolling: touch;
+}
 .units-slider::-webkit-scrollbar {
   height: 6px;
 }
@@ -192,6 +210,20 @@ body {
   box-sizing: border-box;
 }
 
+.hostel-card {
+  flex: 0 0 auto;
+  width: 260px;
+  max-width: 90vw;
+  scroll-snap-align: start;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
 /* ----------- التغيير على الموبايل ----------- */
 @media (max-width: 768px) {
   .units-slider {
@@ -201,6 +233,19 @@ body {
   }
 
   .unit-card {
+    flex: 1 1 100%; /* الكارت ياخد العرض كامل */
+    width: 100%;    /* العرض 100% */
+    max-width: 100%;
+    scroll-snap-align: none; /* الغي الالتقاط على الموبايل */
+    margin-bottom: 1rem; /* مسافة تحت كل كارت */
+  }
+  .hostels-slider {
+    flex-wrap: wrap; /* يسمح للعنصر بالانتقال لسطر ثاني */
+    overflow-x: visible; /* الغاء التمرير الأفقي */
+    padding: 0.5rem;
+  }
+
+  .hostel-card {
     flex: 1 1 100%; /* الكارت ياخد العرض كامل */
     width: 100%;    /* العرض 100% */
     max-width: 100%;
