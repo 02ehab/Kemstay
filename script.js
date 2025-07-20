@@ -68,3 +68,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+// عرض شقق مميزة
+function autoScrollSlider(sliderId) {
+  const slider = document.getElementById(sliderId);
+  let scrollAmount = 0;
+  const slideWidth = 260;
+
+  setInterval(() => {
+    if (scrollAmount <= slider.scrollWidth - slider.clientWidth - slideWidth) {
+      slider.scrollTo({
+        left: scrollAmount + slideWidth,
+        behavior: 'smooth'
+      });
+      scrollAmount += slideWidth;
+    } else {
+      slider.scrollTo({ left: 0, behavior: 'smooth' });
+      scrollAmount = 0;
+    }
+  }, 3000);
+}
+
+autoScrollSlider("apartmentSlider");
+autoScrollSlider("hotelSlider");
+
+function slideLeft(id) {
+  const slider = document.getElementById(id);
+  slider.scrollBy({ left: -260, behavior: 'smooth' });
+}
+
+function slideRight(id) {
+  const slider = document.getElementById(id);
+  slider.scrollBy({ left: 260, behavior: 'smooth' });
+}
