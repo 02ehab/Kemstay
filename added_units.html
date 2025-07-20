@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>عرض الوحدة - Kemstay</title>
+  <link rel="stylesheet" href="added_units.css" />
+</head>
+<body>
+     <header>
+
+     <div class="logo">Kemstay</div>
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- القائمة الأفقية (للكمبيوتر) -->
+  <nav class="main-nav">
+    <a href="index.html">الرئيسية</a>
+    <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
+    <a href="notifications.html">الاشعارات</a>
+    <a href="chat.html">الدردشة </a>
+    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+  </nav>
+
+  <!-- القائمة الجانبية (للموبايل) -->
+  <div id="sideMenu" class="side-menu">
+    <button class="close-btn" onclick="closeMenu()">✖</button>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
+      <a href="notifications.html">الاشعارات</a>
+    <a href="chat.html">الدردشة </a>
+    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+    </nav>
+  </div>
+
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1> الوحدات المضافة</h1>
+      <p>هنا تجد جميع الشقق والفنادق التي قمت بإضافتها</p>
+    </div>
+  </section>
+
+  <section class="units-section">
+  <h2> الشقق المضافة</h2>
+  <div class="units-slider">
+    <div class="unit-card">
+      <h3>شقة في القاهرة</h3>
+      <p>السعر: 1500 جنيه / شهر</p>
+      <div class="card-actions">
+        <button class="edit-btn">✏️ تعديل</button>
+        <button class="delete-btn">🗑️ حذف</button>
+      </div>
+    </div>
+    <div class="unit-card">
+      <h3>شقة في الإسكندرية</h3>
+      <p>السعر: 1200 جنيه / شهر</p>
+      <div class="card-actions">
+        <button class="edit-btn">✏️ تعديل</button>
+        <button class="delete-btn">🗑️ حذف</button>
+      </div>
+    </div>
+    <!-- المزيد من الكروت -->
+  </div>
+</section>
+
+<section class="units-section">
+  <h2> الفنادق المضافة</h2>
+  <div class="units-slider">
+    <div class="unit-card">
+      <h3>فندق في القاهرة</h3>
+      <p>السعر: 1500 جنيه / ليلة</p>
+      <div class="card-actions">
+        <button class="edit-btn">✏️ تعديل</button>
+        <button class="delete-btn">🗑️ حذف</button>
+      </div>
+    </div>
+    <div class="unit-card">
+      <h3>فندق في الإسكندرية</h3>
+      <p>السعر: 1200 جنيه / ليلة</p>
+      <div class="card-actions">
+        <button class="edit-btn">✏️ تعديل</button>
+        <button class="delete-btn">🗑️ حذف</button>
+      </div>
+    </div>
+    <!-- المزيد من الكروت -->
+  </div>
+</section>
+
+  <footer class="footer">
+    <div class="footer-container">
+        <ul class="footer-links">
+            <li><a href="#">سياسة الاستخدام</a></li>
+            <li><a href="#">الأسئلة الشائعة</a></li>
+            <li><a href="#">المدونة</a></li>
+            <li><a href="#">الشروط والأحكام</a></li>
+        </ul>
+        <p class="footer-copy">© 2025 Kemstay. جميع الحقوق محفوظة.</p>
+    </div>
+</footer>
+
+  <script src="added_units.js"></script>
+</body>
+</html>
