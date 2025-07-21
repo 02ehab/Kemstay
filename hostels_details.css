@@ -21,7 +21,8 @@ body {
   line-height: 1.6;
 }
 
- header {
+
+    header {
   background-color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ظل أعمق */
   padding: 1rem 2rem;
@@ -120,11 +121,124 @@ body {
   }
 }
 /* تفاصيل الوحدة*/
-body {
-  font-family: Arial;
-  margin: 0;
-  background: #f9f9f9;
-  color: #333;
+
+/* From Uiverse.io by dovatgabriel */ 
+.card svg {
+  height: 25px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e7e7e7;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  height: 50px;
+  width: 200px;
+  border-radius: 20px;
+}
+
+.card::before, .card::after {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  transition: 0.25s linear;
+  z-index: 1;
+}
+
+.card::before {
+  content: "";
+  left: 0;
+  justify-content: flex-end;
+  background-color: #4d60b6;
+}
+
+.card::after {
+  content: "";
+  right: 0;
+  justify-content: flex-start;
+  background-color: #4453a6;
+}
+
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.card:hover span {
+  opacity: 0;
+  z-index: -3;
+}
+
+.card:hover::before {
+  opacity: 0.5;
+  transform: translateY(-100%);
+}
+
+.card:hover::after {
+  opacity: 0.5;
+  transform: translateY(100%);
+}
+
+.card span {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: whitesmoke;
+  font-family: 'Fira Mono', monospace;
+  font-size: 24px;
+  font-weight: 700;
+  opacity: 1;
+  transition: opacity 0.25s;
+  z-index: 2;
+}
+
+.card .social-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  height: 100%;
+  color: whitesmoke;
+  font-size: 24px;
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+.card .social-link svg {
+  text-shadow: 1px 1px rgba(31, 74, 121, 0.7);
+  transform: scale(1);
+}
+
+.card .social-link:hover {
+  background-color: rgba(249, 244, 255, 0.774);
+  animation: bounce_613 0.4s linear;
+}
+
+@keyframes bounce_613 {
+  40% {
+    transform: scale(1.4);
+  }
+
+  60% {
+    transform: scale(0.8);
+  }
+
+  80% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .details-main {
@@ -309,54 +423,91 @@ body {
 }
 
 /* معلومات الوحدة */
-.unit-basic-info {
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+.unit-info {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  color: #333;
 }
 
 .unit-title {
-  font-size: 1.5rem;
-  color: #010101;
-  margin-bottom: 0.5rem;
+  font-size: 28px;
+  color: #c0392b;
+  margin-bottom: 10px;
 }
 
 .unit-location {
-  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
   color: #555;
 }
 
 .unit-location .map-icon {
-  color: #007BFF;
-  margin-right: 0.5rem;
+  background-color: #f1f1f1;
+  padding: 6px 12px;
+  border-radius: 30px;
   text-decoration: none;
+  color: #c0392b;
+  font-weight: 500;
+  transition: background 0.3s;
 }
 
 .unit-location .map-icon:hover {
-  text-decoration: underline;
+  background-color: #e0e0e0;
 }
 
-/* وصف وخدمات */
 .content-section {
-  padding: 2rem 0;
+  margin-top: 30px;
 }
 
-.content-section h2 {
-  color: #010101;
-  margin-bottom: 0.5rem;
+.content-section h2,
+.content-section h3 {
+  color: #2c3e50;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  border-right: 4px solid #c0392b;
+  padding-right: 8px;
+  
+}
+
+.description p {
+  font-size: 17px;
+  line-height: 1.7;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
 }
 
 .services ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding-left: 0;
   list-style: none;
+  padding: 0;
+  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
 }
 
 .services li {
-  background: #f4f4f4;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+  background-color: #f2f2f2;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 15px;
+  position: relative;
+  padding-right: 30px;
+}
+
+.services li::before {
+  content: "✓";
+  color: green;
+  position: absolute;
+  right: 10px;
 }
 
 /* استجابة */
@@ -407,10 +558,45 @@ body {
 }
 
   .footer {
-  background-color: #222;
-  color: #fff;
-  padding: 2rem;
-  text-align: center;
-  margin-top: auto; /* هذا يجعل الفوتر يلتصق بأسفل الصفحة */
+    background-color: #0e0e0e;
+    color: #999;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 50px;
+    border-radius: 3px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links li a {
+    color: #999;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-links li a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-copy {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
 }
 
