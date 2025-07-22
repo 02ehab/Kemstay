@@ -37,14 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // عرض تفاصيل 
-const images=["images/unit1.jpg","images/unit2.jpg","images/unit3.jpg"];
-let i=0;
-const imgEl=document.getElementById("sliderImage");
-function show(idx){imgEl.src=images[idx];}
-function nextImage(){i=(i+1)%images.length;show(i);}
-function prevImage(){i=(i-1+images.length)%images.length;show(i);}
-
-// بوب اب سلايدر
 const imageSources = [
   'home.jpg',
   'room1.jpg',
@@ -87,3 +79,68 @@ function nextPopupImage(event) {
   currentImageIndex = (currentImageIndex + 1) % imageSources.length;
   document.getElementById("popupImage").src = imageSources[currentImageIndex];
 }
+
+ // منع دخول الصفحات بدون تسجيل
+const isLoggedIn = localStorage.getItem("isLoggedIn");
+if (isLoggedIn !== "true") {
+  // تحويل المستخدم لتسجيل الدخول
+  window.location.href = "login.html";
+}
+
+//مشاركة
+function toggleShare() {
+    const buttons = document.getElementById("share-buttons");
+    buttons.style.display = buttons.style.display === "flex" ? "none" : "flex";
+
+    const url = encodeURIComponent(window.location.href);
+
+    document.getElementById("whatsapp").href = `https://wa.me/?text=${url}`;
+    document.getElementById("facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    document.getElementById("twitter").href = `https://twitter.com/intent/tweet?url=${url}&text=شاهد هذه الوحدة على Kemstay`;
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert("✅ تم نسخ الرابط");
+    });
+  }
+
+  // عرض تفاصيل الوحدة
+const unit = JSON.parse(localStorage.getItem("latestApartment"));
+
+if (unit) {
+  document.getElementById("unitTitle").textContent = unit.title || "شقة بدون عنوان";
+  document.getElementById("unitType").textContent = unit.unitType;
+  document.getElementById("category").textContent = unit.category;
+  document.getElementById("capacity").textContent = unit.capacity;
+  document.getElementById("price").textContent = unit.price;
+  document.getElementById("description").textContent = unit.description;
+
+  document.getElementById("governorate").textContent = unit.governorate;
+  document.getElementById("street").textContent = unit.street;
+  document.getElementById("building").textContent = unit.building;
+  document.getElementById("floor").textContent = unit.floor;
+  document.getElementById("nearby").textContent = unit.nearby;
+  document.getElementById("landmark").textContent = unit.landmark;
+
+  // الصور
+  const gallery = document.getElementById("imageGallery");
+  gallery.innerHTML = ""; // Clear previous images
+  unit.images.forEach(img => {
+    const image = document.createElement("img");
+    image.src = img;
+    gallery.appendChild(image);
+  });
+
+  // التوافر
+  const availabilityList = document.getElementById("availabilityList");
+  availabilityList.innerHTML = ""; // Clear previous availability
+  unit.availability.forEach(range => {
+    const li = document.createElement("li");
+    li.textContent = `${range.from} → ${range.to}`;
+    availabilityList.appendChild(li);
+  });
+}
+
+
+     
