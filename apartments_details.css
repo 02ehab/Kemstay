@@ -422,93 +422,58 @@ body {
   background: #30c6c6;
 }
 
-/* معلومات الوحدة */
-.unit-info {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  font-family: 'Cairo', sans-serif;
-  direction: rtl;
-  color: #333;
-}
+.container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
 
-.unit-title {
-  font-size: 28px;
-  color: #c0392b;
-  margin-bottom: 10px;
-}
+   
 
-.unit-location {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 16px;
-  color: #555;
-}
+    .gallery {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      margin-bottom: 20px;
+    }
 
-.unit-location .map-icon {
-  background-color: #f1f1f1;
-  padding: 6px 12px;
-  border-radius: 30px;
-  text-decoration: none;
-  color: #c0392b;
-  font-weight: 500;
-  transition: background 0.3s;
-}
+    .gallery img {
+      width: 100%;
+      max-width: 250px;
+      height: 180px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
 
-.unit-location .map-icon:hover {
-  background-color: #e0e0e0;
-}
+    .info-group {
+      margin-bottom: 20px;
+    }
 
-.content-section {
-  margin-top: 30px;
-}
+    .info-group h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
 
-.content-section h2,
-.content-section h3 {
-  color: #2c3e50;
-  margin-top: 25px;
-  margin-bottom: 10px;
-  border-right: 4px solid #c0392b;
-  padding-right: 8px;
-  
-}
+    .info-group p, .info-group li {
+      margin: 5px 0;
+      color: #555;
+    }
 
-.description p {
-  font-size: 17px;
-  line-height: 1.7;
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 10px;
-}
+    ul {
+      padding-right: 20px;
+    }
 
-.services ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 15px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 10px;
-}
+    .tag {
+      display: inline-block;
+      background: #e0e0e0;
+      border-radius: 20px;
+      padding: 5px 15px;
+      margin: 5px 5px 5px 0;
+    }
 
-.services li {
-  background-color: #f2f2f2;
-  padding: 10px 15px;
-  border-radius: 8px;
-  font-size: 15px;
-  position: relative;
-  padding-right: 30px;
-}
-
-.services li::before {
-  content: "✓";
-  color: green;
-  position: absolute;
-  right: 10px;
-}
 
 /* استجابة */
 .details-main {
