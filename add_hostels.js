@@ -1,4 +1,3 @@
-
 function openMenu() {
   document.getElementById("sideMenu").classList.add("open");
 }
@@ -7,8 +6,9 @@ function closeMenu() {
   document.getElementById("sideMenu").classList.remove("open");
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
-  // زر الحجز الوهمي
+  // زر الحجز
   const reserveBtn = document.querySelector(".reserve-btn");
   if (reserveBtn) {
     reserveBtn.addEventListener("click", () => {
@@ -16,130 +16,128 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // تغيير حالة تسجيل الدخول بناءً على localStorage
+  // تغيير حالة تسجيل الدخول
   const authLinks = document.querySelectorAll(".auth-link");
   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  if (authLinks.length > 0) {
-    authLinks.forEach(link => {
-      if (isLoggedIn === "true") {
-        link.textContent = "الملف الشخصي";
-        link.href = "profile.html";
-      } else {
-        link.textContent = "تسجيل الدخول";
-        link.href = "login.html";
-      }
-    });
-  }
-
- 
-
-  // أزرار + لإضافة حقول جديدة (تكرر الحقول داخل نفس الأب)
-  document.querySelectorAll(".plus").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const parent = btn.parentElement;
-      const firstInput = parent.querySelector("input");
-      if (firstInput) {
-        const clone = firstInput.cloneNode(true);
-        clone.value = "";
-        parent.insertBefore(clone, btn);
-      }
-    });
+  authLinks.forEach(link => {
+    if (isLoggedIn === "true") {
+      link.textContent = "الملف الشخصي";
+      link.href = "profile.html";
+    } else {
+      link.textContent = "تسجيل الدخول";
+      link.href = "login.html";
+    }
   });
 
-  // التحقق من الموافقة على الشروط قبل الإرسال
-  const form = document.querySelector("form");
-  if (form) {
-    form.addEventListener("submit", e => {
-      const agreement = form.querySelector('input[type="checkbox"][required]');
-      if (agreement && !agreement.checked) {
-        e.preventDefault();
-        alert("يجب الموافقة على الشروط والأحكام قبل إرسال النموذج.");
+  // Multi-step form with localStorage step persistence
+  const steps = document.querySelectorAll(".step");
+  const progressBar = document.getElementById("progressBar");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const submitBtn = document.getElementById("submitBtn");
+  const form = document.getElementById("hotelForm") || document.getElementById("multiForm");
+  const LS_KEY = "kemstay_hotel_step";
+  let currentStep = 0;
+
+  // Restore step from localStorage
+  const savedStep = parseInt(localStorage.getItem(LS_KEY), 10);
+  if (!isNaN(savedStep) && savedStep >= 0 && savedStep < steps.length) {
+    currentStep = savedStep;
+  }
+
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.style.display = i === index ? "block" : "none";
+    });
+    if (progressBar)
+      progressBar.style.width = ((index + 1) / steps.length) * 100 + "%";
+    if (prevBtn) prevBtn.disabled = index === 0;
+    if (nextBtn) nextBtn.style.display = index === steps.length - 1 ? "none" : "inline-block";
+    if (submitBtn) submitBtn.style.display = index === steps.length - 1 ? "inline-block" : "none";
+    // Save step to localStorage
+    localStorage.setItem(LS_KEY, index);
+  }
+
+  function validateStep(index) {
+    const inputs = steps[index].querySelectorAll("input, select, textarea");
+    for (let input of inputs) {
+      if (input.hasAttribute("required") && !input.value) {
+        alert("يرجى ملء جميع الحقول المطلوبة");
+        return false;
+      }
+    }
+    return true;
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      if (validateStep(currentStep)) {
+        currentStep++;
+        if (currentStep >= steps.length) currentStep = steps.length - 1;
+        showStep(currentStep);
       }
     });
   }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function () {
+      currentStep--;
+      if (currentStep < 0) currentStep = 0;
+      showStep(currentStep);
+    });
+  }
+
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (validateStep(currentStep)) {
+        alert("تم إرسال النموذج بنجاح!");
+        localStorage.removeItem(LS_KEY);
+        // يمكنك هنا رفع الصور والبيانات لـ Firebase أو localStorage
+      }
+    });
+  }
+
+  showStep(currentStep);
 });
-
-// دوال إضافة وحذف المميزات والشروط والقائمة
-
-function addFeature() {
-  const input = document.getElementById("featureInput");
-  const value = input?.value.trim();
-  if (value) {
-    const li = document.createElement("li");
-    li.innerHTML = `${value} <button class="remove" onclick="this.parentElement.remove()">×</button>`;
-    document.getElementById("featuresList").appendChild(li);
-    input.value = "";
-  }
-}
-
-function addRule() {
-  const input = document.getElementById("ruleInput");
-  const value = input?.value.trim();
-  if (value) {
-    const li = document.createElement("li");
-    li.innerHTML = `${value} <button class="remove" onclick="this.parentElement.remove()">×</button>`;
-    document.getElementById("rulesList").appendChild(li);
-    input.value = "";
-  }
-}
 
 function addAvailability() {
-  const from = document.getElementById("availableFrom")?.value;
-  const to = document.getElementById("availableTo")?.value;
+  const list = document.getElementById("availabilityList");
+  const input = document.createElement("input");
+  input.type = "date";
+  input.name = "availability[]";
+  input.required = true;
 
-  if (from && to) {
-    const li = document.createElement("li");
-    li.textContent = `من ${from} إلى ${to}`;
+  const removeBtn = document.createElement("button");
+  removeBtn.type = "button";
+  removeBtn.textContent = "−";
+  removeBtn.onclick = () => inputDiv.remove();
 
-    const removeBtn = document.createElement("button");
-    removeBtn.className = "remove";
-    removeBtn.innerHTML = "×";
-    removeBtn.onclick = () => li.remove();
-
-    li.appendChild(removeBtn);
-    document.getElementById("availabilityList").appendChild(li);
-
-    document.getElementById("availableFrom").value = "";
-    document.getElementById("availableTo").value = "";
-  }
+  const inputDiv = document.createElement("div");
+  inputDiv.appendChild(input);
+  inputDiv.appendChild(removeBtn);
+  list.appendChild(inputDiv);
 }
 
-function addOwnerCondition() {
-  const input = document.getElementById("ownerConditionInput");
-  const value = input?.value.trim();
+function addFeature() {
+  const list = document.getElementById("featuresList");
+  const input = document.createElement("input");
+  input.type = "text";
+  input.name = "features[]";
+  input.placeholder = "ميزة";
+  input.required = true;
 
-  if (value) {
-    const li = document.createElement("li");
-    li.textContent = value;
+  const removeBtn = document.createElement("button");
+  removeBtn.type = "button";
+  removeBtn.textContent = "−";
+  removeBtn.onclick = () => inputDiv.remove();
 
-    const removeBtn = document.createElement("button");
-    removeBtn.className = "remove";
-    removeBtn.innerHTML = "×";
-    removeBtn.onclick = () => li.remove();
-
-    li.appendChild(removeBtn);
-    document.getElementById("ownerConditionsList").appendChild(li);
-    input.value = "";
-  }
+  const inputDiv = document.createElement("div");
+  inputDiv.appendChild(input);
+  inputDiv.appendChild(removeBtn);
+  list.appendChild(inputDiv);
 }
 
-//الصور
-document.getElementById('imageInput').addEventListener('change', function(event) {
-  const preview = document.getElementById('preview');
-  preview.innerHTML = ""; // مسح الصور السابقة
 
-  const files = event.target.files;
 
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const img = document.createElement("img");
-      img.src = e.target.result;
-      preview.appendChild(img);
-    }
-
-    reader.readAsDataURL(file);
-  }
-});
+ 
