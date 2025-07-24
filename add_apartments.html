@@ -36,106 +36,88 @@
   </div>
 
   </header>
-
-<div class="form-container">
-    <h2>إضافة وحدة</h2>
-
-    <form method="POST" action="#">
-      <div class="form-grid">
-
-        <!-- العمود الأيمن (النصوص) -->
-        <div class="col">
-          <div class="row-4">
-            <label>
-    نوع الوحدة
-    <select name="unitType" required>
-      <option value="">اختر نوع الوحدة</option>
-      <option value="apartment">شقة</option>
-      <option value="room">غرفة</option>
-    </select>
-  </label>
-            <label>
-    التصنيف
-    <select name="category" required>
-      <option value="">اختر التصنيف</option>
-      <option value="residential">سكني</option>
-      <option value="commercial">تجاري</option>
-    </select>
-  </label>
-            <label>
-    عدد الأفراد
-    <select name="capacity" required>
-      <option value="">اختر العدد</option>
-      <!-- نستخدم حلقة JS لاحقًا لو حبيت، أو يدوي -->
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-    </select>
-  </label>
-            <label class="chk"><input type="checkbox"> مفروشة</label>
-          </div>
-
-          <div class="row-3">
-            <input type="text" placeholder="الشهر/اليوم">
-            <input type="number" placeholder="السعر">
-          </div>
-<!-- العمود الأيسر (الصور والشروط) -->
-         <div class="upload-container">
-    <h2>ارفع الصور</h2>
-    <input type="file" id="imageInput" multiple accept="image/*">
-    <div id="preview" class="preview"></div>
+<wrapper>
+  <form id="listingForm">
+    <h2>نموذج إضافة شقة - Kemstay</h2><!-- الخطوة 1: معلومات أساسية -->
+<div class="form-step active">
+  <div class="form-group">
+    <label>العنوان الكامل</label>
+    <input type="text" name="address" required>
   </div>
-          <label>الوصف
-            <textarea rows="4"></textarea>
-          </label>
-
-          <h4>التوافر</h4>
-
-<div class="vertical-3">
-  <input type="date" id="availableFrom" placeholder="متاح من">
-  <input type="date" id="availableTo" placeholder="متاح إلى">
-  <button type="button" onclick="addAvailability()" class="plus">＋ إضافة</button>
+  <div class="form-group">
+    <label>نوع الوحدة</label>
+    <select name="type" required>
+      <option>شقة</option>
+      <option>استوديو</option>
+      <option>غرفة</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>المساحة (متر)</label>
+    <input type="number" name="area" required>
+  </div>
+  <div class="form-group">
+    <label>الدور</label>
+    <input type="number" name="floor">
+  </div>
+  <div class="buttons">
+    <button type="button" onclick="nextStep()">التالي</button>
+  </div>
 </div>
-<ul id="addAvailabilityList" class="tags-list"></ul>
 
-          <h4>العنوان</h4>
-          <div class="row-2">
-            <input type="text" placeholder="المحافظة">
-            <input type="text" placeholder="الشارع">
-          </div>
-          <div class="row-2">
-            <input type="text" placeholder="رقم العقار">
-            <input type="text" placeholder="رقم الدور">
-          </div>
-          <div class="row-2">
-            <input type="text" placeholder="قريب من">
-            <input type="text" placeholder="علامة مميزة">
-          </div>
-
-          <h4>المميزات</h4>
-          <div class="row-2">
-  <input type="text" id="featureInput" placeholder="أضف ميزة">
-  <button type="button" onclick="addFeature()">＋ إضافة</button>
+<!-- الخطوة 2: رفع الصور حسب الغرف -->
+<div class="form-step">
+  <div id="roomImagesContainer">
+    <div class="form-group">
+      <label>اختر نوع الغرفة</label>
+      <select id="roomType">
+        <option value="مفردة">غرفة مفردة</option>
+        <option value="مزدوجة">غرفة مزدوجة</option>
+        <option value="ثلاثية">غرفة ثلاثية</option>
+        <option value="صالة">صالة</option>
+        <option value="مطبخ">مطبخ</option>
+        <option value="حمام">حمام</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>صور الغرفة</label>
+      <input type="file" id="roomImages" multiple>
+    </div>
+    <button type="button" onclick="addRoomImages()">إضافة الغرفة</button>
+    <ul id="roomsPreview"></ul>
+  </div>
+  <div class="buttons">
+    <button type="button" onclick="prevStep()">السابق</button>
+    <button type="button" onclick="nextStep()">التالي</button>
+  </div>
 </div>
-<ul id="featuresList" class="tags-list"></ul>
 
-
-
-
-<div class="row-2">
-  <input type="text" id="ownerConditionInput" placeholder="أضف شروطك">
-  <button type="button" onclick="addOwnerCondition()">＋ إضافة</button>
+<!-- الخطوة 3: بيانات التواصل والشروط -->
+<div class="form-step">
+  <div class="form-group">
+    <label>اسم المالك</label>
+    <input type="text" name="owner_name" required>
+  </div>
+  <div class="form-group">
+    <label>رقم الجوال</label>
+    <input type="tel" name="phone" required>
+  </div>
+  <div class="form-group">
+    <label>السعر الشهري</label>
+    <input type="number" name="price_monthly">
+  </div>
+  <div class="form-group">
+    <label>شروط الإيجار</label>
+    <textarea name="conditions" rows="4"></textarea>
+  </div>
+  <div class="buttons">
+    <button type="button" onclick="prevStep()">السابق</button>
+    <button type="submit">إرسال</button>
+  </div>
 </div>
-<ul id="ownerConditionsList" class="tags-list"></ul>
-          
-        </div>
+
+  </form>
+</wrapper>
 
         <div class="form-footer">
     <div class="row-2 align-items-center">
