@@ -124,177 +124,98 @@ body {
 
 /* إضافة وحدة */
 
-main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 3rem;
-}
-
-/* أساسيات */
-h2 { margin: 0 0 1.5rem; }
-h4 { margin: 1.5rem 0 .5rem; font-size: 1rem; color: #555; }
-
-.form-container {
-  width: 100%;
-  max-width: 600px; /* أقصى عرض */
-  min-width: 300px; /* أقل عرض */
+form {
   background: #fff;
-  margin: auto;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 3px 12px rgba(0,0,0,.12);
-  margin-top: 4rem;
-  margin-bottom: 4rem;
-  box-sizing: border-box;
-}
-
-.form-grid {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-.col {
-  flex: 1;
-  min-width: 320px;
-}
-
-.row-4, .row-3, .row-2 {
-  display: flex;
-  gap: 0.8rem;
-  margin-bottom: 1rem;
-}
-.row-4 > * { flex: 1; }
-.row-3 > * { flex: 1; }
-.row-2 > * { flex: 1; }
-
-input, textarea {
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-textarea {
-  resize: vertical;
-}
-
-.upload-container {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   max-width: 600px;
-  margin: auto;
+  animation: fadeIn 0.8s ease;
 }
 
-input[type="file"] {
-  margin: 10px 0;
+h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 25px;
 }
 
-.preview {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
+.form-step {
+  display: none;
+  animation: fadeSlide 0.6s ease-in-out;
+}
+.form-step.active {
+  display: block;
 }
 
-.preview img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+.form-group {
+  margin-bottom: 20px;
 }
 
-.plus {
-  background: #FF5A5F;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.4rem 1rem;
-  cursor: pointer;
+label {
+  display: block;
+  margin-bottom: 6px;
+  color: #34495e;
   font-weight: bold;
 }
-.plus.mini {
-  padding: 0.3rem 0.8rem;
-  font-size: 0.8rem;
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border 0.3s;
 }
 
+input:focus, select:focus, textarea:focus {
+  border-color: #3498db;
+  outline: none;
+}
 
-form {
+.buttons {
   display: flex;
-  flex-direction: column;
-  position: relative;
-  padding-bottom: 100px; /* عشان تضمن فيه مساحة تحت */
-}
-
-.form-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* يمين */
-  position: absolute;
-  bottom: 20px; /* من أسفل الفورم */
-  right: 20px; /* على يمين الصفحة */
-}
-
-.form-footer .row-2 {
-  margin-bottom: 10px;
-}
-
-.form-footer .buttons {
-  display: flex;
+  justify-content: space-between;
   gap: 10px;
 }
 
-button.add {
-  background-color: #4CAF50;
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #3498db;
   color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
-button.cancel {
-  background-color: #ccc;
-  color: black;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
+button:hover {
+  background-color: #2980b9;
 }
 
+ul#roomsPreview {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
 
-
-.add {
-  background: #00A699;
-  color: #fff;
-  border: none;
+ul#roomsPreview li {
+  background-color: #ecf0f1;
+  padding: 10px;
+  margin-bottom: 8px;
   border-radius: 6px;
-  padding: 0.7rem 1.5rem;
 }
 
-.cancel {
-  background: #fff;
-  color: #FF5A5F;
-  border: 1px solid #FF5A5F;
-  border-radius: 6px;
-  padding: 0.7rem 1.5rem;
-}
-.chk {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin: 0;
-  white-space: nowrap;
+@keyframes fadeSlide {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 
-.chk input[type="checkbox"] {
-  vertical-align: middle;
-  width: 18px; /* حجم الأيقونة */
-  height: 18px;
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
-
 
 
      .footer {
