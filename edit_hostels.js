@@ -6,8 +6,9 @@ function closeMenu() {
   document.getElementById("sideMenu").classList.remove("open");
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
-  // زر الحجز الوهمي
+  // زر الحجز
   const reserveBtn = document.querySelector(".reserve-btn");
   if (reserveBtn) {
     reserveBtn.addEventListener("click", () => {
@@ -15,186 +16,232 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // تغيير حالة تسجيل الدخول بناءً على localStorage
+  // تغيير حالة تسجيل الدخول
   const authLinks = document.querySelectorAll(".auth-link");
   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  if (authLinks.length > 0) {
-    authLinks.forEach(link => {
-      if (isLoggedIn === "true") {
-        link.textContent = "الملف الشخصي";
-        link.href = "profile.html";
-      } else {
-        link.textContent = "تسجيل الدخول";
-        link.href = "login.html";
-      }
-    });
-  }
-
-  // منطقة رفع الصورة مع عرض المعاينة
-  const uploadArea = document.querySelector(".upload-main");
-  if (uploadArea) {
-    const imageInput = document.createElement("input");
-    imageInput.type = "file";
-    imageInput.accept = "image/*";
-    imageInput.hidden = true;
-
-    const imagePreview = document.createElement("img");
-    imagePreview.style.display = "none";
-    imagePreview.style.marginTop = "1rem";
-    imagePreview.style.maxWidth = "100%";
-
-    uploadArea.appendChild(imageInput);
-    uploadArea.appendChild(imagePreview);
-
-    uploadArea.style.cursor = "pointer";
-    uploadArea.addEventListener("click", () => {
-      imageInput.click();
-    });
-
-    imageInput.addEventListener("change", () => {
-      const file = imageInput.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = e => {
-          imagePreview.src = e.target.result;
-          imagePreview.style.display = "block";
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  }
-
-  // أزرار + لإضافة حقول جديدة (تكرر الحقول داخل نفس الأب)
-  document.querySelectorAll(".plus").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const parent = btn.parentElement;
-      const firstInput = parent.querySelector("input");
-      if (firstInput) {
-        const clone = firstInput.cloneNode(true);
-        clone.value = "";
-        parent.insertBefore(clone, btn);
-      }
-    });
+  authLinks.forEach(link => {
+    if (isLoggedIn === "true") {
+      link.textContent = "الملف الشخصي";
+      link.href = "profile.html";
+    } else {
+      link.textContent = "تسجيل الدخول";
+      link.href = "login.html";
+    }
   });
 
-  // التحقق من الموافقة على الشروط قبل الإرسال
-  const form = document.querySelector("form");
-  if (form) {
-    form.addEventListener("submit", e => {
-      const agreement = form.querySelector('input[type="checkbox"][required]');
-      if (agreement && !agreement.checked) {
-        e.preventDefault();
-        alert("يجب الموافقة على الشروط والأحكام قبل إرسال النموذج.");
+  // Multi-step form with localStorage step persistence
+  const steps = document.querySelectorAll(".step");
+  const progressBar = document.getElementById("progressBar");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const submitBtn = document.getElementById("submitBtn");
+  const form = document.getElementById("hotelForm") || document.getElementById("multiForm");
+  const LS_KEY = "kemstay_hotel_step";
+  let currentStep = 0;
+
+  // Restore step from localStorage
+  const savedStep = parseInt(localStorage.getItem(LS_KEY), 10);
+  if (!isNaN(savedStep) && savedStep >= 0 && savedStep < steps.length) {
+    currentStep = savedStep;
+  }
+
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.style.display = i === index ? "block" : "none";
+    });
+    if (progressBar)
+      progressBar.style.width = ((index + 1) / steps.length) * 100 + "%";
+    if (prevBtn) prevBtn.disabled = index === 0;
+    if (nextBtn) nextBtn.style.display = index === steps.length - 1 ? "none" : "inline-block";
+    if (submitBtn) submitBtn.style.display = index === steps.length - 1 ? "inline-block" : "none";
+    // Save step to localStorage
+    localStorage.setItem(LS_KEY, index);
+  }
+
+  function validateStep(index) {
+    const inputs = steps[index].querySelectorAll("input, select, textarea");
+    for (let input of inputs) {
+      if (input.hasAttribute("required") && !input.value) {
+        alert("يرجى ملء جميع الحقول المطلوبة");
+        return false;
+      }
+    }
+    return true;
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      if (validateStep(currentStep)) {
+        currentStep++;
+        if (currentStep >= steps.length) currentStep = steps.length - 1;
+        showStep(currentStep);
       }
     });
   }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function () {
+      currentStep--;
+      if (currentStep < 0) currentStep = 0;
+      showStep(currentStep);
+    });
+  }
+
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (validateStep(currentStep)) {
+        alert("تم إرسال النموذج بنجاح!");
+        localStorage.removeItem(LS_KEY);
+        // يمكنك هنا رفع الصور والبيانات لـ Firebase أو localStorage
+      }
+    });
+  }
+
+  showStep(currentStep);
 });
-
-// دوال إضافة وحذف المميزات والشروط والقائمة
-
-function addFeature() {
-  const input = document.getElementById("featureInput");
-  const value = input?.value.trim();
-  if (value) {
-    const li = document.createElement("li");
-    li.innerHTML = `${value} <button class="remove" onclick="this.parentElement.remove()">×</button>`;
-    document.getElementById("featuresList").appendChild(li);
-    input.value = "";
-  }
-}
-
-function addRule() {
-  const input = document.getElementById("ruleInput");
-  const value = input?.value.trim();
-  if (value) {
-    const li = document.createElement("li");
-    li.innerHTML = `${value} <button class="remove" onclick="this.parentElement.remove()">×</button>`;
-    document.getElementById("rulesList").appendChild(li);
-    input.value = "";
-  }
-}
 
 function addAvailability() {
-  const from = document.getElementById("availableFrom")?.value;
-  const to = document.getElementById("availableTo")?.value;
+  const list = document.getElementById("availabilityList");
+  const input = document.createElement("input");
+  input.type = "date";
+  input.name = "availability[]";
+  input.required = true;
 
-  if (from && to) {
-    const li = document.createElement("li");
-    li.textContent = `من ${from} إلى ${to}`;
+  const removeBtn = document.createElement("button");
+  removeBtn.type = "button";
+  removeBtn.textContent = "−";
+  removeBtn.onclick = () => inputDiv.remove();
 
-    const removeBtn = document.createElement("button");
-    removeBtn.className = "remove";
-    removeBtn.innerHTML = "×";
-    removeBtn.onclick = () => li.remove();
-
-    li.appendChild(removeBtn);
-    document.getElementById("availabilityList").appendChild(li);
-
-    document.getElementById("availableFrom").value = "";
-    document.getElementById("availableTo").value = "";
-  }
+  const inputDiv = document.createElement("div");
+  inputDiv.appendChild(input);
+  inputDiv.appendChild(removeBtn);
+  list.appendChild(inputDiv);
 }
 
-function addOwnerCondition() {
-  const input = document.getElementById("ownerConditionInput");
-  const value = input?.value.trim();
+function addFeature() {
+  const list = document.getElementById("featuresList");
+  const input = document.createElement("input");
+  input.type = "text";
+  input.name = "features[]";
+  input.placeholder = "ميزة";
+  input.required = true;
 
-  if (value) {
-    const li = document.createElement("li");
-    li.textContent = value;
+  const removeBtn = document.createElement("button");
+  removeBtn.type = "button";
+  removeBtn.textContent = "−";
+  removeBtn.onclick = () => inputDiv.remove();
 
-    const removeBtn = document.createElement("button");
-    removeBtn.className = "remove";
-    removeBtn.innerHTML = "×";
-    removeBtn.onclick = () => li.remove();
-
-    li.appendChild(removeBtn);
-    document.getElementById("ownerConditionsList").appendChild(li);
-    input.value = "";
-  }
+  const inputDiv = document.createElement("div");
+  inputDiv.appendChild(input);
+  inputDiv.appendChild(removeBtn);
+  list.appendChild(inputDiv);
 }
 
+//اضافة غرفة فرعيه
 
-// جلب بيانات الوحدة من localStorage (أو Firebase)
-document.addEventListener("DOMContentLoaded", function () {
-  const apartmentData = JSON.parse(localStorage.getItem("selectedApartment")); // أو جلب من id
+let roomIndex = 1;
 
-  if (apartmentData) {
-    document.getElementById("type").value = apartmentData.type;
-    document.getElementById("category").value = apartmentData.category;
-    document.getElementById("people").value = apartmentData.people;
-    document.getElementById("furnished").checked = apartmentData.furnished;
-    document.getElementById("description").value = apartmentData.description;
-    document.getElementById("address").value = apartmentData.address;
+document.getElementById('addRoomBtn').addEventListener('click', () => {
+  const container = document.getElementById('roomsContainer');
 
-    // خصائص إضافية حسب تصميمك
-    // مثل تعبئة المميزات أو التواريخ
-  }
+  const newRoomDiv = document.createElement('div');
+  newRoomDiv.classList.add('room-group');
+
+  newRoomDiv.innerHTML = `
+    <label>نوع الغرفة:</label>
+    <select name="room_type[]" required>
+      <option value="">اختر نوع الغرفة</option>
+      <option value="single">غرفة فردية</option>
+      <option value="double">غرفة مزدوجة</option>
+      <option value="suite">جناح</option>
+      <option value="family">غرفة عائلية</option>
+    </select>
+
+    <label>صور الغرفة:</label>
+    <input type="file" name="room_images_${roomIndex}[]" multiple accept="image/*" required>
+
+    <button type="button" class="removeRoomBtn">− إزالة غرفة</button>
+  `;
+
+  container.appendChild(newRoomDiv);
+
+  // أضف حدث إزالة للحقل الجديد
+  newRoomDiv.querySelector('.removeRoomBtn').addEventListener('click', () => {
+    newRoomDiv.remove();
+  });
+
+  roomIndex++;
 });
 
-// عند الضغط على "تعديل الوحدة"
-document.getElementById("editForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const updatedApartment = {
-    type: document.getElementById("type").value,
-    category: document.getElementById("category").value,
-    people: document.getElementById("people").value,
-    furnished: document.getElementById("furnished").checked,
-    description: document.getElementById("description").value,
-    address: document.getElementById("address").value,
-    // أضف أي حقول إضافية
-  };
-
-  
-  // حفظ التعديل في localStorage (أو أرسله لـ Firebase)
-  localStorage.setItem("selectedApartment", JSON.stringify(updatedApartment));
-
-  alert("تم تعديل بيانات الوحدة بنجاح");
-  window.location.href = "add_apartments.html"; // رجوع للصفحة الرئيسية أو قائمة الوحدات
+// تفعيل زر إزالة على المجموعة الأولى
+document.querySelectorAll('.removeRoomBtn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.target.parentElement.remove();
+  });
 });
 
-function goToEditPage(apartment) {
-  localStorage.setItem("selectedApartment", JSON.stringify(apartment));
-  window.location.href = "edit_apartments.html";
+ //اضافة خدمات
+ function addService(type) {
+  const container = document.createElement('div');
+  container.className = 'service-item';
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.name = `services_${type}[]`;
+  input.placeholder = 'أدخل اسم الخدمة';
+  input.required = true;
+
+  const deleteBtn = document.createElement('span');
+  deleteBtn.innerHTML = '🗑';
+  deleteBtn.className = 'delete-service';
+  deleteBtn.onclick = () => container.remove();
+
+  container.appendChild(input);
+  container.appendChild(deleteBtn);
+
+  if (type === 'available') {
+    document.getElementById('availableServicesList').appendChild(container);
+  } else if (type === 'breakfast') {
+    document.getElementById('breakfastServicesList').appendChild(container);
+  } else if (type === 'extra') {
+    document.getElementById('extraServicesList').appendChild(container);
+  }
 }
+
+//الاتاحية
+document.querySelector("form").addEventListener("submit", function(e) {
+    const from = new Date(document.getElementById("availableFrom").value);
+    const to = new Date(document.getElementById("availableTo").value);
+    if (from > to) {
+      alert("تاريخ البداية يجب أن يكون قبل تاريخ النهاية");
+      e.preventDefault();
+    }
+  });
+
+  //اضافة الاتاحية
+   function addAvailability() {
+    const container = document.getElementById("availabilityContainer");
+
+    const group = document.createElement("div");
+    group.className = "availability-group";
+
+    group.innerHTML = `
+      <div class="form-group">
+        <label>متاح من:</label>
+        <input type="date" name="availableFrom[]" required>
+      </div>
+      <div class="form-group">
+        <label>متاح حتى:</label>
+        <input type="date" name="availableTo[]" required>
+      </div>
+      <button type="button" class="remove-btn" onclick="removeAvailability(this)">− حذف</button>
+    `;
+
+    container.appendChild(group);
+  }
+
+  function removeAvailability(button) {
+    const group = button.closest(".availability-group");
+    group.remove();
+  }
