@@ -55,17 +55,27 @@ function loadItems(type) {
 
   itemsData.forEach(item => {
     const card = document.createElement('div');
-    card.className = 'unit-card'; // نفس التنسيق للكارت
+    card.className = 'unit-card';
     card.setAttribute('data-id', item.id);
 
     card.innerHTML = `
       <h3>${item.title}</h3>
       <p>السعر: ${item.price} جنيه / شهر</p>
       <div class="card-actions">
-        <button class="edit-btn" onclick="editItem('${type}', '${item.id}')">✏️ تعديل</button>
-        <button class="delete-btn" onclick="deleteItem('${type}', '${item.id}')">🗑️ حذف</button>
+        <button class="edit-btn">✏️ تعديل</button>
+        <button class="delete-btn">🗑️ حذف</button>
       </div>
     `;
+
+    // Add event listeners for edit and delete
+    const editBtn = card.querySelector('.edit-btn');
+    editBtn.addEventListener('click', function() {
+      editItem(type, item.id);
+    });
+    const deleteBtn = card.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', function() {
+      deleteItem(type, item.id);
+    });
 
     container.appendChild(card);
   });
@@ -93,7 +103,13 @@ function deleteItem(type, id) {
 
 // دالة تعديل (نفس فكرة الحذف، فقط تنبيه حالياً)
 function editItem(type, id) {
-  alert(`تعديل ${type === 'units' ? 'الشقة' : 'الفندق'} برقم ${id} غير مفعّل حالياً`);
+  if (type === 'units') {
+    window.location.href = 'edit_apartments.html';
+  } else if (type === 'hotels') {
+    window.location.href = 'edit_hostels.html';
+  } else {
+    alert('صفحة التعديل غير متوفرة لهذا النوع');
+  }
 }
 
 // تحميل الشقق والفنادق عند تحميل الصفحة
@@ -101,3 +117,10 @@ window.addEventListener('DOMContentLoaded', () => {
   loadItems('units');
   loadItems('hotels');
 });
+
+// منع دخول الصفحات بدون تسجيل
+const isLoggedIn = localStorage.getItem("isLoggedIn");
+  if (!isLoggedIn) {
+    // تحويل المستخدم لتسجيل الدخول
+    window.location.href = "login.html";
+  }
