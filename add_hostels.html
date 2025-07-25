@@ -156,6 +156,47 @@
   </div>
 </div>
 
+<!-- Step 6: السعر والإتاحة -->
+<div class="step">
+  <h3>السعر والإتاحة</h3>
+
+  <!-- السعر -->
+  <div class="form-group">
+    <label for="price">السعر لكل ليلة (بالجنيه):</label>
+    <input type="number" id="price" name="price" min="0" placeholder="أدخل السعر" required>
+  </div>
+
+  <!-- نوع التسعير -->
+  <div class="form-group">
+    <label for="pricingType">نوع التسعير:</label>
+    <select id="pricingType" name="pricingType" required>
+      <option value="">اختر نوع التسعير</option>
+      <option value="nightly">لكل ليلة</option>
+      <option value="weekly">لكل أسبوع</option>
+      <option value="monthly">لكل شهر</option>
+      <option value="per_person">لكل شخص</option>
+    </select>
+  </div>
+
+  <!-- الإتاحة -->
+  <div id="availabilityContainer">
+  <div class="availability-group">
+    <div class="form-group">
+      <label>متاح من:</label>
+      <input type="date" name="availableFrom[]" required>
+    </div>
+
+    <div class="form-group">
+      <label>متاح حتى:</label>
+      <input type="date" name="availableTo[]" required>
+    </div>
+  </div>
+</div>
+
+<!-- زر الإضافة -->
+<button type="button" onclick="addAvailability()">＋ إضافة فترة إتاحة</button>
+
+</div>
 
 
     <!-- Navigation buttons -->
