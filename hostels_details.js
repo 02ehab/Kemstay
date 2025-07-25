@@ -36,55 +36,101 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// عرض تفاصيل 
-const images=["images/unit1.jpg","images/unit2.jpg","images/unit3.jpg"];
-let i=0;
-const imgEl=document.getElementById("sliderImage");
-function show(idx){imgEl.src=images[idx];}
-function nextImage(){i=(i+1)%images.length;show(i);}
-function prevImage(){i=(i-1+images.length)%images.length;show(i);}
-
-// بوب اب سلايدر
-const imageSources = [
-  'home.jpg',
-  'room1.jpg',
-  'room2.jpg',
-  'room3.jpg'
-];
-let currentImageIndex = 0;
-
-function prevImage() {
-  currentImageIndex = (currentImageIndex - 1 + imageSources.length) % imageSources.length;
-  document.getElementById("sliderImage").src = imageSources[currentImageIndex];
-}
-
-function nextImage() {
-  currentImageIndex = (currentImageIndex + 1) % imageSources.length;
-  document.getElementById("sliderImage").src = imageSources[currentImageIndex];
-}
-
-function openPopup(index) {
-  currentImageIndex = index;
-  document.getElementById("popupImage").src = imageSources[index];
-  document.getElementById("popup").classList.remove("hidden");
-}
 
 
-function closePopupOutside(event) {
-  if (event.target.id === "popup") {
-    document.getElementById("popup").classList.add("hidden");
+
+// منع دخول الصفحات بدون تسجيل + سلايدر صور الغرف (داخل DOMContentLoaded)
+document.addEventListener("DOMContentLoaded", function() {
+  // Only check login once
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  if (!isLoggedIn) {
+    window.location.href = "login.html";
+    return;
   }
-}
 
-function prevPopupImage(event) {
-  event.stopPropagation();
-  currentImageIndex = (currentImageIndex - 1 + imageSources.length) % imageSources.length;
-  document.getElementById("popupImage").src = imageSources[currentImageIndex];
-}
+  // --- Main slider popup logic ---
+  const mainImages = [
+    'home.jpg',
+    'room1.jpg',
+    'room2.jpg',
+    'room3.jpg'
+  ];
+  let mainCurrentIndex = 0;
+  const mainSliderImage = document.getElementById('sliderImage');
+  const mainPopup = document.getElementById('popup');
+  const mainPopupImage = document.getElementById('popupImage');
 
-function nextPopupImage(event) {
-  event.stopPropagation();
-  currentImageIndex = (currentImageIndex + 1) % imageSources.length;
-  document.getElementById("popupImage").src = imageSources[currentImageIndex];
-}
+  if (mainSliderImage && mainPopup && mainPopupImage) {
+    mainSliderImage.addEventListener('click', function() {
+      mainPopupImage.src = mainImages[mainCurrentIndex];
+      mainPopup.classList.remove('hidden');
+    });
+    window.prevImage = function() {
+      mainCurrentIndex = (mainCurrentIndex - 1 + mainImages.length) % mainImages.length;
+      mainSliderImage.src = mainImages[mainCurrentIndex];
+    };
+    window.nextImage = function() {
+      mainCurrentIndex = (mainCurrentIndex + 1) % mainImages.length;
+      mainSliderImage.src = mainImages[mainCurrentIndex];
+    };
+    window.openPopup = function(index) {
+      mainCurrentIndex = index;
+      mainPopupImage.src = mainImages[mainCurrentIndex];
+      mainPopup.classList.remove('hidden');
+    };
+    window.closePopupOutside = function(event) {
+      if (event.target.id === "popup") {
+        mainPopup.classList.add('hidden');
+      }
+    };
+    window.prevPopupImage = function(event) {
+      event.stopPropagation();
+      mainCurrentIndex = (mainCurrentIndex - 1 + mainImages.length) % mainImages.length;
+      mainPopupImage.src = mainImages[mainCurrentIndex];
+    };
+    window.nextPopupImage = function(event) {
+      event.stopPropagation();
+      mainCurrentIndex = (mainCurrentIndex + 1) % mainImages.length;
+      mainPopupImage.src = mainImages[mainCurrentIndex];
+    };
+  }
 
+
+  // --- Room gallery popup logic ---
+const galleryImagesEls = document.querySelectorAll('.room-images img');
+const galleryPopup = document.getElementById('imagePopup');
+const galleryPopupImage = document.getElementById('galleryPopupImage');
+let galleryCurrentIndex = 0;
+let galleryImagesArr = [];
+
+galleryImagesEls.forEach((img) => {
+  img.addEventListener('click', function() {
+    galleryImagesArr = Array.from(img.parentElement.querySelectorAll('img'));
+    galleryCurrentIndex = galleryImagesArr.indexOf(this);
+    if (galleryPopupImage) {
+      galleryPopupImage.src = this.src; // This line sets the image source
+    }
+    if (galleryPopup) {
+      galleryPopup.classList.remove('hidden');
+    }
+  });
+});
+
+  window.closeGalleryPopup = function() {
+    if (galleryPopup) galleryPopup.classList.add('hidden');
+  };
+  window.changeGalleryImage = function(direction) {
+    if (!galleryImagesArr.length || !galleryPopupImage) return;
+    galleryCurrentIndex = (galleryCurrentIndex + direction + galleryImagesArr.length) % galleryImagesArr.length;
+    galleryPopupImage.src = galleryImagesArr[galleryCurrentIndex].src;
+  };
+  window.prevPopupImage = function(event) {
+    if (event) event.stopPropagation();
+    window.changeGalleryImage(-1);
+  };
+  window.nextPopupImage = function(event) {
+    if (event) event.stopPropagation();
+    window.changeGalleryImage(1);
+  };
+
+});
