@@ -1,247 +1,400 @@
-function openMenu() {
-  document.getElementById("sideMenu").classList.add("open");
-}
 
-function closeMenu() {
-  document.getElementById("sideMenu").classList.remove("open");
-}
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  // زر الحجز
-  const reserveBtn = document.querySelector(".reserve-btn");
-  if (reserveBtn) {
-    reserveBtn.addEventListener("click", () => {
-      alert("تم إرسال طلب الحجز بنجاح! سيتم التواصل معك قريبًا.");
-    });
-  }
-
-  // تغيير حالة تسجيل الدخول
-  const authLinks = document.querySelectorAll(".auth-link");
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-  authLinks.forEach(link => {
-    if (isLoggedIn === "true") {
-      link.textContent = "الملف الشخصي";
-      link.href = "profile.html";
-    } else {
-      link.textContent = "تسجيل الدخول";
-      link.href = "login.html";
+/* Header*/
+*{
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
-  });
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
-  // Multi-step form with localStorage step persistence
-  const steps = document.querySelectorAll(".step");
-  const progressBar = document.getElementById("progressBar");
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
-  const submitBtn = document.getElementById("submitBtn");
-  const form = document.getElementById("hotelForm") || document.getElementById("multiForm");
-  const LS_KEY = "kemstay_hotel_step";
-  let currentStep = 0;
+body {
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
 
-  // Restore step from localStorage
-  const savedStep = parseInt(localStorage.getItem(LS_KEY), 10);
-  if (!isNaN(savedStep) && savedStep >= 0 && savedStep < steps.length) {
-    currentStep = savedStep;
-  }
 
-  function showStep(index) {
-    steps.forEach((step, i) => {
-      step.style.display = i === index ? "block" : "none";
-    });
-    if (progressBar)
-      progressBar.style.width = ((index + 1) / steps.length) * 100 + "%";
-    if (prevBtn) prevBtn.disabled = index === 0;
-    if (nextBtn) nextBtn.style.display = index === steps.length - 1 ? "none" : "inline-block";
-    if (submitBtn) submitBtn.style.display = index === steps.length - 1 ? "inline-block" : "none";
-    // Save step to localStorage
-    localStorage.setItem(LS_KEY, index);
-  }
+   header {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ظل أعمق */
+  padding: 1rem 2rem;
+  margin: 20px auto; /* يبعد الهيدر عن حواف الصفحة */
+  width: 95%;
+  max-width: 1200px;
+  border-radius: 10px; /* حواف دائرية */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  direction: ltr; /* تُغيّرها للعربي إذا أردت */
+  z-index: 10;
+  position: relative;
+}
 
-  function validateStep(index) {
-    const inputs = steps[index].querySelectorAll("input, select, textarea");
-    for (let input of inputs) {
-      if (input.hasAttribute("required") && !input.value) {
-        alert("يرجى ملء جميع الحقول المطلوبة");
-        return false;
-      }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #964B00;
     }
-    return true;
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener("click", function () {
-      if (validateStep(currentStep)) {
-        currentStep++;
-        if (currentStep >= steps.length) currentStep = steps.length - 1;
-        showStep(currentStep);
-      }
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener("click", function () {
-      currentStep--;
-      if (currentStep < 0) currentStep = 0;
-      showStep(currentStep);
-    });
-  }
-
-  if (form) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (validateStep(currentStep)) {
-        alert("تم إرسال النموذج بنجاح!");
-        localStorage.removeItem(LS_KEY);
-        // يمكنك هنا رفع الصور والبيانات لـ Firebase أو localStorage
-      }
-    });
-  }
-
-  showStep(currentStep);
-});
-
-function addAvailability() {
-  const list = document.getElementById("availabilityList");
-  const input = document.createElement("input");
-  input.type = "date";
-  input.name = "availability[]";
-  input.required = true;
-
-  const removeBtn = document.createElement("button");
-  removeBtn.type = "button";
-  removeBtn.textContent = "−";
-  removeBtn.onclick = () => inputDiv.remove();
-
-  const inputDiv = document.createElement("div");
-  inputDiv.appendChild(input);
-  inputDiv.appendChild(removeBtn);
-  list.appendChild(inputDiv);
-}
-
-function addFeature() {
-  const list = document.getElementById("featuresList");
-  const input = document.createElement("input");
-  input.type = "text";
-  input.name = "features[]";
-  input.placeholder = "ميزة";
-  input.required = true;
-
-  const removeBtn = document.createElement("button");
-  removeBtn.type = "button";
-  removeBtn.textContent = "−";
-  removeBtn.onclick = () => inputDiv.remove();
-
-  const inputDiv = document.createElement("div");
-  inputDiv.appendChild(input);
-  inputDiv.appendChild(removeBtn);
-  list.appendChild(inputDiv);
-}
-
-//اضافة غرفة فرعيه
-
-let roomIndex = 1;
-
-document.getElementById('addRoomBtn').addEventListener('click', () => {
-  const container = document.getElementById('roomsContainer');
-
-  const newRoomDiv = document.createElement('div');
-  newRoomDiv.classList.add('room-group');
-
-  newRoomDiv.innerHTML = `
-    <label>نوع الغرفة:</label>
-    <select name="room_type[]" required>
-      <option value="">اختر نوع الغرفة</option>
-      <option value="single">غرفة فردية</option>
-      <option value="double">غرفة مزدوجة</option>
-      <option value="suite">جناح</option>
-      <option value="family">غرفة عائلية</option>
-    </select>
-
-    <label>صور الغرفة:</label>
-    <input type="file" name="room_images_${roomIndex}[]" multiple accept="image/*" required>
-
-    <button type="button" class="removeRoomBtn">− إزالة غرفة</button>
-  `;
-
-  container.appendChild(newRoomDiv);
-
-  // أضف حدث إزالة للحقل الجديد
-  newRoomDiv.querySelector('.removeRoomBtn').addEventListener('click', () => {
-    newRoomDiv.remove();
-  });
-
-  roomIndex++;
-});
-
-// تفعيل زر إزالة على المجموعة الأولى
-document.querySelectorAll('.removeRoomBtn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.target.parentElement.remove();
-  });
-});
-
- //اضافة خدمات
- function addService(type) {
-  const container = document.createElement('div');
-  container.className = 'service-item';
-
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.name = `services_${type}[]`;
-  input.placeholder = 'أدخل اسم الخدمة';
-  input.required = true;
-
-  const deleteBtn = document.createElement('span');
-  deleteBtn.innerHTML = '🗑';
-  deleteBtn.className = 'delete-service';
-  deleteBtn.onclick = () => container.remove();
-
-  container.appendChild(input);
-  container.appendChild(deleteBtn);
-
-  if (type === 'available') {
-    document.getElementById('availableServicesList').appendChild(container);
-  } else if (type === 'breakfast') {
-    document.getElementById('breakfastServicesList').appendChild(container);
-  } else if (type === 'extra') {
-    document.getElementById('extraServicesList').appendChild(container);
-  }
-}
-
-//الاتاحية
-document.querySelector("form").addEventListener("submit", function(e) {
-    const from = new Date(document.getElementById("availableFrom").value);
-    const to = new Date(document.getElementById("availableTo").value);
-    if (from > to) {
-      alert("تاريخ البداية يجب أن يكون قبل تاريخ النهاية");
-      e.preventDefault();
+    
+    nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
-  });
 
-  //اضافة الاتاحية
-   function addAvailability() {
-    const container = document.getElementById("availabilityContainer");
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+     .menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
 
-    const group = document.createElement("div");
-    group.className = "availability-group";
+.side-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
+  max-width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  padding: 2rem 1rem;
+  z-index: 999;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+}
 
-    group.innerHTML = `
-      <div class="form-group">
-        <label>متاح من:</label>
-        <input type="date" name="availableFrom[]" required>
-      </div>
-      <div class="form-group">
-        <label>متاح حتى:</label>
-        <input type="date" name="availableTo[]" required>
-      </div>
-      <button type="button" class="remove-btn" onclick="removeAvailability(this)">− حذف</button>
-    `;
+.side-menu nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-    container.appendChild(group);
+.side-menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.side-menu .close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  align-self: flex-end;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.side-menu.open {
+  display: flex;
+}
+
+@media (max-width: 600px) {
+  header > nav {
+    display: none; /* إخفاء القائمة الأصلية فقط على الشاشات الصغيرة */
   }
 
-  function removeAvailability(button) {
-    const group = button.closest(".availability-group");
-    group.remove();
+  .menu-toggle {
+    display: block;
   }
+
+
+  nav:not(.side-menu nav) {
+    display: none; /* إخفاء القائمة العادية على الموبايل */
+  }
+}
+
+/* إضافة وحدة */
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  font-family: 'Tajawal', sans-serif;
+  direction: rtl;
+}
+
+h2, h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+label.agree-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 0.3rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.progress {
+  width: 100%;
+  background-color: #eee;
+  height: 10px;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: #007BFF;
+  border-radius: 5px;
+  transition: width 0.3s ease;
+}
+
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #007BFF;
+  color: white;
+}
+
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.terms-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: right;
+  direction: rtl;
+}
+
+.custom-checkbox {
+  position: relative;
+  padding-right: 35px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.custom-checkbox .checkmark:after {
+  right: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/*اضافة خدمات*/
+.services-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.service-category {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.service-category h4 {
+  margin-bottom: 0.5rem;
+}
+
+.service-category input {
+  display: block;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  padding: 0.4rem;
+}
+
+.service-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.service-item input {
+  flex: 1;
+  padding: 0.4rem;
+}
+
+.delete-service {
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 1.2rem;
+  color: red;
+  transition: 0.2s;
+}
+
+.delete-service:hover {
+  transform: scale(1.2);
+}
+
+.step .form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.availability-group {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  position: relative;
+}
+
+.remove-btn {
+  margin-top: 10px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+
+/*footer*/
+     .footer {
+    background-color: #0e0e0e;
+    color: #999;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 50px;
+    border-radius: 3px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links li a {
+    color: #999;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-links li a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-copy {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
