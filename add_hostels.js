@@ -138,6 +138,74 @@ function addFeature() {
   list.appendChild(inputDiv);
 }
 
+//اضافة غرفة فرعيه
 
+let roomIndex = 1;
 
- 
+document.getElementById('addRoomBtn').addEventListener('click', () => {
+  const container = document.getElementById('roomsContainer');
+
+  const newRoomDiv = document.createElement('div');
+  newRoomDiv.classList.add('room-group');
+
+  newRoomDiv.innerHTML = `
+    <label>نوع الغرفة:</label>
+    <select name="room_type[]" required>
+      <option value="">اختر نوع الغرفة</option>
+      <option value="single">غرفة فردية</option>
+      <option value="double">غرفة مزدوجة</option>
+      <option value="suite">جناح</option>
+      <option value="family">غرفة عائلية</option>
+    </select>
+
+    <label>صور الغرفة:</label>
+    <input type="file" name="room_images_${roomIndex}[]" multiple accept="image/*" required>
+
+    <button type="button" class="removeRoomBtn">− إزالة غرفة</button>
+  `;
+
+  container.appendChild(newRoomDiv);
+
+  // أضف حدث إزالة للحقل الجديد
+  newRoomDiv.querySelector('.removeRoomBtn').addEventListener('click', () => {
+    newRoomDiv.remove();
+  });
+
+  roomIndex++;
+});
+
+// تفعيل زر إزالة على المجموعة الأولى
+document.querySelectorAll('.removeRoomBtn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.target.parentElement.remove();
+  });
+});
+
+ //اضافة خدمات
+ function addService(type) {
+  const container = document.createElement('div');
+  container.className = 'service-item';
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.name = `services_${type}[]`;
+  input.placeholder = 'أدخل اسم الخدمة';
+  input.required = true;
+
+  const deleteBtn = document.createElement('span');
+  deleteBtn.innerHTML = '🗑';
+  deleteBtn.className = 'delete-service';
+  deleteBtn.onclick = () => container.remove();
+
+  container.appendChild(input);
+  container.appendChild(deleteBtn);
+
+  if (type === 'available') {
+    document.getElementById('availableServicesList').appendChild(container);
+  } else if (type === 'breakfast') {
+    document.getElementById('breakfastServicesList').appendChild(container);
+  } else if (type === 'extra') {
+    document.getElementById('extraServicesList').appendChild(container);
+  }
+}
+
