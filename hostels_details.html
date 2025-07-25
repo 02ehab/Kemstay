@@ -59,11 +59,12 @@
   <!-- سلايدر الصور -->
   <div class="slider-section">
     <button onclick="prevImage()">❮</button>
-<img id="sliderImage" src="home.jpg" alt="صورة الوحدة" onclick="openPopup(currentImageIndex)">
+    <img id="sliderImage" src="home.jpg" alt="صورة الوحدة" onclick="openPopup(currentImageIndex)">
     <button onclick="nextImage()">❯</button>
   </div>
 </main>
 
+<!-- نافذة الصور المكبرة -->
 <div class="popup-overlay hidden" id="popup" onclick="closePopupOutside(event)">
   <div class="popup-content">
     <button class="popup-prev" onclick="prevPopupImage(event)">❮</button>
@@ -72,44 +73,95 @@
   </div>
 </div>
 
-    <div class="unit-info">
-      <div class="unit-basic-info">
-        <h1 class="unit-title"> فندق في المعادي</h1>
-        <div class="unit-location">
-          <span>المعادي، القاهرة</span>
-          <a href="https://maps.google.com?q=المعادي" target="_blank" class="map-icon">📍 على الخريطة</a>
-        </div>
+<!-- معلومات الوحدة -->
+<div class="unit-info">
+  <div class="unit-basic-info">
+    <h1 class="unit-title">فندق في المعادي</h1>
+    <div class="unit-location">
+      <span>المعادي، القاهرة</span>
+      <a href="https://maps.google.com?q=المعادي" target="_blank" class="map-icon">📍 على الخريطة</a>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="description">
+      <h2>حول الفندق</h2>
+      <p>فندق مميز يوفر إقامة مريحة في موقع استراتيجي بالقرب من محطة المترو. يحتوي على غرف مجهزة بالكامل وخدمات راقية.</p>
+    </div>
+
+    <!-- تفاصيل الغرف -->
+   <section class="rooms-section">
+  <h2>تفاصيل الغرف</h2>
+  <div class="room-cards">
+    <div class="room-card">
+      <h3>جناح فاخر</h3>
+      <div class="room-images">
+        <img src="home.jpg" alt="Room Image">
+        <img src="home.jpg" alt="Room Image">
       </div>
+    </div>
+    <div class="room-card">
+      <h3>غرفة فردية</h3>
+      <div class="room-images">
+        <img src="home.jpg" alt="Room Image">
+        <img src="home.jpg" alt="Room Image">
+      </div>
+    </div>
+    <div class="room-card">
+      <h3>جناح فاخر</h3>
+      <div class="room-images">
+        <img src="home.jpg" alt="Room Image">
+        <img src="home.jpg" alt="Room Image">
+      </div>
+    </div>
+    <div class="room-card">
+      <h3>جناح فاخر</h3>
+      <div class="room-images">
+        <img src="pic.jpg" alt="Room Image">
+        <img src="pic.jpg" alt="Room Image">
+      </div>
+    </div>
+  </div>
+</section>
 
-      <section class="content-section">
-        <div class="description">
-          <h2>حول الوحدة</h2>
-          <p>شقة فندقية مفروشة بالكامل، تتكون من غرفتي نوم، صالة، مطبخ، وحمام. موقع متميز بالقرب من محطة المترو.</p>
-        </div>
+<!-- Popup -->
+<div id="imagePopup" class="popup-overlay hidden" onclick="closeGalleryPopup()">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closeGalleryPopup()">&times;</span>
+    <img id="galleryPopupImage" src="" alt="Room Image">
+    <button class="popup-prev" onclick="prevPopupImage(event)">❮</button>>
+    <button class="popup-next" onclick="nextPopupImage(event)">❯</button>
+  </div>
+</div>
 
-        <div class="services">
-          <h2>الخدمات المتوفرة</h2>
-          <ul>
-            <li>تكييف</li>
-            <li>واي فاي</li>
-            <li>مطبخ مجهز</li>
-            <li>غسالة</li>
-          </ul>
 
-          <h3>خدمات الإفطار</h3>
-          <ul>
-            <li>إفطار عربي</li>
-            <li>إفطار إنجليزي</li>
-          </ul>
 
-          <h3>خدمات إضافية</h3>
-          <ul>
-            <li>خدمة توصيل من وإلى المطار</li>
-            <li>تنظيف يومي</li>
-          </ul>
-        </div>
-      </section>
-    
+
+    <!-- الخدمات -->
+    <div class="services">
+      <h2>الخدمات المتوفرة</h2>
+      <ul>
+        <li>تكييف</li>
+        <li>واي فاي مجاني</li>
+        <li>موقف سيارات</li>
+      </ul>
+
+      <h3>خدمات الإفطار</h3>
+      <ul>
+        <li>إفطار عربي</li>
+        <li>إفطار قاري</li>
+      </ul>
+
+      <h3>خدمات إضافية</h3>
+      <ul>
+        <li>توصيل من/إلى المطار</li>
+        <li>تنظيف يومي</li>
+        <li>خدمة الغرف</li>
+      </ul>
+    </div>
+
+  </section>
+
 <div class="card">
   <span>Social</span>
   <a class="social-link" href="#">
@@ -127,7 +179,7 @@
 </div>
 
 </div>
-
+</div>
 <div id="chatbot-container">
 <!-- أيقونة الشات -->
  <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
