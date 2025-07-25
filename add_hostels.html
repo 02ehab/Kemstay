@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>عرض الوحدة - Kemstay</title>
-  <link rel="stylesheet" href="add_apartments.css" />
+  <link rel="stylesheet" href="add_hostels.css" />
 </head>
 <body>
      <header>
@@ -36,7 +36,7 @@
   </div>
 
   </header>
-<wrapper>
+<div class="wrapper">  
 <div class="container">
   <h2>إضافة فندق جديد</h2>
 
@@ -69,42 +69,94 @@
     <div class="step">
       <h3>الوصف والخدمات</h3>
 
-      <label>الوصف:</label>
+      <label>وصف الفندق:</label>
       <textarea name="description" required></textarea>
 
-      <div>
-        <h4>الخدمات المتوفرة:</h4>
-        <div id="servicesList"></div>
-        <button type="button" onclick="addService()">＋ إضافة خدمة</button>
-      </div>
+      <div class="services-section">
+
+  <!-- القسم الأول: الخدمات المتوفرة -->
+  <div class="service-category">
+    <h4>الخدمات المتوفرة:</h4>
+    <div id="availableServicesList"></div>
+    <button type="button" onclick="addService('available')">＋ إضافة خدمة</button>
+  </div>
+
+  <!-- القسم الثاني: خدمات الإفطار -->
+  <div class="service-category">
+    <h4>خدمات الإفطار:</h4>
+    <div id="breakfastServicesList"></div>
+    <button type="button" onclick="addService('breakfast')">＋ إضافة خدمة</button>
+  </div>
+
+  <!-- القسم الثالث: الخدمات الإضافية -->
+  <div class="service-category">
+    <h4>الخدمات الإضافية:</h4>
+    <div id="extraServicesList"></div>
+    <button type="button" onclick="addService('extra')">＋ إضافة خدمة</button>
+  </div>
+
+</div>
+
     </div>
 
     <!-- Step 3 -->
     <div class="step">
-      <h3>العنوان والموقع</h3>
+      <div class="form-group">
+  <label for="address">العنوان:</label>
+  <input type="text" id="address" name="address" placeholder="أدخل عنوان الوحدة" required>
+</div>
 
-      <label>المدينة:</label>
-      <input type="text" name="city" required />
+<div class="form-group">
+  <label for="locationLink">رابط الموقع على الخريطة:</label>
+  <input type="url" id="locationLink" name="locationLink" placeholder="أدخل رابط Google Maps" required>
+</div>
 
-      <label>العنوان الكامل:</label>
-      <input type="text" name="address" required />
+
     </div>
 
-    <!-- Step 4 -->
+        <!-- Step 4 -->
     <div class="step">
-      <h3>الصور والموافقة</h3>
+       <div id="roomsContainer">
+  <div class="room-group">
+    <label>نوع الغرفة:</label>
+    <select name="room_type[]" required>
+      <option value="">اختر نوع الغرفة</option>
+      <option value="single">غرفة فردية</option>
+      <option value="double">غرفة مزدوجة</option>
+      <option value="suite">جناح</option>
+      <option value="family">غرفة عائلية</option>
+    </select>
 
-      <label>رفع الصور:</label>
-      <input type="file" name="images" multiple required />
+    <label>صور الغرفة:</label>
+    <input type="file" name="room_images_0[]" multiple accept="image/*" required>
 
-     <label class="agree-label">
-  <input type="checkbox" name="agree" required />
-  أوافق على الشروط والأحكام
-</label>
+    <!-- زر إزالة خاص بالغرفة هذه فقط -->
+    <button type="button" class="removeRoomBtn">− إزالة غرفة</button>
+  </div>
 
-      <p class="note">يرجى التأكد من صحة المعلومات المقدمة قبل الإرسال.</p>
+</div>
+<br><br>
+<div class="controls">
+  <button type="button" id="addRoomBtn">＋ إضافة غرفة جديدة</button>
+</div>
+</div>
 
-    </div>
+    <!-- Step 5 -->
+    <div class="step">
+  <h3> الصور الرئيسية للفندق</h3>
+  <label>رفع الصور:</label>
+  <input type="file" name="images" multiple required>
+
+  <div class="terms-container">
+    <label class="custom-checkbox">
+      <input type="checkbox" name="agree" required>
+      <span class="checkmark"></span>
+      أوافق على الشروط والأحكام
+    </label>
+  </div>
+</div>
+
+
 
     <!-- Navigation buttons -->
       <div class="buttons">
@@ -115,7 +167,7 @@
   </form>
 </div>
 
-</wrapper>
+</div>
   <footer class="footer">
     <div class="footer-container">
         <ul class="footer-links">
