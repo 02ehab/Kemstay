@@ -56,12 +56,13 @@ body {
       color: #333;
       font-weight: 500;
     }
-     .menu-toggle {
+    .menu-toggle {
   display: none;
   background: none;
   border: none;
   font-size: 2rem;
   cursor: pointer;
+  color: #333; /* مهم عشان تظهر الأيقونة بلون واضح */
 }
 
 .side-menu {
@@ -101,6 +102,9 @@ body {
   align-self: flex-end;
   cursor: pointer;
   margin-bottom: 1rem;
+  color: #333;          /* لون واضح */
+  position: relative;
+  z-index: 1100;
 }
 
 .side-menu.open {
@@ -121,6 +125,7 @@ body {
     display: none; /* إخفاء القائمة العادية على الموبايل */
   }
 }
+
 
 /* إضافة وحدة */
 .container {
