@@ -36,112 +36,171 @@
   </div>
 
   </header>
-<wrapper>
-  <form id="listingForm">
-    <h2>نموذج إضافة شقة - Kemstay</h2><!-- الخطوة 1: معلومات أساسية -->
-<div class="form-step active">
-  <div class="form-group">
-    <label>العنوان الكامل</label>
-    <input type="text" name="address" required>
+<div class="wrapper">  
+<div class="container">
+    <h2>إضافة وحدة جديدة</h2>
+
+    <!-- Progress bar -->
+    <div class="progress">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+
+    <form id="multiForm" enctype="multipart/form-data">
+      <!-- Step 1 -->
+     <div class="step active">
+  <h3>بيانات أساسية</h3>
+
+  <label for="unit_type">نوع الوحدة:</label>
+  <select name="unit_type" id="unit_type" required>
+    <option value="">اختر</option>
+    <option value="apartment">شقة</option>
+    <option value="room">غرفة</option>
+    <option value="room">استديو</option>
+  </select>
+
+  <label for="category">التصنيف:</label>
+  <select name="category" id="category" required>
+    <option value="">اختر</option>
+    <option value="residential">سكني</option>
+    <option value="commercial">تجاري</option>
+  </select>
+
+  <label for="occupants">عدد الأفراد:</label>
+  <input type="number" name="occupants" id="occupants" required>
+
+  <label>التأثيث:</label>
+  <div class="furnish-options">
+    <label class="radio-option">
+      <input type="radio" name="furnishStatus" value="مفروشة" checked>
+      مفروشة
+    </label>
+    <label class="radio-option">
+      <input type="radio" name="furnishStatus" value="غير مفروشة">
+      غير مفروشة
+    </label>
   </div>
+</div>
+
+
+
+      <!-- Step 2 -->
+    <div class="step">
+      <h3>الوصف والخدمات</h3>
+
+      <label>وصف الوحدة:</label>
+      <textarea name="description" required></textarea>
+
+      <div class="services-section">
+
+  <!-- القسم الأول: الخدمات المتوفرة -->
+  <div class="service-category">
+    <h4>الخدمات المتوفرة:</h4>
+    <div id="availableServicesList"></div>
+    <button type="button" onclick="addService('available')">＋ إضافة خدمة</button>
+  </div>
+
+  <!-- القسم الثالث: الخدمات الإضافية -->
+  <div class="service-category">
+    <h4>الخدمات الإضافية:</h4>
+    <div id="extraServicesList"></div>
+    <button type="button" onclick="addService('extra')">＋ إضافة خدمة</button>
+  </div>
+
+</div>
+
+    </div>
+
+
+      <!-- Step 3 -->
+    <div class="step">
+      <div class="form-group">
+  <label for="address">العنوان:</label>
+  <input type="text" id="address" name="address" placeholder="أدخل عنوان الوحدة" required>
+</div>
+
+<div class="form-group">
+  <label for="locationLink">رابط الموقع على الخريطة:</label>
+  <input type="url" id="locationLink" name="locationLink" placeholder="أدخل رابط Google Maps" required>
+</div>
+
+    </div>
+
+    <!-- Step 4: السعر والإتاحة -->
+<div class="step">
+  <h3>السعر والإتاحة</h3>
+
+  <!-- السعر -->
   <div class="form-group">
-    <label>نوع الوحدة</label>
-    <select name="type" required>
-      <option>شقة</option>
-      <option>استوديو</option>
-      <option>غرفة</option>
+    <label for="price">السعر  (بالجنيه):</label>
+    <input type="number" id="price" name="price" min="0" placeholder="أدخل السعر" required>
+  </div>
+
+  <!-- نوع التسعير -->
+  <div class="form-group">
+    <label for="pricingType">نوع التسعير:</label>
+    <select id="pricingType" name="pricingType" required>
+      <option value="">اختر نوع التسعير</option>
+      <option value="nightly">لكل ليلة</option>
+      <option value="weekly">لكل أسبوع</option>
+      <option value="monthly">لكل شهر</option>
+      <option value="per_person">لكل شخص</option>
     </select>
   </div>
-  <div class="form-group">
-    <label>المساحة (متر)</label>
-    <input type="number" name="area" required>
-  </div>
-  <div class="form-group">
-    <label>الدور</label>
-    <input type="number" name="floor">
-  </div>
-  <div class="buttons">
-    <button type="button" onclick="nextStep()">التالي</button>
-  </div>
-</div>
 
-<!-- الخطوة 2: رفع الصور حسب الغرف -->
-<div class="form-step">
-  <div id="roomImagesContainer">
+  <!-- الإتاحة -->
+  <div id="availabilityContainer">
+  <div class="availability-group">
     <div class="form-group">
-      <label>اختر نوع الغرفة</label>
-      <select id="roomType">
-        <option value="مفردة">غرفة مفردة</option>
-        <option value="مزدوجة">غرفة مزدوجة</option>
-        <option value="ثلاثية">غرفة ثلاثية</option>
-        <option value="صالة">صالة</option>
-        <option value="مطبخ">مطبخ</option>
-        <option value="حمام">حمام</option>
-      </select>
+      <label>متاح من:</label>
+      <input type="date" name="availableFrom[]" required>
     </div>
+
     <div class="form-group">
-      <label>صور الغرفة</label>
-      <input type="file" id="roomImages" multiple>
+      <label>متاح حتى:</label>
+      <input type="date" name="availableTo[]" required>
     </div>
-    <button type="button" onclick="addRoomImages()">إضافة الغرفة</button>
-    <ul id="roomsPreview"></ul>
-  </div>
-  <div class="buttons">
-    <button type="button" onclick="prevStep()">السابق</button>
-    <button type="button" onclick="nextStep()">التالي</button>
   </div>
 </div>
 
-<!-- الخطوة 3: بيانات التواصل والشروط -->
-<div class="form-step">
-  <div class="form-group">
-    <label>اسم المالك</label>
-    <input type="text" name="owner_name" required>
-  </div>
-  <div class="form-group">
-    <label>رقم الجوال</label>
-    <input type="tel" name="phone" required>
-  </div>
-  <div class="form-group">
-    <label>السعر الشهري</label>
-    <input type="number" name="price_monthly">
-  </div>
-  <div class="form-group">
-    <label>شروط الإيجار</label>
-    <textarea name="conditions" rows="4"></textarea>
-  </div>
-  <div class="buttons">
-    <button type="button" onclick="prevStep()">السابق</button>
-    <button type="submit">إرسال</button>
+<!-- زر الإضافة -->
+<button type="button" onclick="addAvailability()">＋ إضافة فترة إتاحة</button>
+
+</div>
+      <!-- Step 5 -->
+      <div class="step">
+  <h3>الصور والموافقة</h3>
+  <label>رفع الصور:</label>
+  <input type="file" name="images" multiple required>
+
+  <div class="terms-container">
+    <label class="custom-checkbox">
+      <input type="checkbox" name="agree" required>
+      <span class="checkmark"></span>
+      أوافق على الشروط والأحكام
+    </label>
   </div>
 </div>
 
-  </form>
-</wrapper>
-
-        <div class="form-footer">
-    <div class="row-2 align-items-center">
-      <label class="chk">
-        <input type="checkbox" required>
-        أوافق على <a href="#">الشروط والأحكام</a>
-      </label>
-    </div>
-
-    <div class="buttons">
-      <button type="submit" class="add">إضافة الوحدة</button>
-      <button type="reset" class="cancel">إلغاء</button>
-    </div>
-  </div>
-</form>
-        
+      <!-- Navigation buttons -->
+      <div class="buttons">
+        <button type="button" id="prevBtn" onclick="nextStep(-1)" disabled>السابق</button>
+        <button type="button" id="nextBtn" onclick="nextStep(1)">التالي</button>
+        <button type="submit" id="submitBtn" style="display:none;">إضافة</button>
       </div>
     </form>
   </div>
-</main>
-
+</div>
   <footer class="footer">
-    جميع الحقوق محفوظة لـ Kemstay © 2025
-  </footer>
+    <div class="footer-container">
+        <ul class="footer-links">
+            <li><a href="privacy.html">سياسة الخصوصية</a></li>
+            <li><a href="faq.html">الأسئلة الشائعة</a></li>
+            <li><a href="blog.html">المدونة</a></li>
+            <li><a href="terms.html">الشروط والأحكام</a></li>
+        </ul>
+        <p class="footer-copy">© 2025 Kemstay. جميع الحقوق محفوظة.</p>
+    </div>
+</footer>
 
   <script src="add_apartments.js"></script>
 </body>
