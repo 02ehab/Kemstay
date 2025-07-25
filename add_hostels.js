@@ -209,3 +209,39 @@ document.querySelectorAll('.removeRoomBtn').forEach(btn => {
   }
 }
 
+//الاتاحية
+document.querySelector("form").addEventListener("submit", function(e) {
+    const from = new Date(document.getElementById("availableFrom").value);
+    const to = new Date(document.getElementById("availableTo").value);
+    if (from > to) {
+      alert("تاريخ البداية يجب أن يكون قبل تاريخ النهاية");
+      e.preventDefault();
+    }
+  });
+
+  //اضافة الاتاحية
+   function addAvailability() {
+    const container = document.getElementById("availabilityContainer");
+
+    const group = document.createElement("div");
+    group.className = "availability-group";
+
+    group.innerHTML = `
+      <div class="form-group">
+        <label>متاح من:</label>
+        <input type="date" name="availableFrom[]" required>
+      </div>
+      <div class="form-group">
+        <label>متاح حتى:</label>
+        <input type="date" name="availableTo[]" required>
+      </div>
+      <button type="button" class="remove-btn" onclick="removeAvailability(this)">− حذف</button>
+    `;
+
+    container.appendChild(group);
+  }
+
+  function removeAvailability(button) {
+    const group = button.closest(".availability-group");
+    group.remove();
+  }
