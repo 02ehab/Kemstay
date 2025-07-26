@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>عرض الوحدة - Kemstay</title>
+  <title>اضافة الوحدة - Kemstay</title>
   <link rel="stylesheet" href="add_apartments.css" />
+  <link rel="stylesheet" href="chatbot.css" />
 </head>
 <body>
      <header>
@@ -107,7 +108,14 @@
   </div>
 
 </div>
+<!-- القسم الثالث: اضف شروط -->
+  <div class="service-category">
+    <h4>اضف شروطك:</h4>
+    <div id="extraServicesList"></div>
+    <button type="button" onclick="addService('extra')">＋ إضافة شرط</button>
+  </div>
 
+</div>
     </div>
 
 
@@ -190,6 +198,27 @@
     </form>
   </div>
 </div>
+  <!--
+<div id="chatbot-container">
+ <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
+
+  <div id="chatPopup" class="chatbot-popup hidden">
+    <div class="chatbot-header">
+      <span>Kemstay  🤖</span>
+      <button onclick="toggleChatbox()">✖</button>
+    </div>
+    <div class="chatbot-messages" id="chatMessages">
+      <p>👋 مرحبًا بك! كيف يمكنني مساعدتك؟</p>
+    </div>
+    <input
+      type="text"
+      id="chatInput"
+      placeholder="اكتب رسالتك..."
+      onkeydown="if(event.key==='Enter') sendChatMessage()"
+    />
+    <button onclick="sendChatMessage()">إرسال</button>
+  </div>
+-->
   <footer class="footer">
     <div class="footer-container">
         <ul class="footer-links">
@@ -203,5 +232,6 @@
 </footer>
 
   <script src="add_apartments.js"></script>
+  <script src="chatbot.js"></script>
 </body>
 </html>
