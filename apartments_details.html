@@ -42,19 +42,27 @@
 <main class="details-main">
   <!-- كارت الحجز -->
   <aside class="booking-box">
-    <p class="price">400 جنيه / الليلة</p>
-    <div class="dates">
-      <div class="date-field">
-        <label for="checkin">تسجيل الدخول</label>
-        <input type="date" id="checkin" name="checkin">
-      </div>
-      <div class="date-field">
-        <label for="checkout">تسجيل الخروج</label>
-        <input type="date" id="checkout" name="checkout">
-      </div>
+  <p class="price">400 جنيه / الليلة</p>
+  <div class="dates">
+    <div class="date-field">
+      <label for="checkin">تسجيل الدخول</label>
+      <input type="date" id="checkin" name="checkin">
     </div>
-    <button class="book-btn">احجز الآن</button>
-  </aside>
+    <div class="date-field">
+      <label for="checkout">تسجيل الخروج</label>
+      <input type="date" id="checkout" name="checkout">
+    </div>
+  </div>
+
+  <div class="contract-approval" style="margin: 1em 0;">
+    <label>
+      <input type="checkbox" id="contractCheck" />
+      أوافق على <a href="contract.html" target="_blank" rel="noopener">العقد</a>
+    </label>
+  </div>
+
+  <button class="book-btn" disabled>احجز الآن</button>
+</aside>
 
   <!-- سلايدر الصور -->
   <div class="slider-section">
