@@ -149,4 +149,37 @@ const contractCheck = document.getElementById('contractCheck');
     bookBtn.disabled = !contractCheck.checked;
   });
 
+ // Example user data (replace with localStorage.getItem('unitUser') if needed)
+const userData =
+  JSON.parse(localStorage.getItem('unitUser')) ||
+  {
+    fullName: "ايهاب عبد اللاه",
+    role: "owner", // or "broker"
+    joinDate: "2024-03-15",
+    profileImg: "" // leave empty for placeholder
+  };
+
+// Fill the card
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("userFullName").textContent = userData.fullName || "اسم المستخدم";
+  document.getElementById("userRoleLabel").textContent = userData.role === "owner" ? "مالك" : "وسيط";
+  document.getElementById("userRoleLabel").style.background =
+    userData.role === "owner"
+      ? "linear-gradient(90deg, #6c63ff 60%, #f61c0d 100%)"
+      : "linear-gradient(90deg, #f61c0d 60%, #6c63ff 100%)";
+  document.getElementById("userProfileImg").src =
+    userData.profileImg && userData.profileImg.length > 5
+      ? userData.profileImg
+      : "https://i.pravatar.cc/120?img=3";
+  // Format join date
+  const joinDate = new Date(userData.joinDate);
+  const months = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+  let dateStr = "انضم: ";
+  if (!isNaN(joinDate)) {
+    dateStr += `${months[joinDate.getMonth()]} ${joinDate.getFullYear()}`;
+  } else {
+    dateStr += userData.joinDate || "غير معروف";
+  }
+  document.getElementById("userJoinDate").textContent = dateStr;
+});
      
