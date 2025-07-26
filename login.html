@@ -17,14 +17,14 @@
 
       <form id="loginForm" class="form active">
         <h2>تسجيل الدخول</h2>
-        <input type="text" placeholder="البريد الإلكتروني" required />
-        <input type="password" placeholder="كلمة المرور" required />
-        <button type="submit">دخول</button>
-        <p class="or-line">أو تسجيل الدخول باستخدام</p>
-        <button type="button" class="google-btn" onclick="loginWithGoogle()">
-          <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google" />
-          Google
-        </button>
+        <input type="tel" id="phoneNumber" placeholder="رقم الهاتف" pattern="[0-9]{10,15}" required />
+        <button type="submit" id="sendOtpBtn">إرسال رمز التحقق</button>
+
+        <div id="otpSection" style="display:none; margin-top: 10px;">
+          <input type="text" id="otpInput" placeholder="أدخل رمز التحقق" pattern="[0-9]{6}" maxlength="6" />
+          <button type="button" id="verifyOtpBtn">تحقق</button>
+          <p id="otpError" style="color:red; display:none;">رمز التحقق غير صحيح. حاول مرة أخرى.</p>
+        </div>
       </form>
 
       <form id="registerForm" class="form">
@@ -37,7 +37,7 @@
         <option value="">اختر النوع</option>
         <option value="tenant">مستأجر</option>
         <option value="owner">مالك</option>
-          <option value="owner">وسيط معتمد</option>
+        <option value="broker">وسيط معتمد</option>
         </select>
         <button type="submit">تسجيل</button>
         <p class="or-line">أو التسجيل باستخدام</p>
