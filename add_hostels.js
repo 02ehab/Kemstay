@@ -6,19 +6,13 @@ function closeMenu() {
   document.getElementById("sideMenu").classList.remove("open");
 }
 
-
+  // تحقق من حالة تسجيل الدخول من localStorage
 document.addEventListener("DOMContentLoaded", () => {
-  // زر الحجز
-  const reserveBtn = document.querySelector(".reserve-btn");
-  if (reserveBtn) {
-    reserveBtn.addEventListener("click", () => {
-      alert("تم إرسال طلب الحجز بنجاح! سيتم التواصل معك قريبًا.");
-    });
-  }
-
-  // تغيير حالة تسجيل الدخول
   const authLinks = document.querySelectorAll(".auth-link");
   const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  if (authLinks.length === 0) return; // ما فيش عناصر، نخرج بأمان
+
   authLinks.forEach(link => {
     if (isLoggedIn === "true") {
       link.textContent = "الملف الشخصي";
@@ -28,6 +22,50 @@ document.addEventListener("DOMContentLoaded", () => {
       link.href = "login.html";
     }
   });
+});
+
+
+//وقت تسجيل الدخول يظهر ملفي ويختفي تسجيل الدخول
+document.addEventListener("DOMContentLoaded", function () {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+  const authButtons = document.getElementById("authButtons");
+  const sideAuthButtons = document.getElementById("sideAuthButtons");
+
+  const profileLink = document.getElementById("profileLink");
+  const profileLinkMobile = document.getElementById("profileLinkMobile");
+
+  if (isLoggedIn) {
+    if (authButtons) authButtons.style.display = "none";
+    if (sideAuthButtons) sideAuthButtons.style.display = "none";
+
+    if (profileLink) profileLink.style.display = "inline-block";
+    if (profileLinkMobile) profileLinkMobile.style.display = "inline-block";
+  } else {
+    if (authButtons) authButtons.style.display = "flex";
+    if (sideAuthButtons) sideAuthButtons.style.display = "flex";
+
+    if (profileLink) profileLink.style.display = "none";
+    if (profileLinkMobile) profileLinkMobile.style.display = "none";
+  }
+});
+
+// التحقق من حالة تسجيل الدخول قبل الانتقال إلى صفحات محمية
+document.addEventListener("DOMContentLoaded", function () {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  // اختار كل الروابط باستثناء تسجيل الدخول أو الرئيسية
+  const protectedLinks = document.querySelectorAll("a:not([href*='login']):not([href='index.html'])");
+
+  protectedLinks.forEach(link => {
+    link.addEventListener("click", function (e) {
+      if (!isLoggedIn) {
+        e.preventDefault();
+        window.location.href = "login.html";
+      }
+    });
+  });
+});
 
   // Multi-step form with localStorage step persistence
   const steps = document.querySelectorAll(".step");
@@ -88,19 +126,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (form) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (validateStep(currentStep)) {
-        alert("تم إرسال النموذج بنجاح!");
-        localStorage.removeItem(LS_KEY);
-        // يمكنك هنا رفع الصور والبيانات لـ Firebase أو localStorage
-      }
-    });
-  }
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    if (validateStep(currentStep)) {
+      localStorage.removeItem(LS_KEY);
+      window.location.href = "thanks.html"; // Redirect after submit
+    }
+  });
+}
 
   showStep(currentStep);
-});
 
+  // Add availability input dynamically
 function addAvailability() {
   const list = document.getElementById("availabilityList");
   const input = document.createElement("input");
@@ -245,3 +282,8 @@ document.querySelector("form").addEventListener("submit", function(e) {
     const group = button.closest(".availability-group");
     group.remove();
   }
+
+  document.getElementById("multiForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+});
