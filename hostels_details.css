@@ -669,6 +669,78 @@ body {
   }
 }
 
+/* User Card Styles */
+.user-card {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(44, 62, 80, 0.08);
+  padding: 1.2em 1.5em;
+  margin: 2em auto 1em auto;
+  max-width: 350px;
+  transition: box-shadow 0.3s, transform 0.3s;
+  direction: rtl;
+}
+
+.user-card:hover {
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+  transform: scale(1.03);
+}
+
+.user-card-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 1em;
+  border: 2px solid #eaeaea;
+  background: #f6f6f6;
+}
+
+.user-card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.user-card-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 0.3em;
+}
+
+.user-card-role {
+  display: inline-block;
+  font-size: 0.98em;
+  color: #fff;
+  background: linear-gradient(90deg, #6c63ff 60%, #f61c0d 100%);
+  padding: 0.25em 0.8em;
+  border-radius: 12px;
+  margin-bottom: 0.3em;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.user-card-date {
+  font-size: 0.95em;
+  color: #888;
+}
+@media (max-width: 500px) {
+  .user-card {
+    max-width: 98vw;
+    padding: 1em;
+  }
+  .user-card-img {
+    width: 56px;
+    height: 56px;
+    margin-left: 0.7em;
+  }
+}
+/*footer*/
   .footer {
     background-color: #0e0e0e;
     color: #999;
