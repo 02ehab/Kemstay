@@ -37,6 +37,7 @@
   </div>
 
   </header>
+  
 <div class="wrapper">  
 <div class="container">
     <h2>إضافة وحدة جديدة</h2>
@@ -84,37 +85,40 @@
 
 
 
-      <!-- Step 2 -->
-    <div class="step">
-      <h3>الوصف والخدمات</h3>
+     <!-- Step 2 -->
+<div class="step">
+  <h3>الوصف والخدمات</h3>
 
-      <label>وصف الوحدة:</label>
-      <textarea name="description" required></textarea>
+  <label>وصف الوحدة:</label>
+  <textarea name="description" required></textarea>
 
-      <div class="services-section">
+  <div class="services-section">
 
-  <!-- القسم الأول: الخدمات المتوفرة -->
-  <div class="service-category">
-    <h4>الخدمات المتوفرة:</h4>
-    <div id="availableServicesList"></div>
-    <button type="button" onclick="addService('available')">＋ إضافة خدمة</button>
+    <!-- القسم الأول: الخدمات المتوفرة -->
+    <div class="service-category">
+      <h4>الخدمات المتوفرة:</h4>
+      <div id="availableServicesList"></div>
+      <button type="button" onclick="addService('available')">＋ إضافة خدمة</button>
+    </div>
+
+    <!-- القسم الثالث: الخدمات الإضافية -->
+    <div class="service-category">
+      <h4>الخدمات الإضافية:</h4>
+      <div id="extraServicesList"></div>
+      <button type="button" onclick="addService('extra')">＋ إضافة خدمة</button>
+    </div>
+
+    <!-- القسم الرابع: شروط المالك -->
+    <div class="service-category">
+      <h4>شروط المالك:</h4>
+      <div id="ownerConditionsList"></div>
+      <button type="button" onclick="addService('owner')">＋ إضافة شرط</button>
+    </div>
+
   </div>
-
-  <!-- القسم الثالث: الخدمات الإضافية -->
-  <div class="service-category">
-    <h4>الخدمات الإضافية:</h4>
-    <div id="extraServicesList"></div>
-    <button type="button" onclick="addService('extra')">＋ إضافة خدمة</button>
-  </div>
-
 </div>
-</div>
-<!-- القسم الثالث: اضف شروطك -->
-  <div class="service-category">
-    <h4>اضف شروطك:</h4>
-    <div id="extraServicesList"></div>
-    <button type="button" onclick="addService('extra')">＋ إضافة شرط</button>
-  </div>
+
+
 
       <!-- Step 3 -->
     <div class="step">
@@ -171,6 +175,7 @@
 <button type="button" onclick="addAvailability()">＋ إضافة فترة إتاحة</button>
 
 </div>
+
       <!-- Step 5 -->
       <div class="step">
   <h3>الصور والموافقة</h3>
