@@ -104,7 +104,20 @@ function toggleSection(sectionId) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  const userType = localStorage.getItem("userType"); // "owner" أو "tenant"
+  let userType = localStorage.getItem("userType"); // "owner" أو "tenant"
+
+  // Treat broker as owner
+  if (userType === "broker") {
+    userType = "owner";
+  }
+
+  // Hide added units and booking requests cards for tenants
+  if (userType === "tenant") {
+    const addedUnitsCard = document.querySelector(".added-units-card");
+    const bookingRequestsCard = document.querySelector(".booking-requests-card");
+    if (addedUnitsCard) addedUnitsCard.style.display = "none";
+    if (bookingRequestsCard) bookingRequestsCard.style.display = "none";
+  }
 
   // التحكم في الظهور والاختفاء حسب حالة الدخول
   const authButtons = document.getElementById("authButtons");
@@ -122,6 +135,24 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sideAuthButtons) sideAuthButtons.style.display = "flex";
     if (profileLink) profileLink.style.display = "none";
     if (profileLinkMobile) profileLinkMobile.style.display = "none";
+  }
+
+  // Load profile data from localStorage and update UI
+  const profileData = JSON.parse(localStorage.getItem('profileData'));
+  if (profileData) {
+    const profileImg = document.querySelector('.profile-img');
+    const nameElem = document.querySelector('.profile-card h2');
+    const emailElem = document.querySelector('.profile-card p:nth-of-type(1)');
+    const cityElem = document.querySelector('.profile-card p:nth-of-type(2)');
+    const userTypeElem = document.querySelector('.profile-card p:nth-of-type(3)');
+    const joinDateElem = document.querySelector('.profile-card p:nth-of-type(4)');
+
+    if (profileImg && profileData.image) profileImg.src = profileData.image;
+    if (nameElem && profileData.name) nameElem.textContent = profileData.name;
+    if (emailElem && profileData.email) emailElem.textContent = "البريد: " + profileData.email;
+    if (cityElem && profileData.city) cityElem.textContent = "المدينة: " + profileData.city;
+    if (userTypeElem && profileData.userType) userTypeElem.textContent = "النوع: " + profileData.userType;
+    if (joinDateElem && profileData.joinDate) joinDateElem.textContent = "تاريخ الانضمام: " + profileData.joinDate;
   }
 
   // تحكم في البوب أب حسب نوع المستخدم
