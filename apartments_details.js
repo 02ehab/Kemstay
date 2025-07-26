@@ -141,6 +141,12 @@ if (unit) {
     availabilityList.appendChild(li);
   });
 }
+//العقد
+const contractCheck = document.getElementById('contractCheck');
+  const bookBtn = document.querySelector('.book-btn');
 
+  contractCheck.addEventListener('change', () => {
+    bookBtn.disabled = !contractCheck.checked;
+  });
 
      
