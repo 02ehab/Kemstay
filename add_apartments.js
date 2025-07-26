@@ -1,22 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // القائمة الجانبية
-  function openMenu() {
-    document.getElementById("sideMenu").classList.add("open");
-  }
+function openMenu() {
+  document.getElementById("sideMenu").classList.add("open");
+}
 
-  function closeMenu() {
-    document.getElementById("sideMenu").classList.remove("open");
-  }
-
-  window.openMenu = openMenu;
-  window.closeMenu = closeMenu;
+function closeMenu() {
+  document.getElementById("sideMenu").classList.remove("open");
+}
 
   // التحقق من تسجيل الدخول
   const isLoggedIn = localStorage.getItem("isLoggedIn");
   if (!isLoggedIn) {
     window.location.href = "login.html";
   }
-
   const authLinks = document.querySelectorAll(".auth-link");
   authLinks.forEach(link => {
     if (isLoggedIn === "true") {
@@ -27,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
       link.href = "login.html";
     }
   });
-
 
   // Multi-step form with localStorage step persistence
   const steps = document.querySelectorAll(".step");
@@ -86,44 +79,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Add availability date validation and save data on submit
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (validateStep(currentStep)) {
-        alert("تمت إضافة الوحدة بنجاح ✅");
-        localStorage.removeItem(LS_KEY);
-        // هنا ممكن تبعت البيانات بـ fetch أو AJAX
+      if (!validateStep(currentStep)) return;
+
+      // Validate all availability date ranges
+      let validDates = true;
+      document.querySelectorAll(".availability-group").forEach(group => {
+        const from = new Date(group.querySelector("input[name='availableFrom[]']").value);
+        const to = new Date(group.querySelector("input[name='availableTo[]']").value);
+        if (from > to) {
+          validDates = false;
+        }
+      });
+      if (!validDates) {
+        alert("تاريخ البداية يجب أن يكون قبل تاريخ النهاية في جميع الفترات");
+        return;
       }
+
+      // Save data
+      const data = {
+        unit_type: document.getElementById("unit_type").value,
+        category: document.getElementById("category").value,
+        occupants: document.getElementById("occupants").value,
+        furnishStatus: document.querySelector("input[name='furnishStatus']:checked").value,
+        description: document.querySelector("textarea[name='description']").value,
+        address: document.getElementById("address").value,
+        locationLink: document.getElementById("locationLink").value,
+        price: document.getElementById("price").value,
+        pricingType: document.getElementById("pricingType").value,
+        services: {
+          available: [...document.querySelectorAll("#availableServicesList input")].map(i => i.value),
+          extra: [...document.querySelectorAll("#extraServicesList input")].map(i => i.value),
+        },
+        availability: [...document.querySelectorAll(".availability-group")].map(group => ({
+          from: group.querySelector("input[name='availableFrom[]']").value,
+          to: group.querySelector("input[name='availableTo[]']").value
+        }))
+      };
+
+      localStorage.setItem("unitDataToEdit", JSON.stringify(data));
+      localStorage.removeItem(LS_KEY);
+      window.location.href = "edit_add_apartments.html";
     });
   }
 
   showStep(currentStep);
 
-function addAvailability() {
-  const container = document.getElementById("availabilityList");
-  const div = document.createElement("div");
-  div.innerHTML = `
-    <input type="date" name="avail_dates[]" required />
-    <button type="button" onclick="this.parentElement.remove()">×</button>`;
-  container.appendChild(div);
-}
-
-function addFeature() {
-  const container = document.getElementById("featuresList");
-  const div = document.createElement("div");
-  div.innerHTML = `
-    <input type="text" name="features[]" placeholder="ميزة" required />
-    <button type="button" onclick="this.parentElement.remove()">×</button>`;
-  container.appendChild(div);
-}
-
-showStep(currentStep);
-  prevBtn.addEventListener("click", () => nextStep(-1));
-  nextBtn.addEventListener("click", () => nextStep(1));
-  submitBtn.addEventListener("click", () => document.getElementById("multiForm").submit());
-  document.getElementById("addAvailabilityBtn").addEventListener("click", addAvailability);
-  document.getElementById("addFeatureBtn").addEventListener("click", addFeature); 
-});
 
 //اضافة ميزة
 function addService(type) {
@@ -153,16 +157,35 @@ function addService(type) {
   }
 }
 
+//اضف شرط
+function addService(type) {
+  const container = document.createElement('div');
+  container.className = 'service-item';
 
-//الاتاحية
-document.querySelector("form").addEventListener("submit", function(e) {
-    const from = new Date(document.getElementById("availableFrom").value);
-    const to = new Date(document.getElementById("availableTo").value);
-    if (from > to) {
-      alert("تاريخ البداية يجب أن يكون قبل تاريخ النهاية");
-      e.preventDefault();
-    }
-  });
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.name = `services_${type}[]`;
+  input.placeholder = type === 'owner' ? 'أدخل شرط المالك' : 'أدخل اسم الخدمة';
+  input.required = true;
+
+  const deleteBtn = document.createElement('span');
+  deleteBtn.innerHTML = '🗑';
+  deleteBtn.className = 'delete-service';
+  deleteBtn.onclick = () => container.remove();
+
+  container.appendChild(input);
+  container.appendChild(deleteBtn);
+
+  if (type === 'available') {
+    document.getElementById('availableServicesList').appendChild(container);
+  } else if (type === 'extra') {
+    document.getElementById('extraServicesList').appendChild(container);
+  } else if (type === 'owner') {
+    document.getElementById('ownerConditionsList').appendChild(container);
+  }
+}
+
+
 
    function addAvailability() {
     const container = document.getElementById("availabilityContainer");
@@ -189,3 +212,51 @@ document.querySelector("form").addEventListener("submit", function(e) {
     const group = button.closest(".availability-group");
     group.remove();
   }
+
+
+// Add availability date validation for all groups
+if (form) {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!validateStep(currentStep)) return;
+
+    // Validate all availability date ranges
+    let validDates = true;
+    document.querySelectorAll(".availability-group").forEach(group => {
+      const from = new Date(group.querySelector("input[name='availableFrom[]']").value);
+      const to = new Date(group.querySelector("input[name='availableTo[]']").value);
+      if (from > to) {
+        validDates = false;
+      }
+    });
+    if (!validDates) {
+      alert("تاريخ البداية يجب أن يكون قبل تاريخ النهاية في جميع الفترات");
+      return;
+    }
+
+    // Save data
+    const data = {
+      unit_type: document.getElementById("unit_type").value,
+      category: document.getElementById("category").value,
+      occupants: document.getElementById("occupants").value,
+      furnishStatus: document.querySelector("input[name='furnishStatus']:checked").value,
+      description: document.querySelector("textarea[name='description']").value,
+      address: document.getElementById("address").value,
+      locationLink: document.getElementById("locationLink").value,
+      price: document.getElementById("price").value,
+      pricingType: document.getElementById("pricingType").value,
+      services: {
+        available: [...document.querySelectorAll("#availableServicesList input")].map(i => i.value),
+        extra: [...document.querySelectorAll("#extraServicesList input")].map(i => i.value),
+      },
+      availability: [...document.querySelectorAll(".availability-group")].map(group => ({
+        from: group.querySelector("input[name='availableFrom[]']").value,
+        to: group.querySelector("input[name='availableTo[]']").value
+      }))
+    };
+
+    localStorage.setItem("unitDataToEdit", JSON.stringify(data));
+    localStorage.removeItem(LS_KEY);
+    window.location.href = "edit_add_apartments.html";
+  });
+}
