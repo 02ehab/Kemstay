@@ -257,6 +257,6 @@ if (form) {
 
     localStorage.setItem("unitDataToEdit", JSON.stringify(data));
     localStorage.removeItem(LS_KEY);
-    window.location.href = "edit_add_apartments.html";
+    window.location.href = "edit_apartments.html";
   });
 }
