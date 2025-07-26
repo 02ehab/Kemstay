@@ -6,10 +6,12 @@ function closeMenu() {
   document.getElementById("sideMenu").classList.remove("open");
 }
 
-  // التحقق من تسجيل الدخول
+// التحقق من تسجيل الدخول
+document.addEventListener("DOMContentLoaded", () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
   if (!isLoggedIn) {
     window.location.href = "login.html";
+    return;
   }
   const authLinks = document.querySelectorAll(".auth-link");
   authLinks.forEach(link => {
@@ -113,6 +115,7 @@ function closeMenu() {
         services: {
           available: [...document.querySelectorAll("#availableServicesList input")].map(i => i.value),
           extra: [...document.querySelectorAll("#extraServicesList input")].map(i => i.value),
+          owner: [...document.querySelectorAll("#ownerConditionsList input")].map(i => i.value),
         },
         availability: [...document.querySelectorAll(".availability-group")].map(group => ({
           from: group.querySelector("input[name='availableFrom[]']").value,
@@ -122,72 +125,42 @@ function closeMenu() {
 
       localStorage.setItem("unitDataToEdit", JSON.stringify(data));
       localStorage.removeItem(LS_KEY);
-      window.location.href = "edit_add_apartments.html";
+      window.location.href = "thanks.html";
     });
   }
 
   showStep(currentStep);
 
+  // Add landlord condition/service
+  window.addService = function(type) {
+    const container = document.createElement('div');
+    container.className = 'service-item';
 
-//اضافة ميزة
-function addService(type) {
-  const container = document.createElement('div');
-  container.className = 'service-item';
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.name = `services_${type}[]`;
+    input.placeholder = type === 'owner' ? 'أدخل شرط المالك' : 'أدخل اسم الخدمة';
+    input.required = true;
 
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.name = `services_${type}[]`;
-  input.placeholder = 'أدخل اسم الخدمة';
-  input.required = true;
+    const deleteBtn = document.createElement('span');
+    deleteBtn.innerHTML = '🗑';
+    deleteBtn.className = 'delete-service';
+    deleteBtn.onclick = () => container.remove();
 
-  const deleteBtn = document.createElement('span');
-  deleteBtn.innerHTML = '🗑';
-  deleteBtn.className = 'delete-service';
-  deleteBtn.onclick = () => container.remove();
+    container.appendChild(input);
+    container.appendChild(deleteBtn);
 
-  container.appendChild(input);
-  container.appendChild(deleteBtn);
+    if (type === 'available') {
+      document.getElementById('availableServicesList').appendChild(container);
+    } else if (type === 'extra') {
+      document.getElementById('extraServicesList').appendChild(container);
+    } else if (type === 'owner') {
+      document.getElementById('ownerConditionsList').appendChild(container);
+    }
+  };
 
-  if (type === 'available') {
-    document.getElementById('availableServicesList').appendChild(container);
-  } else if (type === 'breakfast') {
-    document.getElementById('breakfastServicesList').appendChild(container);
-  } else if (type === 'extra') {
-    document.getElementById('extraServicesList').appendChild(container);
-  }
-}
-
-//اضف شرط
-function addService(type) {
-  const container = document.createElement('div');
-  container.className = 'service-item';
-
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.name = `services_${type}[]`;
-  input.placeholder = type === 'owner' ? 'أدخل شرط المالك' : 'أدخل اسم الخدمة';
-  input.required = true;
-
-  const deleteBtn = document.createElement('span');
-  deleteBtn.innerHTML = '🗑';
-  deleteBtn.className = 'delete-service';
-  deleteBtn.onclick = () => container.remove();
-
-  container.appendChild(input);
-  container.appendChild(deleteBtn);
-
-  if (type === 'available') {
-    document.getElementById('availableServicesList').appendChild(container);
-  } else if (type === 'extra') {
-    document.getElementById('extraServicesList').appendChild(container);
-  } else if (type === 'owner') {
-    document.getElementById('ownerConditionsList').appendChild(container);
-  }
-}
-
-
-
-   function addAvailability() {
+  // Add availability group
+  window.addAvailability = function() {
     const container = document.getElementById("availabilityContainer");
 
     const group = document.createElement("div");
@@ -206,57 +179,10 @@ function addService(type) {
     `;
 
     container.appendChild(group);
-  }
+  };
 
-  function removeAvailability(button) {
+  window.removeAvailability = function(button) {
     const group = button.closest(".availability-group");
     group.remove();
-  }
-
-
-// Add availability date validation for all groups
-if (form) {
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    if (!validateStep(currentStep)) return;
-
-    // Validate all availability date ranges
-    let validDates = true;
-    document.querySelectorAll(".availability-group").forEach(group => {
-      const from = new Date(group.querySelector("input[name='availableFrom[]']").value);
-      const to = new Date(group.querySelector("input[name='availableTo[]']").value);
-      if (from > to) {
-        validDates = false;
-      }
-    });
-    if (!validDates) {
-      alert("تاريخ البداية يجب أن يكون قبل تاريخ النهاية في جميع الفترات");
-      return;
-    }
-
-    // Save data
-    const data = {
-      unit_type: document.getElementById("unit_type").value,
-      category: document.getElementById("category").value,
-      occupants: document.getElementById("occupants").value,
-      furnishStatus: document.querySelector("input[name='furnishStatus']:checked").value,
-      description: document.querySelector("textarea[name='description']").value,
-      address: document.getElementById("address").value,
-      locationLink: document.getElementById("locationLink").value,
-      price: document.getElementById("price").value,
-      pricingType: document.getElementById("pricingType").value,
-      services: {
-        available: [...document.querySelectorAll("#availableServicesList input")].map(i => i.value),
-        extra: [...document.querySelectorAll("#extraServicesList input")].map(i => i.value),
-      },
-      availability: [...document.querySelectorAll(".availability-group")].map(group => ({
-        from: group.querySelector("input[name='availableFrom[]']").value,
-        to: group.querySelector("input[name='availableTo[]']").value
-      }))
-    };
-
-    localStorage.setItem("unitDataToEdit", JSON.stringify(data));
-    localStorage.removeItem(LS_KEY);
-    window.location.href = "edit_apartments.html";
-  });
-}
+  };
+});
