@@ -359,19 +359,18 @@ body {
 .booking-box {
   flex: 1 1 30%;
   max-width: 320px;
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: var(--bg-glass);
+  padding: 2rem;
+  border-radius: var(--rounded-xl);
+  box-shadow: var(--shadow-light);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .booking-box .price {
-  font-size: 1.3rem;
-  color: #964B00;
+  font-size: 1.5rem;
   font-weight: bold;
+  color: var(--primary-color);
   margin-bottom: 1rem;
 }
 
@@ -379,7 +378,6 @@ body {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  width: 100%;
   margin-bottom: 1rem;
 }
 
@@ -391,35 +389,41 @@ body {
 
 .date-field label {
   font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
+  color: #666;
 }
 
 .date-field input[type="date"] {
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   font-size: 1rem;
-  width: 100%;
+  background-color: white;
 }
 
-/* زر الحجز */
 .book-btn {
-  width: 100%;
-  max-width: 300px;
   padding: 0.8rem;
-  background: #964B00;
+  width: 100%;
+  background: linear-gradient(to left, var(--accent-color), var(--primary-color));
   color: #fff;
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
   cursor: pointer;
-  margin-top: 1rem;
-  transition: background 0.3s;
+  transition: transform 0.2s, box-shadow 0.3s;
 }
 
 .book-btn:hover {
-  background: #30c6c6;
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+:root {
+  --primary-color: #21242a;
+  --accent-color: #21242a;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --rounded-xl: 16px;
 }
 
 .container {
