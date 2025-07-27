@@ -20,7 +20,7 @@
       <a href="hostels.html">هوستيل</a>
     <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkDesktop">تسجيل الدخول</a>
   </nav>
 
   <!-- القائمة الجانبية (للموبايل) -->
@@ -32,13 +32,13 @@
       <a href="hostels.html">هوستيل</a>
       <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkMobile">تسجيل الدخول</a>
     </nav>
   </div>
 
   </header>
-<wrapper>
 
+<div class="wrapper">
 <main class="details-main">
   <!-- كارت الحجز -->
   <aside class="booking-box">
@@ -82,24 +82,21 @@
 
 <div class="container">
     
-    <div class="info-group">
+    <section class="info-group">
       <h3>معلومات عامة</h3>
       <p><strong>نوع الوحدة:</strong> <span id="unitType"></span></p>
       <p><strong>التصنيف:</strong> <span id="category"></span></p>
       <p><strong>عدد الأفراد:</strong> <span id="capacity"></span></p>
       <p><strong>السعر:</strong> <span id="price"></span> جنية</p>
-    </div>
+    </section>
 
-      <h3>الوصف</h3>
-      <p id="description">وصف الشقة...</p>
+      <section>
+        <h3>الوصف</h3>
+        <h2 id="unitTitle" style="margin-bottom: 0.2em;"></h2>
+        <p id="description">وصف الشقة...</p>
+      </section>
    
-<!--
-  <div class="info-group">
-      <h3>الفترة المتاحة</h3>
-      <ul id="availabilityList"></ul>
-    </div>
--->
-  <div class="info-group">
+  <section class="info-group">
       <h3>العنوان</h3>
       <p><strong>المحافظة:</strong> <span id="governorate"></span></p>
       <p><strong>الشارع:</strong> <span id="street"></span></p>
@@ -107,26 +104,39 @@
       <p><strong>الدور:</strong> <span id="floor"></span></p>
       <p><strong>قريب من:</strong> <span id="nearby"></span></p>
       <p><strong>علامة مميزة:</strong> <span id="landmark"></span></p>
-    </div>
+            <a id="locationLink" href="#" target="_blank" rel="noopener" style="display: inline-block; margin-bottom: 0.5em; color: blue; text-decoration: underline;"></a>
 
-  <div class="info-group">
-      <h3>المميزات</h3>
-      <div id="featuresList"></div>
-    </div>
+    </section>
 
-    <div class="info-group">
-      <h3>الشروط</h3>
-      <div id="conditionsList"></div>
-    </div>
-  <!-- User Card Component -->
-<div id="userCard" class="user-card">
+  <section class="info-group">
+  <h3>المميزات</h3>
+  <ul id="featuresList" class="info-list">
+    <li> إنترنت فائق السرعة</li>
+    <li> تكييف في جميع الغرف</li>
+    <li> مطبخ مجهز بالكامل</li>
+    <li> إطلالة بانورامية</li>
+  </ul>
+</section>
+
+<section class="info-group">
+  <h3>الشروط</h3>
+  <ul id="conditionsList" class="info-list">
+    <li> ممنوع التدخين داخل الوحدة</li>
+    <li> لا يُسمح بالحيوانات الأليفة</li>
+    <li> الالتزام بمواعيد تسجيل الوصول والمغادرة</li>
+    <li> الحد الأدنى للإقامة ليلتين</li>
+  </ul>
+</section>
+
+    <!-- User Card Component -->
+<section id="userCard" class="user-card">
   <img id="userProfileImg" class="user-card-img" src="https://i.pravatar.cc/120?img=3" alt="صورة المستخدم">
   <div class="user-card-info">
     <div class="user-card-name" id="userFullName"> ايهاب عبداللاه</div>
     <div class="user-card-role" id="userRoleLabel">مالك</div>
     <div class="user-card-date" id="userJoinDate">انضم: مارس 2024</div>
   </div>
-</div>
+</section>
 <!--
     <div class="card">
   <span>Social</span>
@@ -147,16 +157,14 @@
   </div>
 
    
-
 </div>
 
 </div>
-
+<!-- 
 <div id="chatbot-container">
-<!-- أيقونة الشات -->
+  
  <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
 
-  <!-- نافذة الشات -->
   <div id="chatPopup" class="chatbot-popup hidden">
     <div class="chatbot-header">
       <span>Kemstay  🤖</span>
@@ -173,7 +181,8 @@
     />
     <button onclick="sendChatMessage()">إرسال</button>
   </div>
-
+-->
+</div>
   <footer class="footer">
     <div class="footer-container">
         <ul class="footer-links">
