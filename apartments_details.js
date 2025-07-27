@@ -122,6 +122,24 @@ if (unit) {
   document.getElementById("floor").textContent = unit.floor;
   document.getElementById("nearby").textContent = unit.nearby;
   document.getElementById("landmark").textContent = unit.landmark;
+  
+ // Construct Google Maps URL for location link
+  const addressParts = [
+    unit.governorate,
+    unit.street,
+    unit.building,
+    unit.floor,
+    unit.nearby,
+    unit.landmark
+  ].filter(Boolean);
+  const mapsQuery = encodeURIComponent(addressParts.join(", "));
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+
+  const locationLink = document.getElementById("locationLink");
+  locationLink.href = mapsUrl;
+  locationLink.textContent = "عرض الموقع على الخريطة";
+  locationLink.target = "_blank";
+  locationLink.rel = "noopener";
 
   // الصور
   const gallery = document.getElementById("imageGallery");
