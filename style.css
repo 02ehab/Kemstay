@@ -14,11 +14,22 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f9f9f9;
+  background-color: #f1effa;
   color: #333;
   line-height: 1.6;
+    background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;
+
 }
 
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-in-out;
+}
 
     header {
   background-color: #fff;
@@ -34,13 +45,17 @@ body {
   flex-wrap: wrap;
   direction: ltr; /* تُغيّرها للعربي إذا أردت */
   z-index: 10;
-  position: relative;
+position: relative; /* لو عايز تضمن أن الهيدر فوق المحتوى */
+  /* لو عايز تأثير زجاجي */
+background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  backdrop-filter: blur(12px); /* لو عايز تأثير زجاجي */
+  -webkit-backdrop-filter: blur(12px);
 }
 
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: #964B00;
+      color: #1a1d21;
     }
 
     nav {
@@ -69,7 +84,7 @@ body {
 
 .btn-signup {
   padding: 8px 20px;
-  background-color: #ff5520;
+  background-color: #1a1d21;
   color: #fff;
   border-radius: 30px;
   font-weight: 500;
@@ -155,10 +170,13 @@ body {
 }
 
    /* CSS */
-.search-bar-airbnb {
+.search-bar {
+  flex-wrap: wrap;
+  justify-content: center;
   display: flex;
   align-items: center;
-  background-color: white;
+  background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  backdrop-filter: blur(12px); /* لو عايز تأثير زجاجي */
   border-radius: 50px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   padding: 10px 20px;
@@ -172,33 +190,26 @@ body {
 .search-item {
   display: flex;
   flex-direction: column;
+  min-width: 150px;
   flex: 1;
-  min-width: 120px;
 }
 
 .search-item label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #888;
-  margin-bottom: 4px;
-  user-select: none;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
-.search-item input[type="text"],
-.search-item input[type="date"],
-.search-item input[type="number"] {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 30px;
-  background-color: #f7f7f7;
+.search-item input {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 0px solid #ccc;
   font-size: 1rem;
-  outline: none;
-  transition: box-shadow 0.3s ease;
 }
 
 .search-item input:focus {
-  box-shadow: 0 0 0 2px #964B00;
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  backdrop-filter: blur(12px); /* لو عايز تأثير زجاجي */
 }
 
 /* فاصل بين العناصر */
@@ -210,7 +221,7 @@ body {
 
 /* زرار البحث */
 .search-btn {
-  background-color: #964B00;
+  background-color: #1a1d21;
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -230,7 +241,7 @@ body {
 
 /* Responsive */
 @media (max-width: 700px) {
-  .search-bar-airbnb {
+  .search-bar {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
@@ -250,6 +261,7 @@ body {
   }
 }
 
+/* تنسيق قسم عرض الشقق */
     .listing-section {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 كروت على اللابتوب */
@@ -320,7 +332,7 @@ body {
   display: inline-block;
   margin-top: 10px;
   padding: 0.5rem 1rem;
-  background-color: #964B00;
+  background-color: #1a1d21;
   color: white;
   text-decoration: none;
   border-radius: 6px;
@@ -382,7 +394,6 @@ body {
   font-size: 1rem;
   color: #333;
 }
-
 
 /*عرض شقق مميزة */
 
@@ -481,17 +492,20 @@ body {
 }
 
 
+
  .footer {
     background-color: #0e0e0e;
     color: #999;
     padding: 40px 20px;
     text-align: center;
     margin-top: 50px;
+    border-radius: 3px;
 }
 
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
+    
 }
 
 .footer-links {
