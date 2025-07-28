@@ -114,6 +114,11 @@ body {
 .form button:hover {
   background-color: #5f5f5f;
 }
+input[type="tel"] {
+  direction: rtl;
+  text-align: right;
+}
+
 
 @keyframes fadeIn {
   from {
