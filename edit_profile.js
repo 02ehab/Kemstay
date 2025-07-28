@@ -116,3 +116,11 @@ function saveProfile(event) {
   // Redirect to profile page
   window.location.href = "profile.html";
 }
+
+// Hide added units and booking requests cards for tenants
+  if (userType === "tenant") {
+    const addedUnitsCard = document.querySelector(".added-units-card");
+    const bookingRequestsCard = document.querySelector(".booking-requests-card");
+    if (addedUnitsCard) addedUnitsCard.style.display = "none";
+    if (bookingRequestsCard) bookingRequestsCard.style.display = "none";
+  }
