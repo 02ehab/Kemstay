@@ -48,8 +48,7 @@ body {
 position: relative; /* لو عايز تضمن أن الهيدر فوق المحتوى */
   /* لو عايز تأثير زجاجي */
 background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
-  backdrop-filter: blur(12px); /* لو عايز تأثير زجاجي */
-  -webkit-backdrop-filter: blur(12px);
+  
 }
 
     .logo {
@@ -119,7 +118,9 @@ background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
   width: 70%;
   max-width: 300px;
   height: 100%;
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  backdrop-filter: blur(12px); /* لو عايز تأثير زجاجي */
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: -2px 0 10px rgba(0,0,0,0.2);
   padding: 2rem 1rem;
   z-index: 999;
@@ -194,25 +195,28 @@ background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
   flex: 1;
 }
 
+.search-item select,
 .search-item label {
   margin-bottom: 0.3rem;
   font-weight: bold;
   font-size: 0.9rem;
 }
 
+.search-item select,
 .search-item input {
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: 0px solid #ccc;
   font-size: 1rem;
 }
-
+.search-item select:focus,
 .search-item input:focus {
   background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
   backdrop-filter: blur(12px); /* لو عايز تأثير زجاجي */
 }
 
 /* فاصل بين العناصر */
+
 .search-item:not(:last-child) {
   border-right: 1px solid #ddd;
   padding-right: 16px;
