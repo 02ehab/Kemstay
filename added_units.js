@@ -1,126 +1,156 @@
 function openMenu() {
-  document.getElementById("sideMenu").classList.add("open");
+  document.getElementById("sideMenu")?.classList.add("open");
 }
 
 function closeMenu() {
-  document.getElementById("sideMenu").classList.remove("open");
+  document.getElementById("sideMenu")?.classList.remove("open");
 }
 
-
-//تغيير حالة تسجيل الدخول
 document.addEventListener("DOMContentLoaded", () => {
-  const authLinks = document.querySelectorAll(".auth-link");
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const currentUserId = localStorage.getItem("currentUserId");
 
-  if (authLinks.length === 0) return; // ما فيش عناصر، نخرج بأمان
-
-  authLinks.forEach(link => {
-    if (isLoggedIn === "true") {
-      link.textContent = "الملف الشخصي";
-      link.href = "profile.html";
-    } else {
-      link.textContent = "تسجيل الدخول";
-      link.href = "login.html";
-    }
+  // تحديث روابط auth-link
+  document.querySelectorAll(".auth-link").forEach(link => {
+    link.textContent = isLoggedIn ? "الملف الشخصي" : "تسجيل الدخول";
+    link.href = isLoggedIn ? "profile.html" : "login.html";
   });
+
+  // التحكم في عرض الأزرار حسب حالة تسجيل الدخول
+  const toggleDisplay = (el, showStyle) => {
+    if (el) el.style.display = showStyle;
+  };
+
+  toggleDisplay(document.getElementById("authButtons"), isLoggedIn ? "none" : "flex");
+  toggleDisplay(document.getElementById("sideAuthButtons"), isLoggedIn ? "none" : "flex");
+  toggleDisplay(document.getElementById("profileLink"), isLoggedIn ? "inline-block" : "none");
+  toggleDisplay(document.getElementById("profileLinkMobile"), isLoggedIn ? "inline-block" : "none");
+
+  // منع الدخول للصفحات المحمية
+  const protectedLinks = document.querySelectorAll("a:not([href*='login']):not([href='index.html'])");
+  protectedLinks.forEach(link => {
+    link.addEventListener("click", e => {
+      if (!isLoggedIn) {
+        e.preventDefault();
+        window.location.href = "login.html";
+      }
+    });
+  });
+
+  // منع دخول الصفحة نفسها إذا كانت محمية (مثل صفحة تعديل/إضافة وحدات)
+  const protectedPage = document.body.dataset.requireLogin === "true";
+  if (protectedPage && !isLoggedIn) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  // تحميل العناصر
+  loadItems('hotels');
+  loadItems('units');
+
+  // عرض الشقق الخاصة بالمستخدم الحالي فقط (added_units_container)
+  const apartments = JSON.parse(localStorage.getItem("allApartments") || "[]");
+  const myApartments = apartments.filter(a => a.userId === currentUserId);
+
+  const addedUnitsContainer = document.querySelector(".added-units-container");
+  if (addedUnitsContainer) {
+    addedUnitsContainer.innerHTML = "";
+
+    if (myApartments.length === 0) {
+      addedUnitsContainer.innerHTML = "<p>لا توجد شقق مضافة حالياً.</p>";
+    } else {
+      myApartments.forEach(apartment => {
+        const card = document.createElement("div");
+        card.className = "apartment-card";
+        card.setAttribute("data-id", apartment.id);
+
+        card.innerHTML = `
+          <img src="${apartment.images?.[0] || 'default.jpg'}" alt="${apartment.title || apartment.type || 'شقة'}" />
+          <h3>${apartment.title || apartment.type || 'شقة'}</h3>
+          <p>السعر: ${apartment.price} جنيه</p>
+          <p>الموقع: ${apartment.address || apartment.location || ''}</p>
+          <div class="card-actions">
+            <button class="edit-btn">✏️ تعديل</button>
+            <button class="delete-btn">🗑️ حذف</button>
+          </div>
+        `;
+
+        // تعديل
+        card.querySelector('.edit-btn').addEventListener('click', () => {
+          localStorage.setItem("unitDataToEdit", JSON.stringify(apartment));
+          localStorage.setItem("unitDataToEditId", apartment.id);
+          window.location.href = 'edit_apartments.html';
+        });
+
+        // حذف
+        card.querySelector('.delete-btn').addEventListener('click', () => {
+          if (confirm('هل أنت متأكد من حذف هذه الوحدة؟')) {
+            const updated = apartments.filter(a => a.id !== apartment.id);
+            localStorage.setItem("allApartments", JSON.stringify(updated));
+            card.remove();
+            if (!addedUnitsContainer.querySelector(".apartment-card")) {
+              addedUnitsContainer.innerHTML = "<p>لا توجد شقق مضافة حالياً.</p>";
+            }
+          }
+        });
+
+        addedUnitsContainer.appendChild(card);
+      });
+    }
+  }
 });
 
-localStorage.setItem('addedUnits', JSON.stringify([
-  {id: "1", title: "شقة في القاهرة", price: 1500},
-  {id: "2", title: "شقة في الإسكندرية", price: 1200}
-]));
-
-localStorage.setItem('addedhostels', JSON.stringify([
-  {id: "101", title: "فندق النيل", price: 3000},
-  {id: "102", title: "فندق الإسكندرية", price: 2800}
-]));
-
-
-// دالة تحميل الوحدات أو الفنادق وعرضها في الحاوية المناسبة
+// دالة عامة لتحميل وعرض الوحدات أو الفنادق
 function loadItems(type) {
-  // type = 'units' أو 'hotels'
-  const storageKey = type === 'units' ? 'addedUnits' : 'addedhostels';
-  const containerClass = type === 'units' ? '.units-slider' : '.hostels-slider';
-
-  const container = document.querySelector(containerClass);
+  const storageKey = type === 'units' ? 'allApartments' : 'addedhostels';
+  const containerSelector = type === 'units' ? '.units-slider' : '.hostels-slider';
+  const container = document.querySelector(containerSelector);
   if (!container) return;
 
-  const itemsData = JSON.parse(localStorage.getItem(storageKey) || '[]');
-  container.innerHTML = '';
+  const items = JSON.parse(localStorage.getItem(storageKey) || "[]");
+  container.innerHTML = "";
 
-  if (itemsData.length === 0) {
+  if (items.length === 0) {
     container.innerHTML = `<p>لا توجد ${type === 'units' ? 'شقق' : 'فنادق'} مضافة حالياً.</p>`;
     return;
   }
 
-  itemsData.forEach(item => {
+  items.forEach(item => {
     const card = document.createElement('div');
     card.className = 'unit-card';
     card.setAttribute('data-id', item.id);
 
     card.innerHTML = `
-      <h3>${item.title}</h3>
-      <p>السعر: ${item.price} جنيه / شهر</p>
+      <img src="${item.images?.[0] || 'default.jpg'}" alt="${item.title || item.type || 'وحدة'}" />
+      <h3>${item.title || item.type || 'وحدة'}</h3>
+      <p>السعر: ${item.price} جنيه / ${item.pricingType || "شهريًا"}</p>
       <div class="card-actions">
         <button class="edit-btn">✏️ تعديل</button>
         <button class="delete-btn">🗑️ حذف</button>
       </div>
     `;
 
-    // Add event listeners for edit and delete
-    const editBtn = card.querySelector('.edit-btn');
-    editBtn.addEventListener('click', function() {
-      editItem(type, item.id);
+    card.querySelector('.edit-btn').addEventListener('click', () => {
+      if (type === 'units') {
+        localStorage.setItem("unitDataToEdit", JSON.stringify(item));
+        localStorage.setItem("unitDataToEditId", item.id);
+        window.location.href = 'edit_apartments.html';
+      } else {
+        window.location.href = 'edit_hostels.html';
+      }
     });
-    const deleteBtn = card.querySelector('.delete-btn');
-    deleteBtn.addEventListener('click', function() {
-      deleteItem(type, item.id);
+
+    card.querySelector('.delete-btn').addEventListener('click', () => {
+      if (confirm("هل أنت متأكد من حذف هذه الوحدة؟")) {
+        let updated = items.filter(i => i.id !== item.id);
+        localStorage.setItem(storageKey, JSON.stringify(updated));
+        card.remove();
+        if (!container.querySelector(".unit-card")) {
+          container.innerHTML = `<p>لا توجد ${type === 'units' ? 'شقق' : 'فنادق'} مضافة حالياً.</p>`;
+        }
+      }
     });
 
     container.appendChild(card);
   });
 }
-
-// دالة حذف عنصر (شقة أو فندق)
-function deleteItem(type, id) {
-  if (!confirm('هل أنت متأكد من حذف هذه الوحدة؟')) return;
-
-  const storageKey = type === 'units' ? 'addedUnits' : 'addedhostels';
-  const containerClass = type === 'units' ? '.units-slider' : '.hostels-slider';
-
-  let items = JSON.parse(localStorage.getItem(storageKey) || '[]');
-  items = items.filter(item => item.id !== id);
-  localStorage.setItem(storageKey, JSON.stringify(items));
-
-  const container = document.querySelector(containerClass);
-  const card = container.querySelector(`.unit-card[data-id="${id}"]`);
-  if (card) card.remove();
-
-  if (items.length === 0) {
-    container.innerHTML = `<p>لا توجد ${type === 'units' ? 'شقق' : 'فنادق'} مضافة حالياً.</p>`;
-  }
-}
-
-// دالة تعديل (نفس فكرة الحذف، فقط تنبيه حالياً)
-function editItem(type, id) {
-  if (type === 'units') {
-    window.location.href = 'edit_apartments.html';
-  } else if (type === 'hotels') {
-    window.location.href = 'edit_hostels.html';
-  } else {
-    alert('صفحة التعديل غير متوفرة لهذا النوع');
-  }
-}
-
-// تحميل الشقق والفنادق عند تحميل الصفحة
-window.addEventListener('DOMContentLoaded', () => {
-  loadItems('units');
-  loadItems('hotels');
-});
-
-// منع دخول الصفحات بدون تسجيل
-const isLoggedIn = localStorage.getItem("isLoggedIn");
-  if (!isLoggedIn) {
-    // تحويل المستخدم لتسجيل الدخول
-    window.location.href = "login.html";
-  }
