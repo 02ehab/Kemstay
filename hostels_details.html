@@ -20,7 +20,7 @@
       <a href="hostels.html">هوستيل</a>
     <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkDesktop">تسجيل الدخول</a>
   </nav>
 
   <!-- القائمة الجانبية (للموبايل) -->
@@ -32,12 +32,13 @@
       <a href="hostels.html">هوستيل</a>
       <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkMobile">تسجيل الدخول</a>
     </nav>
   </div>
 
   </header>
-<wrapper>
+
+<div class="wrapper">
 
 <main class="details-main">
   <!-- كارت الحجز -->
@@ -73,102 +74,96 @@
   </div>
 </div>
 
-<!-- معلومات الوحدة -->
-<div class="unit-info">
-  <div class="unit-basic-info">
-    <h1 class="unit-title">فندق في المعادي</h1>
-    <div class="unit-location">
-      <span>المعادي، القاهرة</span>
-      <a href="https://maps.google.com?q=المعادي" target="_blank" class="map-icon">📍 على الخريطة</a>
-    </div>
-  </div>
-
-  <section class="content-section">
-    <div class="description">
-      <h2>حول الفندق</h2>
-      <p>فندق مميز يوفر إقامة مريحة في موقع استراتيجي بالقرب من محطة المترو. يحتوي على غرف مجهزة بالكامل وخدمات راقية.</p>
-    </div>
-
-    <!-- تفاصيل الغرف -->
-   <section class="rooms-section">
-  <h2>تفاصيل الغرف</h2>
-  <div class="room-cards">
-    <div class="room-card">
-      <h3>جناح فاخر</h3>
-      <div class="room-images">
-        <img src="home.jpg" alt="Room Image">
-        <img src="home.jpg" alt="Room Image">
-      </div>
-    </div>
-    <div class="room-card">
-      <h3>غرفة فردية</h3>
-      <div class="room-images">
-        <img src="home.jpg" alt="Room Image">
-        <img src="home.jpg" alt="Room Image">
-      </div>
-    </div>
-    <div class="room-card">
-      <h3>جناح فاخر</h3>
-      <div class="room-images">
-        <img src="home.jpg" alt="Room Image">
-        <img src="home.jpg" alt="Room Image">
-      </div>
-    </div>
-    <div class="room-card">
-      <h3>جناح فاخر</h3>
-      <div class="room-images">
-        <img src="pic.jpg" alt="Room Image">
-        <img src="pic.jpg" alt="Room Image">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Popup -->
-<div id="imagePopup" class="popup-overlay hidden" onclick="closeGalleryPopup()">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closeGalleryPopup()">&times;</span>
-    <img id="galleryPopupImage" src="" alt="Room Image">
-    <button class="popup-prev" onclick="prevPopupImage(event)">❮</button>>
-    <button class="popup-next" onclick="nextPopupImage(event)">❯</button>
-  </div>
-</div>
-
-
-
-
-    <!-- الخدمات -->
-    <div class="services">
-      <h2>الخدمات المتوفرة</h2>
-      <ul>
-        <li>تكييف</li>
-        <li>واي فاي مجاني</li>
-        <li>موقف سيارات</li>
-      </ul>
-
-      <h3>خدمات الإفطار</h3>
-      <ul>
-        <li>إفطار عربي</li>
-        <li>إفطار قاري</li>
-      </ul>
-
-      <h3>خدمات إضافية</h3>
-      <ul>
-        <li>توصيل من/إلى المطار</li>
-        <li>تنظيف يومي</li>
-        <li>خدمة الغرف</li>
-      </ul>
-    </div>
-
+<div class="details-container">
+  <section class="hotel-basic-info">
+    <h3>بيانات الفندق</h3>
+    <p><strong>اسم الفندق:</strong> <span id="hotelName"></span></p>
+    <p><strong>التصنيف:</strong> <span id="hotelCategory"></span></p>
   </section>
 
-<!-- User Card Component -->
-<div id="userCard" class="user-card">
-  <img id="userProfileImg" class="user-card-img" src="https://i.pravatar.cc/120?img=3" alt="صورة المستخدم">
-  <div class="user-card-info">
-    <div class="user-card-name" id="userFullName"> ايهاب عبداللاه</div>
-    <div class="user-card-role" id="userRoleLabel">مالك</div>
-    <div class="user-card-date" id="userJoinDate">انضم: مارس 2024</div>
+  <section class="description-section">
+    <h3>الوصف</h3>
+    <h2 id="unitTitle" style="margin-bottom: 0.2em;"></h2>
+    <p id="description"></p>
+  </section>
+
+  <section class="unit-info">
+    <h3>العنوان</h3>
+    <p><strong>المحافظة:</strong> <span id="governorate"></span></p>
+    <p><strong>الشارع:</strong> <span id="address"></span></p>
+    <p><strong>رقم العقار:</strong> <span id="building"></span></p>
+    <p><strong>الدور:</strong> <span id="floor"></span></p>
+    <p><strong>قريب من:</strong> <span id="nearby"></span></p>
+    <p><strong>علامة مميزة:</strong> <span id="landmark"></span></p>
+    <a id="locationLink" href="#" target="_blank" rel="noopener">
+      <span class="map-icon">📍</span> الموقع على الخريطة
+    </a>
+  </section>
+
+  <section class="rooms-section">
+    <h2>تفاصيل الغرف</h2>
+    <div class="room-cards">
+      <div class="room-card">
+        <h3>جناح فاخر</h3>
+        <div class="room-images">
+          <img src="home.jpg" alt="Room Image">
+          <img src="home.jpg" alt="Room Image">
+        </div>
+      </div>
+      <div class="room-card">
+        <h3>غرفة فردية</h3>
+        <div class="room-images">
+          <img src="home.jpg" alt="Room Image">
+          <img src="home.jpg" alt="Room Image">
+        </div>
+      </div>
+      <div class="room-card">
+        <h3>جناح فاخر</h3>
+        <div class="room-images">
+          <img src="home.jpg" alt="Room Image">
+          <img src="home.jpg" alt="Room Image">
+        </div>
+      </div>
+      <div class="room-card">
+        <h3>جناح فاخر</h3>
+        <div class="room-images">
+          <img src="pic.jpg" alt="Room Image">
+          <img src="pic.jpg" alt="Room Image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popup -->
+  <div id="imagePopup" class="popup-overlay hidden" onclick="closeGalleryPopup()">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closeGalleryPopup()">&times;</span>
+      <img id="galleryPopupImage" src="" alt="Room Image">
+      <button class="popup-prev" onclick="prevPopupImage(event)">❮</button>
+      <button class="popup-next" onclick="nextPopupImage(event)">❯</button>
+    </div>
+  </div>
+
+  <section class="service-category">
+    <h3>الخدمات المتوفرة</h3>
+    <ul id="availableServicesList"></ul>
+  </section>
+  <section class="service-category">
+    <h3>خدمات الافطار</h3>
+    <ul id="breakfastServicesList"></ul>
+  </section>
+  <section class="service-category">
+    <h3>الخدمات المجانية</h3>
+    <ul id="extraServicesList"></ul>
+  </section>
+
+  <div id="userCard" class="user-card">
+    <img id="userProfileImg" class="user-card-img" src="https://i.pravatar.cc/120?img=3" alt="صورة المستخدم">
+    <div class="user-card-info">
+      <div class="user-card-name" id="userFullName">ايهاب عبداللاه</div>
+      <div class="user-card-role" id="userRoleLabel">مالك</div>
+      <div class="user-card-date" id="userJoinDate">انضم: مارس 2024</div>
+    </div>
   </div>
 </div>
 <!--
@@ -189,13 +184,11 @@
 </div>
 -->
 
-</div>
-</div>
+<!--  
 <div id="chatbot-container">
-<!-- أيقونة الشات -->
+
  <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
 
-  <!-- نافذة الشات -->
   <div id="chatPopup" class="chatbot-popup hidden">
     <div class="chatbot-header">
       <span>Kemstay  🤖</span>
@@ -212,6 +205,7 @@
     />
     <button onclick="sendChatMessage()">إرسال</button>
   </div>
+ -->
 
   <footer class="footer">
     <div class="footer-container">
