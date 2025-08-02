@@ -1,3 +1,31 @@
+document.addEventListener("DOMContentLoaded", function () {
+  // Load hostel data from localStorage
+  const hostels = JSON.parse(localStorage.getItem("hostels") || "[]");
+
+
+  // get id from URL instead of using lastHostelIndex
+  const urlParams = new URLSearchParams(window.location.search);
+  const index = urlParams.get("id") || 0;
+  const hostel = hostels[index];
+
+  if (!hostel) return;
+
+  document.getElementById("hotelName").textContent = hostel.name || "";
+  document.getElementById("hotelRooms").textContent = hostel.rooms || "";
+  document.getElementById("hotelCategory").textContent = hostel.category || "";
+  document.getElementById("unitTitle").textContent = hostel.name || "";
+  document.getElementById("description").textContent = hostel.description || "";
+  document.getElementById("governorate").textContent = hostel.governorate || "";
+  document.getElementById("address").textContent = hostel.address || "";
+  document.getElementById("building").textContent = hostel.building || "";
+  document.getElementById("floor").textContent = hostel.floor || "";
+  document.getElementById("nearby").textContent = hostel.nearby || "";
+  document.getElementById("landmark").textContent = hostel.landmark || "";
+  document.getElementById("locationLink").href = hostel.locationLink || "#";
+});
+
+
+
 function openMenu() {
   document.getElementById("sideMenu").classList.add("open");
 }
@@ -5,7 +33,6 @@ function openMenu() {
 function closeMenu() {
   document.getElementById("sideMenu").classList.remove("open");
 }
-
 
 // صفحة تفاصيل الوحدة وحجز وهمي
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,13 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
-//تغيير حالة تسجيل الدخول
+// تحقق من حالة تسجيل الدخول من localStorage
 document.addEventListener("DOMContentLoaded", () => {
   const authLinks = document.querySelectorAll(".auth-link");
   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-  if (authLinks.length === 0) return; // ما فيش عناصر، نخرج بأمان
+  if (authLinks.length === 0) return;
 
   authLinks.forEach(link => {
     if (isLoggedIn === "true") {
@@ -36,12 +62,49 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+//وقت تسجيل الدخول يظهر ملفي ويختفي تسجيل الدخول
+document.addEventListener("DOMContentLoaded", function () {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
+  const authButtons = document.getElementById("authButtons");
+  const sideAuthButtons = document.getElementById("sideAuthButtons");
 
+  const profileLink = document.getElementById("profileLink");
+  const profileLinkMobile = document.getElementById("profileLinkMobile");
+
+  if (isLoggedIn) {
+    if (authButtons) authButtons.style.display = "none";
+    if (sideAuthButtons) sideAuthButtons.style.display = "none";
+
+    if (profileLink) profileLink.style.display = "inline-block";
+    if (profileLinkMobile) profileLinkMobile.style.display = "inline-block";
+  } else {
+    if (authButtons) authButtons.style.display = "flex";
+    if (sideAuthButtons) sideAuthButtons.style.display = "flex";
+
+    if (profileLink) profileLink.style.display = "none";
+    if (profileLinkMobile) profileLinkMobile.style.display = "none";
+  }
+});
+
+// التحقق من حالة تسجيل الدخول قبل الانتقال إلى صفحات محمية
+document.addEventListener("DOMContentLoaded", function () {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  const protectedLinks = document.querySelectorAll("a:not([href*='login']):not([href='index.html'])");
+
+  protectedLinks.forEach(link => {
+    link.addEventListener("click", function (e) {
+      if (!isLoggedIn) {
+        e.preventDefault();
+        window.location.href = "login.html";
+      }
+    });
+  });
+});
 
 // منع دخول الصفحات بدون تسجيل + سلايدر صور الغرف (داخل DOMContentLoaded)
 document.addEventListener("DOMContentLoaded", function() {
-  // Only check login once
   const isLoggedIn = localStorage.getItem("isLoggedIn");
   if (!isLoggedIn) {
     window.location.href = "login.html";
@@ -95,26 +158,25 @@ document.addEventListener("DOMContentLoaded", function() {
     };
   }
 
-
   // --- Room gallery popup logic ---
-const galleryImagesEls = document.querySelectorAll('.room-images img');
-const galleryPopup = document.getElementById('imagePopup');
-const galleryPopupImage = document.getElementById('galleryPopupImage');
-let galleryCurrentIndex = 0;
-let galleryImagesArr = [];
+  const galleryImagesEls = document.querySelectorAll('.room-images img');
+  const galleryPopup = document.getElementById('imagePopup');
+  const galleryPopupImage = document.getElementById('galleryPopupImage');
+  let galleryCurrentIndex = 0;
+  let galleryImagesArr = [];
 
-galleryImagesEls.forEach((img) => {
-  img.addEventListener('click', function() {
-    galleryImagesArr = Array.from(img.parentElement.querySelectorAll('img'));
-    galleryCurrentIndex = galleryImagesArr.indexOf(this);
-    if (galleryPopupImage) {
-      galleryPopupImage.src = this.src; // This line sets the image source
-    }
-    if (galleryPopup) {
-      galleryPopup.classList.remove('hidden');
-    }
+  galleryImagesEls.forEach((img) => {
+    img.addEventListener('click', function() {
+      galleryImagesArr = Array.from(img.parentElement.querySelectorAll('img'));
+      galleryCurrentIndex = galleryImagesArr.indexOf(this);
+      if (galleryPopupImage) {
+        galleryPopupImage.src = this.src;
+      }
+      if (galleryPopup) {
+        galleryPopup.classList.remove('hidden');
+      }
+    });
   });
-});
 
   window.closeGalleryPopup = function() {
     if (galleryPopup) galleryPopup.classList.add('hidden');
@@ -132,7 +194,6 @@ galleryImagesEls.forEach((img) => {
     if (event) event.stopPropagation();
     window.changeGalleryImage(1);
   };
-
 });
 
 // Example user data (replace with localStorage.getItem('unitUser') if needed)
@@ -168,3 +229,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   document.getElementById("userJoinDate").textContent = dateStr;
 });
+
