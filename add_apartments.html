@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="chatbot.css" />
 </head>
 <body>
-     <header>
+    <header>
 
      <div class="logo">Kemstay</div>
   <button class="menu-toggle" onclick="openMenu()">☰</button>
@@ -20,7 +20,7 @@
       <a href="hostels.html">هوستيل</a>
     <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkDesktop">تسجيل الدخول</a>
   </nav>
 
   <!-- القائمة الجانبية (للموبايل) -->
@@ -32,7 +32,7 @@
       <a href="hostels.html">هوستيل</a>
       <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkMobile">تسجيل الدخول</a>
     </nav>
   </div>
 
@@ -70,7 +70,6 @@
   <label for="occupants">عدد الأفراد:</label>
   <input type="number" name="occupants" id="occupants" required>
 
-  <label>التأثيث:</label>
   <div class="furnish-options">
     <label class="radio-option">
       <input type="radio" name="furnishStatus" value="مفروشة" checked>
@@ -119,15 +118,32 @@
 </div>
 
 
-
       <!-- Step 3 -->
     <div class="step">
       <div class="form-group">
   <label for="address">العنوان:</label>
   <input type="text" id="address" name="address" placeholder="أدخل عنوان الوحدة" required>
 </div>
-
 <div class="form-group">
+  <label for="city">المدينة:</label>
+  <input type="text" id="city" name="city" placeholder="أدخل اسم المدينة" required>
+
+  <label for="street">الشارع:</label>
+  <input type="text" id="street" name="street" placeholder="أدخل اسم الشارع" required>
+
+  <label for="building">رقم العقار:</label>
+  <input type="text" id="building" name="building" placeholder="أدخل رقم العقار" required>
+
+  <label for="floor">رقم الدور:</label>
+  <input type="text" id="floor" name="floor" placeholder="أدخل رقم الدور" required>
+
+  <label for="nearby"> قريبة من:</label>
+  <input type="text" id="nearby" name="nearby" placeholder="  قريبة من" required>
+
+  <label for="landmark">علامة مميزة :</label>
+  <input type="text" id="landmark" name="landmark" placeholder="  علامة مميزة" required>
+
+
   <label for="locationLink">رابط الموقع على الخريطة:</label>
   <input type="url" id="locationLink" name="locationLink" placeholder="أدخل رابط Google Maps" required>
 </div>
@@ -181,7 +197,9 @@
   <h3>الصور والموافقة</h3>
 
   <label>رفع الصور:</label>
-  <input type="file" name="images" multiple required>
+<input type="file" name="images" id="imagesInput" multiple accept="image/*" required>
+  <div id="imagesPreview" class="images-preview"></div>
+  <button type="button" onclick="removeImage()">حذف الصورة</button>
 
   <div class="terms-container">
     <label class="custom-checkbox">
