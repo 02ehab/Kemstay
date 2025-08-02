@@ -18,8 +18,8 @@ body {
   background-color: #f1effa;
   color: #333;
   line-height: 1.6;
-direction:rtl;
-  /*  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;*/
+  direction: rtl;
+    /*background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;*/
 
 }
 
@@ -33,7 +33,6 @@ direction:rtl;
   animation: fadeIn 1s ease-in-out;
 }
 
-   
     header {
   background-color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ظل أعمق */
@@ -48,7 +47,10 @@ direction:rtl;
   flex-wrap: wrap;
   direction: ltr; /* تُغيّرها للعربي إذا أردت */
   z-index: 10;
-  position: relative;
+position: relative; /* لو عايز تضمن أن الهيدر فوق المحتوى */
+  /* لو عايز تأثير زجاجي */
+background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  
 }
 
     .logo {
@@ -84,7 +86,9 @@ direction:rtl;
   width: 70%;
   max-width: 300px;
   height: 100%;
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  backdrop-filter: blur(12px); /* لو عايز تأثير زجاجي */
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: -2px 0 10px rgba(0,0,0,0.2);
   padding: 2rem 1rem;
   z-index: 999;
