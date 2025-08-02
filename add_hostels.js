@@ -1,73 +1,84 @@
 function openMenu() {
-  document.getElementById("sideMenu").classList.add("open");
+  document.getElementById("sideMenu")?.classList.add("open");
 }
 
 function closeMenu() {
-  document.getElementById("sideMenu").classList.remove("open");
+  document.getElementById("sideMenu")?.classList.remove("open");
 }
 
-  // تحقق من حالة تسجيل الدخول من localStorage
 document.addEventListener("DOMContentLoaded", () => {
-  const authLinks = document.querySelectorAll(".auth-link");
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-
-  if (authLinks.length === 0) return; // ما فيش عناصر، نخرج بأمان
-
-  authLinks.forEach(link => {
-    if (isLoggedIn === "true") {
-      link.textContent = "الملف الشخصي";
-      link.href = "profile.html";
-    } else {
-      link.textContent = "تسجيل الدخول";
-      link.href = "login.html";
-    }
-  });
-});
-
-
-//وقت تسجيل الدخول يظهر ملفي ويختفي تسجيل الدخول
-document.addEventListener("DOMContentLoaded", function () {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
+  // تحديث الروابط حسب حالة تسجيل الدخول
+  const authLinks = document.querySelectorAll(".auth-link");
+  authLinks.forEach(link => {
+    link.textContent = isLoggedIn ? "الملف الشخصي" : "تسجيل الدخول";
+    link.href = isLoggedIn ? "profile.html" : "login.html";
+  });
+
+  // إظهار/إخفاء الأزرار حسب تسجيل الدخول
   const authButtons = document.getElementById("authButtons");
   const sideAuthButtons = document.getElementById("sideAuthButtons");
-
   const profileLink = document.getElementById("profileLink");
   const profileLinkMobile = document.getElementById("profileLinkMobile");
 
   if (isLoggedIn) {
-    if (authButtons) authButtons.style.display = "none";
-    if (sideAuthButtons) sideAuthButtons.style.display = "none";
-
-    if (profileLink) profileLink.style.display = "inline-block";
-    if (profileLinkMobile) profileLinkMobile.style.display = "inline-block";
+    authButtons?.style.setProperty("display", "none");
+    sideAuthButtons?.style.setProperty("display", "none");
+    profileLink?.style.setProperty("display", "inline-block");
+    profileLinkMobile?.style.setProperty("display", "inline-block");
   } else {
-    if (authButtons) authButtons.style.display = "flex";
-    if (sideAuthButtons) sideAuthButtons.style.display = "flex";
-
-    if (profileLink) profileLink.style.display = "none";
-    if (profileLinkMobile) profileLinkMobile.style.display = "none";
+    authButtons?.style.setProperty("display", "flex");
+    sideAuthButtons?.style.setProperty("display", "flex");
+    profileLink?.style.setProperty("display", "none");
+    profileLinkMobile?.style.setProperty("display", "none");
   }
-});
 
-// التحقق من حالة تسجيل الدخول قبل الانتقال إلى صفحات محمية
-document.addEventListener("DOMContentLoaded", function () {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-
-  // اختار كل الروابط باستثناء تسجيل الدخول أو الرئيسية
+  // منع الوصول لروابط محمية
   const protectedLinks = document.querySelectorAll("a:not([href*='login']):not([href='index.html'])");
-
   protectedLinks.forEach(link => {
-    link.addEventListener("click", function (e) {
+    link.addEventListener("click", e => {
       if (!isLoggedIn) {
         e.preventDefault();
         window.location.href = "login.html";
       }
     });
   });
-});
 
-  // Multi-step form with localStorage step persistence
+  // معاينة الصور
+  document.querySelector('input[name="images"]')?.addEventListener('change', function (e) {
+    const preview = document.getElementById('hotelImagesPreview');
+    preview.innerHTML = '';
+    Array.from(e.target.files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function (ev) {
+        const img = document.createElement('img');
+        img.src = ev.target.result;
+        img.style.cssText = 'width:80px; margin:5px; border-radius:8px';
+        preview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
+  // التحقق من التواريخ
+  document.querySelector("form")?.addEventListener("submit", function (e) {
+    const from = new Date(document.getElementById("availableFrom")?.value);
+    const to = new Date(document.getElementById("availableTo")?.value);
+    if (from > to) {
+      alert("تاريخ البداية يجب أن يكون قبل تاريخ النهاية");
+      e.preventDefault();
+    }
+  });
+
+  // تفعيل زر إزالة الغرفة
+  document.querySelectorAll('.removeRoomBtn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.target.parentElement.remove();
+    });
+  });
+
+  // نموذج متعدد الخطوات
   const steps = document.querySelectorAll(".step");
   const progressBar = document.getElementById("progressBar");
   const prevBtn = document.getElementById("prevBtn");
@@ -75,31 +86,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitBtn = document.getElementById("submitBtn");
   const form = document.getElementById("hotelForm") || document.getElementById("multiForm");
   const LS_KEY = "kemstay_hotel_step";
-  let currentStep = 0;
-
-  // Restore step from localStorage
-  const savedStep = parseInt(localStorage.getItem(LS_KEY), 10);
-  if (!isNaN(savedStep) && savedStep >= 0 && savedStep < steps.length) {
-    currentStep = savedStep;
-  }
+  let currentStep = parseInt(localStorage.getItem(LS_KEY)) || 0;
 
   function showStep(index) {
     steps.forEach((step, i) => {
       step.style.display = i === index ? "block" : "none";
     });
-    if (progressBar)
-      progressBar.style.width = ((index + 1) / steps.length) * 100 + "%";
+    if (progressBar) progressBar.style.width = ((index + 1) / steps.length) * 100 + "%";
     if (prevBtn) prevBtn.disabled = index === 0;
     if (nextBtn) nextBtn.style.display = index === steps.length - 1 ? "none" : "inline-block";
     if (submitBtn) submitBtn.style.display = index === steps.length - 1 ? "inline-block" : "none";
-    // Save step to localStorage
     localStorage.setItem(LS_KEY, index);
   }
 
   function validateStep(index) {
     const inputs = steps[index].querySelectorAll("input, select, textarea");
     for (let input of inputs) {
-      if (input.hasAttribute("required") && !input.value) {
+      if (input.required && !input.value) {
         alert("يرجى ملء جميع الحقول المطلوبة");
         return false;
       }
@@ -107,84 +110,53 @@ document.addEventListener("DOMContentLoaded", function () {
     return true;
   }
 
-  if (nextBtn) {
-    nextBtn.addEventListener("click", function () {
-      if (validateStep(currentStep)) {
-        currentStep++;
-        if (currentStep >= steps.length) currentStep = steps.length - 1;
-        showStep(currentStep);
-      }
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener("click", function () {
-      currentStep--;
-      if (currentStep < 0) currentStep = 0;
-      showStep(currentStep);
-    });
-  }
-
-  if (form) {
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
+  nextBtn?.addEventListener("click", () => {
     if (validateStep(currentStep)) {
-      localStorage.removeItem(LS_KEY);
-      window.location.href = "thanks.html"; // Redirect after submit
+      currentStep = Math.min(currentStep + 1, steps.length - 1);
+      showStep(currentStep);
     }
   });
-}
 
-  showStep(currentStep);
+  prevBtn?.addEventListener("click", () => {
+    currentStep = Math.max(currentStep - 1, 0);
+    showStep(currentStep);
+  });
 
-  // Add availability input dynamically
-function addAvailability() {
-  const list = document.getElementById("availabilityList");
-  const input = document.createElement("input");
-  input.type = "date";
-  input.name = "availability[]";
-  input.required = true;
+form?.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (validateStep(currentStep)) {
+      const formData = new FormData(form);
+      const hostel = {
+        id: Date.now(),
+        name: formData.get("name"),
+        rooms: formData.get("rooms"),
+        category: formData.get("category"),
+        description: formData.get("description"),
+        address: formData.get("address"),
+        governorate: formData.get("city"),
+        building: formData.get("building"),
+        floor: formData.get("floor"),
+        nearby: formData.get("nearby"),
+        landmark: formData.get("landmark"),
+        locationLink: formData.get("locationLink"),
+        image: "home.jpg", // placeholder for single image property expected by hostels.js
+        price: formData.get("price") || "غير محدد",
+        title: formData.get("name")
+      };
+      const hostels = JSON.parse(localStorage.getItem("hostels") || "[]");
+      hostels.push(hostel);
+      localStorage.setItem("hostels", JSON.stringify(hostels));
+      localStorage.removeItem(LS_KEY);
+      window.location.href = "thanks.html";
+    }
+  });
 
-  const removeBtn = document.createElement("button");
-  removeBtn.type = "button";
-  removeBtn.textContent = "−";
-  removeBtn.onclick = () => inputDiv.remove();
-
-  const inputDiv = document.createElement("div");
-  inputDiv.appendChild(input);
-  inputDiv.appendChild(removeBtn);
-  list.appendChild(inputDiv);
-}
-
-function addFeature() {
-  const list = document.getElementById("featuresList");
-  const input = document.createElement("input");
-  input.type = "text";
-  input.name = "features[]";
-  input.placeholder = "ميزة";
-  input.required = true;
-
-  const removeBtn = document.createElement("button");
-  removeBtn.type = "button";
-  removeBtn.textContent = "−";
-  removeBtn.onclick = () => inputDiv.remove();
-
-  const inputDiv = document.createElement("div");
-  inputDiv.appendChild(input);
-  inputDiv.appendChild(removeBtn);
-  list.appendChild(inputDiv);
-}
-
-//اضافة غرفة فرعيه
-
+// إضافة غرفة
 let roomIndex = 1;
-
-document.getElementById('addRoomBtn').addEventListener('click', () => {
+document.getElementById('addRoomBtn')?.addEventListener('click', () => {
   const container = document.getElementById('roomsContainer');
-
   const newRoomDiv = document.createElement('div');
   newRoomDiv.classList.add('room-group');
-
   newRoomDiv.innerHTML = `
     <label>نوع الغرفة:</label>
     <select name="room_type[]" required>
@@ -194,35 +166,19 @@ document.getElementById('addRoomBtn').addEventListener('click', () => {
       <option value="suite">جناح</option>
       <option value="family">غرفة عائلية</option>
     </select>
-
     <label>صور الغرفة:</label>
     <input type="file" name="room_images_${roomIndex}[]" multiple accept="image/*" required>
-
     <button type="button" class="removeRoomBtn">− إزالة غرفة</button>
   `;
-
   container.appendChild(newRoomDiv);
-
-  // أضف حدث إزالة للحقل الجديد
-  newRoomDiv.querySelector('.removeRoomBtn').addEventListener('click', () => {
-    newRoomDiv.remove();
-  });
-
+  newRoomDiv.querySelector('.removeRoomBtn').addEventListener('click', () => newRoomDiv.remove());
   roomIndex++;
 });
 
-// تفعيل زر إزالة على المجموعة الأولى
-document.querySelectorAll('.removeRoomBtn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.target.parentElement.remove();
-  });
-});
-
- //اضافة خدمات
- function addService(type) {
+// إضافة خدمة
+function addService(type) {
   const container = document.createElement('div');
   container.className = 'service-item';
-
   const input = document.createElement('input');
   input.type = 'text';
   input.name = `services_${type}[]`;
@@ -237,53 +193,34 @@ document.querySelectorAll('.removeRoomBtn').forEach(btn => {
   container.appendChild(input);
   container.appendChild(deleteBtn);
 
-  if (type === 'available') {
-    document.getElementById('availableServicesList').appendChild(container);
-  } else if (type === 'breakfast') {
-    document.getElementById('breakfastServicesList').appendChild(container);
-  } else if (type === 'extra') {
-    document.getElementById('extraServicesList').appendChild(container);
-  }
+  const target = {
+    available: 'availableServicesList',
+    breakfast: 'breakfastServicesList',
+    extra: 'extraServicesList'
+  }[type];
+  document.getElementById(target)?.appendChild(container);
 }
 
-//الاتاحية
-document.querySelector("form").addEventListener("submit", function(e) {
-    const from = new Date(document.getElementById("availableFrom").value);
-    const to = new Date(document.getElementById("availableTo").value);
-    if (from > to) {
-      alert("تاريخ البداية يجب أن يكون قبل تاريخ النهاية");
-      e.preventDefault();
-    }
-  });
+// إضافة الاتاحية
+function addAvailability() {
+  const container = document.getElementById("availabilityContainer");
+  const group = document.createElement("div");
+  group.className = "availability-group";
+  group.innerHTML = `
+    <div class="form-group">
+      <label>متاح من:</label>
+      <input type="date" name="availableFrom[]" required>
+    </div>
+    <div class="form-group">
+      <label>متاح حتى:</label>
+      <input type="date" name="availableTo[]" required>
+    </div>
+    <button type="button" class="remove-btn" onclick="removeAvailability(this)">− حذف</button>
+  `;
+  container.appendChild(group);
+}
 
-  //اضافة الاتاحية
-   function addAvailability() {
-    const container = document.getElementById("availabilityContainer");
-
-    const group = document.createElement("div");
-    group.className = "availability-group";
-
-    group.innerHTML = `
-      <div class="form-group">
-        <label>متاح من:</label>
-        <input type="date" name="availableFrom[]" required>
-      </div>
-      <div class="form-group">
-        <label>متاح حتى:</label>
-        <input type="date" name="availableTo[]" required>
-      </div>
-      <button type="button" class="remove-btn" onclick="removeAvailability(this)">− حذف</button>
-    `;
-
-    container.appendChild(group);
-  }
-
-  function removeAvailability(button) {
-    const group = button.closest(".availability-group");
-    group.remove();
-  }
-
-  document.getElementById("multiForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
+function removeAvailability(button) {
+  button.closest(".availability-group")?.remove();
+}
 });
