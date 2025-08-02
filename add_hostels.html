@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>عرض الوحدة - Kemstay</title>
+  <title>اضافة فند - Kemstay</title>
   <link rel="stylesheet" href="add_hostels.css" />
+  <link rel="stylesheet" href="chatbot.css" />
 </head>
 <body>
-     <header>
+    <header>
 
      <div class="logo">Kemstay</div>
   <button class="menu-toggle" onclick="openMenu()">☰</button>
@@ -19,7 +20,7 @@
       <a href="hostels.html">هوستيل</a>
     <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkDesktop">تسجيل الدخول</a>
   </nav>
 
   <!-- القائمة الجانبية (للموبايل) -->
@@ -31,11 +32,12 @@
       <a href="hostels.html">هوستيل</a>
       <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkMobile">تسجيل الدخول</a>
     </nav>
   </div>
 
   </header>
+  
 <div class="wrapper">  
 <div class="container">
   <h2>إضافة فندق جديد</h2>
@@ -90,7 +92,7 @@
 
   <!-- القسم الثالث: الخدمات الإضافية -->
   <div class="service-category">
-    <h4>الخدمات الإضافية:</h4>
+    <h4>الخدمات المجانية:</h4>
     <div id="extraServicesList"></div>
     <button type="button" onclick="addService('extra')">＋ إضافة خدمة</button>
   </div>
@@ -99,21 +101,38 @@
 
     </div>
 
-    <!-- Step 3 -->
+     <!-- Step 3 -->
     <div class="step">
       <div class="form-group">
   <label for="address">العنوان:</label>
   <input type="text" id="address" name="address" placeholder="أدخل عنوان الوحدة" required>
 </div>
-
 <div class="form-group">
+  <label for="city">المدينة:</label>
+  <input type="text" id="city" name="city" placeholder="أدخل اسم المدينة" required>
+
+  <label for="street">الشارع:</label>
+  <input type="text" id="street" name="street" placeholder="أدخل اسم الشارع" required>
+
+  <label for="building">رقم العقار:</label>
+  <input type="text" id="building" name="building" placeholder="أدخل رقم العقار" required>
+
+  <label for="floor">رقم الدور:</label>
+  <input type="text" id="floor" name="floor" placeholder="أدخل رقم الدور" required>
+
+  <label for="nearby"> قريبة من:</label>
+  <input type="text" id="nearby" name="nearby" placeholder="  قريبة من" required>
+
+  <label for="landmark">علامة مميزة :</label>
+  <input type="text" id="landmark" name="landmark" placeholder="  علامة مميزة" required>
+
+
   <label for="locationLink">رابط الموقع على الخريطة:</label>
   <input type="url" id="locationLink" name="locationLink" placeholder="أدخل رابط Google Maps" required>
 </div>
 
-
     </div>
-
+    
         <!-- Step 4 -->
     <div class="step">
        <div id="roomsContainer">
@@ -222,5 +241,6 @@
 </footer>
 
   <script src="add_hostels.js"></script>
+   <script src="chatbot.js"></script>
 </body>
 </html>
