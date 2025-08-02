@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>تفاصيل الوحدة - Kemstay</title>
   <link rel="stylesheet" href="hostels.css" />
+  <link rel="stylesheet" href="chatbot.css" />
 </head>
 <body>
      <header>
@@ -19,7 +20,7 @@
       <a href="hostels.html">هوستيل</a>
     <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkDesktop">تسجيل الدخول</a>
   </nav>
 
   <!-- القائمة الجانبية (للموبايل) -->
@@ -31,7 +32,7 @@
       <a href="hostels.html">هوستيل</a>
       <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkMobile">تسجيل الدخول</a>
     </nav>
   </div>
 
@@ -66,23 +67,10 @@
 </div>
 
 <!-- Hostels -->
-<section class="listing-section">
-  <div class="listing-card">
-    <img src="home.jpg" alt="Room Image">
-    <div class="listing-details">
-      <h3> فندق في مدينة نصر</h3>
-      <p>2500 جنيه / يوم</p>
-      <a href="hostels_details.html" class="details-btn">عرض التفاصيل</a>
-    </div>
-  </div>
-  <div class="listing-card">
-    <img src="home.jpg" alt="Room Image">
-    <div class="listing-details">
-      <h3> فندق في مدينة نصر</h3>
-      <p>2500 جنيه / يوم</p>
-      <a href="hostels_details.html" class="details-btn">عرض التفاصيل</a>
-    </div>
-  </div>
+ <section class="listing-section">
+  <!-- الحاوية التي سيتم فيها عرض الفنادق المُضافة من localStorage -->
+  <div id="hostelCardsContainer" class="hostel-container"></div>
+
 </section>
 
 <!-- الفنادق المميزة -->
@@ -92,11 +80,11 @@
     <button class="nav-btn left" onclick="slideLeft('hotelSlider')">‹</button>
     <div class="slider" id="hotelSlider">
       <a href="hostels_details.html" class="slide">
-        <img src="home.jpg" alt="فندق 1">
+        <img src="home.jpg" alt="فندق 1" loading="lazy">
         <p>فندق في القاهرة</p>
       </a>
       <a href="hostels_details.html" class="slide">
-        <img src="home.jpg" alt="فندق 2">
+        <img src="home.jpg" alt="فندق 2" loading="lazy">
         <p>فندق في الإسكندرية</p>
       </a>
       <a href="hostels_details.html" class="slide">
@@ -124,15 +112,16 @@
  <footer class="footer">
     <div class="footer-container">
         <ul class="footer-links">
-            <li><a href="#">سياسة الاستخدام</a></li>
-            <li><a href="#">الأسئلة الشائعة</a></li>
-            <li><a href="#">المدونة</a></li>
-            <li><a href="#">الشروط والأحكام</a></li>
+            <li><a href="privacy.html">سياسة الخصوصية</a></li>
+            <li><a href="faq.html">الأسئلة الشائعة</a></li>
+            <li><a href="blog.html">المدونة</a></li>
+            <li><a href="terms.html">الشروط والأحكام</a></li>
         </ul>
         <p class="footer-copy">© 2025 Kemstay. جميع الحقوق محفوظة.</p>
     </div>
 </footer>
 
   <script src="hostels.js"></script>
+  <script src="chatbot.js"></script>
 </body>
 </html>
