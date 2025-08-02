@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>عرض الوحدة - Kemstay</title>
   <link rel="stylesheet" href="added_units.css" />
+  <link rel="stylesheet" href="chatbot.css" />
 </head>
 <body>
-     <header>
+    <header>
 
      <div class="logo">Kemstay</div>
   <button class="menu-toggle" onclick="openMenu()">☰</button>
@@ -19,7 +20,7 @@
       <a href="hostels.html">هوستيل</a>
     <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkDesktop">تسجيل الدخول</a>
   </nav>
 
   <!-- القائمة الجانبية (للموبايل) -->
@@ -31,7 +32,7 @@
       <a href="hostels.html">هوستيل</a>
       <a href="notifications.html">الاشعارات</a>
     <a href="chat.html">الدردشة </a>
-    <a href="login.html" class="auth-link">تسجيل الدخول</a>
+<a href="login.html" class="auth-link" id="authLinkMobile">تسجيل الدخول</a>
     </nav>
   </div>
 
@@ -70,22 +71,7 @@
 <section class="hostels-section">
   <h2> الفنادق المضافة</h2>
   <div class="hostels-slider">
-    <div class="unit-card">
-      <h3>فندق في القاهرة</h3>
-      <p>السعر: 1500 جنيه / ليلة</p>
-      <div class="card-actions">
-        <button class="edit-btn">✏️ تعديل</button>
-        <button class="delete-btn">🗑️ حذف</button>
-      </div>
-    </div>
-    <div class="unit-card">
-      <h3>فندق في الإسكندرية</h3>
-      <p>السعر: 1200 جنيه / ليلة</p>
-      <div class="card-actions">
-        <button class="edit-btn">✏️ تعديل</button>
-        <button class="delete-btn">🗑️ حذف</button>
-      </div>
-    </div>
+   
     <!-- المزيد من الكروت -->
   </div>
 </section>
@@ -93,15 +79,16 @@
   <footer class="footer">
     <div class="footer-container">
         <ul class="footer-links">
-            <li><a href="#">سياسة الاستخدام</a></li>
-            <li><a href="#">الأسئلة الشائعة</a></li>
-            <li><a href="#">المدونة</a></li>
-            <li><a href="#">الشروط والأحكام</a></li>
+            <li><a href="privacy.html">سياسة الخصوصية</a></li>
+            <li><a href="faq.html">الأسئلة الشائعة</a></li>
+            <li><a href="blog.html">المدونة</a></li>
+            <li><a href="terms.html">الشروط والأحكام</a></li>
         </ul>
         <p class="footer-copy">© 2025 Kemstay. جميع الحقوق محفوظة.</p>
     </div>
 </footer>
 
   <script src="added_units.js"></script>
+   <script src="chatbot.js"></script>
 </body>
 </html>
