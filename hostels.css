@@ -19,8 +19,8 @@ body {
   color: #333;
   line-height: 1.6;
   direction: rtl;
-  /*  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;*/
-
+    /*background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;
+*/
 }
 
 .glass {
@@ -32,7 +32,6 @@ body {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   animation: fadeIn 1s ease-in-out;
 }
-
 
     header {
   background-color: #fff;
@@ -48,8 +47,12 @@ body {
   flex-wrap: wrap;
   direction: ltr; /* تُغيّرها للعربي إذا أردت */
   z-index: 10;
-  position: relative;
+position: relative; /* لو عايز تضمن أن الهيدر فوق المحتوى */
+  /* لو عايز تأثير زجاجي */
+background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  
 }
+
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
@@ -83,7 +86,9 @@ body {
   width: 70%;
   max-width: 300px;
   height: 100%;
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  backdrop-filter: blur(12px); /* لو عايز تأثير زجاجي */
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: -2px 0 10px rgba(0,0,0,0.2);
   padding: 2rem 1rem;
   z-index: 999;
@@ -134,51 +139,6 @@ body {
 }
 
 
-    /* عرض الوحدة */
-.unit-details-container {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  font-family: Arial, sans-serif;
-}
-
-.unit-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-}
-
-.unit-info h2 {
-  font-size: 1.6rem;
-  color: #964B00;
-  margin-bottom: 1rem;
-}
-
-.unit-description {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-.reserve-btn {
-  margin-top: 1.5rem;
-  background-color: #964B00;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.reserve-btn:hover {
-  background-color: #5f5f5f;
-}
  
 /* search bar */
 .search-bar-airbnb {
@@ -365,6 +325,10 @@ body {
         gap: 0.5rem;
       }
     }
+
+    #hostelCardsContainer {
+  display: contents; /* يجعل العناصر بداخله تتبع توزيع grid للأب */
+}
 
     /*عرض شقق مميزة */
 
