@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(LS_KEY, index);
   }
 
+  
   function validateStep(index) {
     const inputs = steps[index].querySelectorAll("input, select, textarea");
     for (let input of inputs) {
@@ -109,6 +110,12 @@ document.addEventListener("DOMContentLoaded", () => {
         furnishStatus: document.querySelector("input[name='furnishStatus']:checked").value,
         description: document.querySelector("textarea[name='description']").value,
         address: document.getElementById("address").value,
+        city: document.getElementById("city").value,
+        street: document.getElementById("street").value,
+        building: document.getElementById("building").value,
+        floor: document.getElementById("floor").value,
+        nearby: document.getElementById("nearby").value,
+        landmark: document.getElementById("landmark").value,
         locationLink: document.getElementById("locationLink").value,
         price: document.getElementById("price").value,
         pricingType: document.getElementById("pricingType").value,
@@ -123,7 +130,39 @@ document.addEventListener("DOMContentLoaded", () => {
         }))
       };
 
-      localStorage.setItem("unitDataToEdit", JSON.stringify(data));
+      // Prepare new apartment object
+      const newApartment = {
+        id: Date.now(),
+        type: data.unit_type,
+        category: data.category,
+        occupants: data.occupants,
+        furnishStatus: data.furnishStatus,
+        description: data.description,
+        address: data.address,
+        city: data.city,
+        street: data.street,
+        building: data.building,
+        floor: data.floor,
+        nearby: data.nearby,
+        landmark: data.landmark,
+        locationLink: data.locationLink,
+        price: data.price,
+        pricingType: data.pricingType,
+        services: data.services,
+        availability: data.availability,
+        images: [], // Image upload handling can be added here
+        userId: "defaultUser" // Placeholder userId, can be replaced with actual user info
+      };
+
+      // Get existing apartments or empty array
+      const apartments = JSON.parse(localStorage.getItem("allApartments") || "[]");
+
+      // Add new apartment
+      apartments.push(newApartment);
+
+      // Save back to localStorage
+      localStorage.setItem("allApartments", JSON.stringify(apartments));
+
       localStorage.removeItem(LS_KEY);
       window.location.href = "thanks.html";
     });
@@ -186,3 +225,14 @@ document.addEventListener("DOMContentLoaded", () => {
     group.remove();
   };
 });
+
+let apartments = JSON.parse(localStorage.getItem("allApartments")) || [];
+apartments.push({
+  id: Date.now(),
+  title: "شقتي الجديدة",
+  price: 3000,
+  location: "القاهرة",
+  userId: currentUserId, // لازم يكون مسجل عند تسجيل الدخول
+  image: "image_url.jpg"
+});
+localStorage.setItem("allApartments", JSON.stringify(apartments));
