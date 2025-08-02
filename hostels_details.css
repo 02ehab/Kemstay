@@ -890,6 +890,24 @@ section p, section li {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
+/* عند الموبايل */
+@media (max-width: 768px) {
+  .details-main {
+    flex-direction: column; /* عرض عمودي */
+    padding: 1rem;
+  }
+  
+  .slider-section,
+  .booking-box {
+    flex: 1 1 100%; /* كل واحد بعرض كامل */
+    max-width: 100%;
+  }
+  
+  .booking-box {
+    margin-top: 1.5rem; /* مسافة تحت السلايدر */
+  }
+}
+
 /* User Card */
 .user-card {
   display: flex;
@@ -1050,3 +1068,4 @@ section p, section li {
   color: #666;
   margin-top: 10px; 
 }
+
