@@ -53,7 +53,9 @@
       <input type="date" id="checkout" name="checkout">
     </div>
   </div>
-
+ <p id="availabilityMessage" style="color: red; font-weight: bold; display: none; margin-top: 10px;">
+    ⚠️ التواريخ المختارة غير متاحة. يرجى اختيار تواريخ أخرى.
+  </p>
   <div class="contract-approval" style="margin: 1em 0;">
     <label>
       <input type="checkbox" id="contractCheck" />
@@ -67,7 +69,7 @@
   <!-- سلايدر الصور -->
   <div class="slider-section">
     <button onclick="prevImage()">❮</button>
-<img id="sliderImage" src="home.jpg" alt="صورة الوحدة" onclick="openPopup(currentImageIndex)">
+<img id="imagesGallery" src="home.jpg" alt="صورة الوحدة" onclick="openPopup(currentImageIndex)">
     <button onclick="nextImage()">❯</button>
   </div>
 </main>
@@ -83,12 +85,14 @@
 <div class="container">
     
     <section class="info-group">
-      <h3>معلومات عامة</h3>
-      <p><strong>نوع الوحدة:</strong> <span id="unitType"></span></p>
-      <p><strong>التصنيف:</strong> <span id="category"></span></p>
-      <p><strong>عدد الأفراد:</strong> <span id="capacity"></span></p>
-      <p><strong>السعر:</strong> <span id="price"></span> جنية</p>
-    </section>
+  <h3>بيانات الوحدة</h3>
+  <p><strong>نوع الوحدة:</strong> <span id="unitType"></span></p>
+  <p><strong>التصنيف:</strong> <span id="category"></span></p>
+  <p><strong>عدد الأفراد:</strong> <span id="occupants"></span></p>
+  <p><strong>الحالة :</strong> <span id="furnishStatus"></span></p>
+  <p><strong>السعر:</strong> <span id="price"></span> جنيه</p>
+  <p><strong>نوع التسعير:</strong> <span id="pricingType"></span></p>
+</section>
 
       <section>
         <h3>الوصف</h3>
@@ -99,34 +103,36 @@
   <section class="info-group">
       <h3>العنوان</h3>
       <p><strong>المحافظة:</strong> <span id="governorate"></span></p>
-      <p><strong>الشارع:</strong> <span id="street"></span></p>
+      <p><strong>الشارع:</strong> <span id="address"></span></p>
       <p><strong>رقم العقار:</strong> <span id="building"></span></p>
       <p><strong>الدور:</strong> <span id="floor"></span></p>
       <p><strong>قريب من:</strong> <span id="nearby"></span></p>
       <p><strong>علامة مميزة:</strong> <span id="landmark"></span></p>
 <a id="locationLink" href="#" target="_blank" rel="noopener">
-    <span class="map-icon">📍</span> شوف الموقع على الخريطة
+    <span class="map-icon">📍</span>  الموقع على الخريطة
   </a>
     </section>
 
-  <section class="info-group">
-  <h3>المميزات</h3>
-  <ul id="featuresList" class="info-list">
-    <li> إنترنت فائق السرعة</li>
-    <li> تكييف في جميع الغرف</li>
-    <li> مطبخ مجهز بالكامل</li>
-    <li> إطلالة بانورامية</li>
-  </ul>
+    <section class="info-group">
+  <h3>الخدمات المتوفرة</h3>
+  <ul id="featuresList"></ul>
+</section>
+
+<section class="info-group">
+  <h3>الخدمات الإضافية</h3>
+  <ul id="extraFeaturesList"></ul>
 </section>
 
 <section class="info-group">
   <h3>الشروط</h3>
-  <ul id="conditionsList" class="info-list">
-    <li> ممنوع التدخين داخل الوحدة</li>
-    <li> لا يُسمح بالحيوانات الأليفة</li>
-    <li> الالتزام بمواعيد تسجيل الوصول والمغادرة</li>
-    <li> الحد الأدنى للإقامة ليلتين</li>
+  <ul id="ownerConditionsList" class="info-list">
+    
   </ul>
+</section>
+
+<section class="info-group">
+  <h3>فترات الإتاحة</h3>
+  <ul id="availabilityList"></ul>
 </section>
 
     <!-- User Card Component -->
