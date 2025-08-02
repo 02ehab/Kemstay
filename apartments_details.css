@@ -18,9 +18,9 @@ body {
   background-color: #f1effa;
   color: #333;
   line-height: 1.6;
-  direction: rtl; 
-  /*  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;*/
-
+  direction: rtl;
+   /* background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;
+*/
 }
 
 .glass {
@@ -32,7 +32,6 @@ body {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   animation: fadeIn 1s ease-in-out;
 }
-
 
     header {
   background-color: #fff;
@@ -48,7 +47,10 @@ body {
   flex-wrap: wrap;
   direction: ltr; /* تُغيّرها للعربي إذا أردت */
   z-index: 10;
-  position: relative;
+position: relative; /* لو عايز تضمن أن الهيدر فوق المحتوى */
+  /* لو عايز تأثير زجاجي */
+background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  
 }
     .logo {
       font-size: 1.5rem;
@@ -83,7 +85,9 @@ body {
   width: 70%;
   max-width: 300px;
   height: 100%;
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  backdrop-filter: blur(12px); /* لو عايز تأثير زجاجي */
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: -2px 0 10px rgba(0,0,0,0.2);
   padding: 2rem 1rem;
   z-index: 999;
@@ -584,18 +588,6 @@ ul#conditionsList li::before {
   position: relative;
 }
 
-/* حجم كارت الحجز */
-.booking-box {
-  flex: 0 0 30%; /* ثابت 30% */
-  max-width: 30%;
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 /* عند الموبايل */
 @media (max-width: 768px) {
