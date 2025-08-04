@@ -102,7 +102,7 @@
 
   <a href="reset_password.html" style="display: block; margin-top: 10px; font-size: 14px; color: #007bff; text-align: left;">نسيت كلمة المرور؟</a>
 
-  <button type="submit">دخول</button>
+  <button type="submit" id="login-btn" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">تسجيل الدخول</button>
   <div class="switch">ليس لديك حساب؟ <a onclick="toggleForm()">سجل الآن</a></div>
 </form>
 
@@ -146,7 +146,7 @@
         <option value="agent">وسيط معتمد</option>
       </select>
 
-      <button type="submit">تسجيل الحساب</button>
+      <button type="submit" id="signup-btn" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">إنشاء حساب</button>n>
       <div class="switch">لديك حساب بالفعل؟ <a onclick="toggleForm()">تسجيل الدخول</a></div>
     </form>
   </div>
@@ -182,6 +182,17 @@
       console.log("تم تسجيل البيانات:", data);
       alert("تم التسجيل بنجاح!");
     }
+    <script>
+  document.getElementById("login-btn")?.addEventListener("click", function (e) {
+    e.preventDefault(); // يمنع إرسال النموذج
+    window.location.href = "profile.html"; // غيرها حسب اسم صفحتك
+  });
+
+  document.getElementById("signup-btn")?.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "profile.html";
+  });
+</script>
   </script>
 
 </body>
