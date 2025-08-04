@@ -1,3 +1,4 @@
+<!-- index.html أو login.html -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -23,7 +24,7 @@
       <a href="#" id="forgot-password-link" style="display: block; margin-top: 10px; font-size: 14px; color: #007bff; text-align: left;">نسيت كلمة المرور؟</a>
 
       <button type="submit" id="login-btn">تسجيل الدخول</button>
-      <div class="switch">ليس لديك حساب؟ <a onclick="toggleForm()">سجل الآن</a></div>
+      <div class="switch">ليس لديك حساب؟ <a href="#" onclick="toggleForm()">سجل الآن</a></div>
     </form>
 
     <!-- Register Form -->
@@ -67,11 +68,10 @@
       </select>
 
       <button type="submit" id="signup-btn">إنشاء حساب</button>
-      <div class="switch">لديك حساب بالفعل؟ <a onclick="toggleForm()">تسجيل الدخول</a></div>
+      <div class="switch">لديك حساب بالفعل؟ <a href="#" onclick="toggleForm()">تسجيل الدخول</a></div>
     </form>
   </div>
-
-  <script src="login.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script type="module" src="login.js" defer></script>
 </body>
 </html>
