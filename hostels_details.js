@@ -230,3 +230,31 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("userJoinDate").textContent = dateStr;
 });
 
+//share hostel
+function shareProperty() {
+  const url = window.location.href;
+  const title = document.title;
+
+  // ✅ Web Share API
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      url: url
+    }).catch(err => {
+      console.error('فشل المشاركة:', err);
+    });
+  } else {
+    alert("جهازك لا يدعم المشاركة التلقائية، استخدم الروابط بالأسفل 👇");
+  }
+}
+
+// توليد روابط المشاركة عند التحميل
+window.addEventListener("DOMContentLoaded", () => {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent(document.title);
+
+  document.getElementById("whatsapp").href = `https://wa.me/?text=${text}%0A${url}`;
+  document.getElementById("twitter").href = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+  document.getElementById("telegram").href = `https://t.me/share/url?url=${url}&text=${text}`;
+  document.getElementById("messenger").href = `fb-messenger://share/?link=${url}`;
+});
