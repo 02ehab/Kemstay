@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تقييم الإقامة | Kemstay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f4f6f9;
+      padding: 2rem 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .review-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .review-form h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #2c3e50;
+    }
+
+    .question-block {
+      margin-bottom: 2rem;
+    }
+
+    .question-title {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .card-options {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: #f1f1f1;
+      padding: 0.8rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1;
+      text-align: center;
+      border: 2px solid transparent;
+      min-width: 80px;
+    }
+
+    .card:hover {
+      transform: scale(1.04);
+    }
+
+    .card.selected {
+      border-color: #0d6efd;
+      background-color: #e7f1ff;
+    }
+
+    .emoji {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .label {
+      font-size: 0.85rem;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-top: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 0.8rem;
+      font-size: 1rem;
+      resize: none;
+    }
+
+    button {
+      margin-top: 2rem;
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #0b5ed7;
+    }
+  </style>
+</head>
+<body>
+  <div class="review-form">
+    <h2>قيّم تجربتك</h2>
+
+    <!-- الأسئلة -->
+    <div class="question-block" data-question="cleanliness">
+      <div class="question-title">1. نظافة مكان الإقامة</div>
+      <div class="card-options"></div>
+    </div>
+
+    <div class="question-block" data-question="comfort">
+      <div class="question-title">2. الراحة والهدوء</div>
+      <div class="card-options"></div>
+    </div>
+
+    <div class="question-block" data-question="location">
+      <div class="question-title">3. الموقع</div>
+      <div class="card-options"></div>
+    </div>
+
+    <div class="question-block" data-question="accuracy">
+      <div class="question-title">4. مطابقة الصور والوصف</div>
+      <div class="card-options"></div>
+    </div>
+
+    <div class="question-block" data-question="host">
+      <div class="question-title">5. التعامل مع المضيف / الاستقبال</div>
+      <div class="card-options"></div>
+    </div>
+
+    <textarea id="comment" placeholder="اكتب تعليقك هنا (اختياري)"></textarea>
+
+    <button onclick="submitReview()">إرسال التقييم</button>
+  </div>
+
+  <script>
+    const responses = {};
+
+    const options = [
+      { value: 1, emoji: "😠", label: "سيء" },
+      { value: 2, emoji: "😕", label: "ضعيف" },
+      { value: 3, emoji: "😐", label: "مقبول" },
+      { value: 4, emoji: "🙂", label: "جيد" },
+      { value: 5, emoji: "🤩", label: "ممتاز" },
+    ];
+
+    document.querySelectorAll(".question-block").forEach(block => {
+      const key = block.dataset.question;
+      const container = block.querySelector(".card-options");
+
+      options.forEach(opt => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.dataset.value = opt.value;
+        card.innerHTML = `<div class="emoji">${opt.emoji}</div><div class="label">${opt.label}</div>`;
+
+        card.addEventListener("click", () => {
+          responses[key] = opt.value;
+
+          // إزالة التحديد من باقي البطاقات
+          container.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
+          card.classList.add("selected");
+        });
+
+        container.appendChild(card);
+      });
+    });
+
+    function submitReview() {
+      const comment = document.getElementById("comment").value;
+      const requiredKeys = ["cleanliness", "comfort", "location", "accuracy", "host"];
+
+      for (const key of requiredKeys) {
+        if (!responses[key]) {
+          alert("يرجى تقييم جميع الأسئلة قبل الإرسال");
+          return;
+        }
+      }
+
+      const review = {
+        ...responses,
+        comment,
+        property_id: "مثال-property-id",
+        user_id: "مثال-user-id"
+      };
+
+      console.log("📤 تم إرسال التقييم:", review);
+      alert("شكرًا على تقييمك!");
+    }
+  </script>
+</body>
+</html>
