@@ -1,61 +1,67 @@
- const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
+// auth.js
+import { supabase } from './supabase.js';
 
-    function toggleForm() {
-      loginForm.classList.toggle('hidden');
-      registerForm.classList.toggle('hidden');
-    }
+// تأكد من تعريف عناصر الفورم
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
 
-    // زر تسجيل الدخول
-    loginForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-       localStorage.setItem("isLoggedIn", "true") 
-      window.location.href = "profile.html";
-    });
+// تبديل بين الفورمات (نسخة تعمل من HTML onclick)
+window.toggleForm = function () {
+  loginForm.classList.toggle('hidden');
+  registerForm.classList.toggle('hidden');
+};
 
-    // زر إنشاء حساب
-    document.getElementById("registerForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const data = {
-        name: document.getElementById('fullname').value,
-        governorate: document.getElementById('governorate').value,
-        phone: document.getElementById('phone').value,
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-        accountType: document.getElementById('accountType').value,
-      };
-      console.log("تم تسجيل البيانات:", data);
-       localStorage.setItem("isLoggedIn", "true") 
-      window.location.href = "profile.html";
-    });
+// تسجيل الدخول
+loginForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
 
-    // رابط نسيت كلمة المرور
-    document.getElementById("forgot-password-link").addEventListener("click", function (e) {
-      e.preventDefault();
-      window.location.href = "reset_password.html";
-    });
-//وقت تسجيل الدخول يظهر ملفي ويختفي تسجيل الدخول
-document.addEventListener("DOMContentLoaded", function () {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
 
-  const authButtons = document.getElementById("authButtons");
-  const sideAuthButtons = document.getElementById("sideAuthButtons");
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
-  const profileLink = document.getElementById("profileLink");
-  const profileLinkMobile = document.getElementById("profileLinkMobile");
-
-  if (isLoggedIn) {
-    if (authButtons) authButtons.style.display = "none";
-    if (sideAuthButtons) sideAuthButtons.style.display = "none";
-
-    if (profileLink) profileLink.style.display = "inline-block";
-    if (profileLinkMobile) profileLinkMobile.style.display = "inline-block";
-  } else {
-    if (authButtons) authButtons.style.display = "flex";
-    if (sideAuthButtons) sideAuthButtons.style.display = "flex";
-
-    if (profileLink) profileLink.style.display = "none";
-    if (profileLinkMobile) profileLinkMobile.style.display = "none";
+  if (error) {
+  console.error('Supabase error:', error);
+  alert("❌ فشل: " + error.message);
+}
+ else {
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userEmail", email);
+    window.location.href = "profile.html";
   }
 });
 
+// إنشاء حساب جديد
+registerForm.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('fullname').value;
+  const governorate = document.getElementById('governorate').value;
+  const phone = document.getElementById('phone').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const accountType = document.getElementById('accountType').value;
+
+  const { data, error } = await supabase.auth.signUp({
+  email,
+  password,
+  options: {
+    data: { name, governorate, phone, accountType }
+  }
+});
+
+if (error) {
+  console.error(error);
+  alert("❌ فشل التسجيل: " + error.message);
+} else {
+  alert("✅ تم التسجيل! تحقق من بريدك الإلكتروني.");
+  window.location.href = "profile.html";
+}
+
+});
+
+// نسيت كلمة المرور
+document.getElementById("forgot-password-link")?.addEventListener("click", function (e) {
+  e.preventDefault();
+  window.location.href = "reset_password.html";
+});
