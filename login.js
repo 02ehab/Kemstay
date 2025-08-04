@@ -9,7 +9,7 @@
     // زر تسجيل الدخول
     loginForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      alert("تم تسجيل الدخول بنجاح!");
+       localStorage.setItem("isLoggedIn", "true") 
       window.location.href = "profile.html";
     });
 
@@ -25,7 +25,7 @@
         accountType: document.getElementById('accountType').value,
       };
       console.log("تم تسجيل البيانات:", data);
-      alert("تم التسجيل بنجاح!");
+       localStorage.setItem("isLoggedIn", "true") 
       window.location.href = "profile.html";
     });
 
@@ -58,3 +58,4 @@ document.addEventListener("DOMContentLoaded", function () {
     if (profileLinkMobile) profileLinkMobile.style.display = "none";
   }
 });
+
