@@ -1031,6 +1031,54 @@ section p, section li {
   box-shadow: 0 4px 16px rgba(0,0,0,0.14);
 }
 
+/*share hostel*/
+
+.share-container {
+  margin-top: 1rem;
+}
+
+.share-button {
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s;
+}
+
+.share-button:hover {
+  background-color: #0b5ed7;
+}
+
+.icon {
+  vertical-align: middle;
+}
+
+.share-links {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.share-links a {
+  background-color: #f1f1f1;
+  color: #333;
+  text-decoration: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.share-links a:hover {
+  background-color: #e1e1e1;
+}
 /* Footer */
 .footer {
   background-color: #0e0e0e;
