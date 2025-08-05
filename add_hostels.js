@@ -150,13 +150,13 @@ form?.addEventListener("submit", function (e) {
       window.location.href = "thanks.html";
     }
   });
-
-// إضافة غرفة
+//اضافة غرفة
 let roomIndex = 1;
 document.getElementById('addRoomBtn')?.addEventListener('click', () => {
   const container = document.getElementById('roomsContainer');
   const newRoomDiv = document.createElement('div');
   newRoomDiv.classList.add('room-group');
+
   newRoomDiv.innerHTML = `
     <label>نوع الغرفة:</label>
     <select name="room_type[]" required>
@@ -166,14 +166,28 @@ document.getElementById('addRoomBtn')?.addEventListener('click', () => {
       <option value="suite">جناح</option>
       <option value="family">غرفة عائلية</option>
     </select>
+
     <label>صور الغرفة:</label>
     <input type="file" name="room_images_${roomIndex}[]" multiple accept="image/*" required>
+
+    <!-- ✅ الحقول الجديدة -->
+    <label>السعر لليلة:</label>
+    <input type="number" name="room_price[]" min="0" placeholder="مثال: 400" required>
+
+    <label>عدد الأسرة:</label>
+    <input type="number" name="room_beds[]" min="1" placeholder="مثال: 2" required>
+
     <button type="button" class="removeRoomBtn">− إزالة غرفة</button>
   `;
+
   container.appendChild(newRoomDiv);
+
+  // تفعيل زر الإزالة
   newRoomDiv.querySelector('.removeRoomBtn').addEventListener('click', () => newRoomDiv.remove());
+
   roomIndex++;
 });
+
 
 // إضافة خدمة
 function addService(type) {
@@ -224,3 +238,4 @@ function removeAvailability(button) {
   button.closest(".availability-group")?.remove();
 }
 });
+
