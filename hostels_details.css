@@ -500,7 +500,48 @@ a#locationLink .map-icon:hover {
   transform: scale(1.08);
   box-shadow: 0 4px 16px rgba(0,0,0,0.14);
 }
+.room-info {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #333;
+}
 
+.room-info p {
+  margin: 4px 0;
+}
+
+
+.selectable-room {
+  display: block;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  position: relative;
+}
+
+.selectable-room input[type="checkbox"] {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  transform: scale(1.5);
+  z-index: 2;
+}
+
+.selectable-room .room-content {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.selectable-room:hover {
+  border-color: #999;
+}
+
+.selectable-room input[type="checkbox"]:checked + .room-content {
+  border: 2px solid #007bff;
+  background-color: #e0f0ff;
+}
 /* Footer */
 .footer {
   background-color: #0e0e0e;
@@ -1116,4 +1157,5 @@ section p, section li {
   color: #666;
   margin-top: 10px; 
 }
+
 
