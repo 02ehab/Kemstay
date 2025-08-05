@@ -134,31 +134,39 @@
     </div>
     
         <!-- Step 4 -->
-    <div class="step">
-       <div id="roomsContainer">
-  <div class="room-group">
-    <label>نوع الغرفة:</label>
-    <select name="room_type[]" required>
-      <option value="">اختر نوع الغرفة</option>
-      <option value="single">غرفة فردية</option>
-      <option value="double">غرفة مزدوجة</option>
-      <option value="suite">جناح</option>
-      <option value="family">غرفة عائلية</option>
-    </select>
+<div class="step">
+  <div id="roomsContainer">
+    <div class="room-group">
+      <label>نوع الغرفة:</label>
+      <select name="room_type[]" required>
+        <option value="">اختر نوع الغرفة</option>
+        <option value="single">غرفة فردية</option>
+        <option value="double">غرفة مزدوجة</option>
+        <option value="suite">جناح</option>
+        <option value="family">غرفة عائلية</option>
+      </select>
 
-    <label>صور الغرفة:</label>
-    <input type="file" name="room_images_0[]" multiple accept="image/*" required>
+      <label>صور الغرفة:</label>
+      <input type="file" name="room_images_0[]" multiple accept="image/*" required>
 
-    <!-- زر إزالة خاص بالغرفة هذه فقط -->
-    <button type="button" class="removeRoomBtn">− إزالة غرفة</button>
+      <!-- ✅ الحقول المضافة -->
+      <label>السعر لليلة:</label>
+      <input type="number" name="room_price[]" min="0" placeholder="مثال: 400" required>
+
+      <label>عدد الأسرة:</label>
+      <input type="number" name="room_beds[]" min="1" placeholder="مثال: 2" required>
+
+      <!-- زر إزالة خاص بالغرفة هذه فقط -->
+      <button type="button" class="removeRoomBtn">− إزالة غرفة</button>
+    </div>
   </div>
 
+  <br><br>
+  <div class="controls">
+    <button type="button" id="addRoomBtn">＋ إضافة غرفة جديدة</button>
+  </div>
 </div>
-<br><br>
-<div class="controls">
-  <button type="button" id="addRoomBtn">＋ إضافة غرفة جديدة</button>
-</div>
-</div>
+
 
     <!-- Step 5 -->
     <div class="step">
@@ -244,3 +252,4 @@
    <script src="chatbot.js"></script>
 </body>
 </html>
+
