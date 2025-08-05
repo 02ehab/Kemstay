@@ -196,6 +196,18 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 });
 
+function submitSelectedRooms() {
+  const selected = document.querySelectorAll('.room-checkbox:checked');
+  if (selected.length === 0) {
+    alert("اختر غرفة واحدة على الأقل.");
+    return;
+  }
+  selected.forEach((checkbox, index) => {
+    const roomTitle = checkbox.closest('.selectable-room').querySelector('h3').innerText;
+    console.log(`تم اختيار: ${roomTitle}`);
+    // تقدر هنا تحفظها في localStorage أو ترسلها للسيرفر
+  });
+}
 // Example user data (replace with localStorage.getItem('unitUser') if needed)
 const userData =
   JSON.parse(localStorage.getItem('unitUser')) ||
@@ -229,6 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   document.getElementById("userJoinDate").textContent = dateStr;
 });
+
 
 //share hostel
 function shareProperty() {
