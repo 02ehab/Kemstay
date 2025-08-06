@@ -97,3 +97,14 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 });
+
+//referral 
+function copyReferral() {
+  const referralInput = document.getElementById("referralLink");
+  referralInput.select();
+  referralInput.setSelectionRange(0, 99999); // للهواتف
+
+  navigator.clipboard.writeText(referralInput.value)
+    .then(() => alert("تم نسخ رابط الإحالة!"))
+    .catch(() => alert("حدث خطأ أثناء النسخ"));
+}
