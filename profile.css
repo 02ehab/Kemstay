@@ -267,6 +267,49 @@ body {
   fill: white;
 }
 
+/*referral*/
+.referral-section {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.referral-section h2 {
+  color: #10b981;
+}
+
+.referral-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.referral-box input {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-radius: 8px 0 0 8px;
+}
+
+.referral-box button {
+  padding: 10px 20px;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 0 8px 8px 0;
+}
+
+.referral-box button:hover {
+  background-color: #0e9e6e;
+}
+
 /*الوحدات المضافة*/
 .profile-sections {
   display: flex;
