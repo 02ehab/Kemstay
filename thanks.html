@@ -39,23 +39,24 @@
 
   <div class="wrapper">
     
-    <body class="thank-page">
-
-  <!-- بلونات -->
-  <div class="balloon"></div>
-  <div class="balloon"></div>
-  <div class="balloon"></div>
-  <div class="balloon"></div>
-  <div class="balloon"></div>
-
-  <!-- محتوى الشكر -->
-  <div class="thank-you-container">
-    <h1>🎉 شكراً لك!</h1>
-    <p>تم رفع الوحدة بنجاح. نحن نقدر مساهمتك على منصتنا.</p>
-    <a href="added_units.html">عرض الوحدات المضافة</a>
+   <div class="checkmark">
+    <!-- SVG متحرك لعلامة الصح -->
+    <svg viewBox="0 0 52 52">
+      <circle cx="26" cy="26" r="25" fill="none" stroke="#4caf50" stroke-width="4" />
+      <path fill="none" stroke="#4caf50" stroke-width="4" d="M14 27 l8 8 l16 -16">
+        <animate attributeName="d" from="M14 27 l0 0 l0 0" to="M14 27 l8 8 l16 -16" dur="0.5s" fill="freeze" />
+      </path>
+    </svg>
   </div>
 
-  </div> 
+  <h1>تم إضافة العقار بنجاح!</h1>
+  <p>شكرًا لانضمامك إلى <strong>Kemstay</strong> كمضيف 🏠</p>
+  <p>سيظهر إعلانك قريبًا بعد المراجعة.</p>
+
+  <!-- زر للانتقال لصفحة الوحدات -->
+  <a href="added_units.html" class="btn">عرض الوحدات الخاصة بي</a>
+
+  <canvas id="confetti"></canvas>
   </div> 
 
 
