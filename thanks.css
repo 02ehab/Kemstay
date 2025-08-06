@@ -134,82 +134,54 @@ body {
 
 /*hero*/
 
-.thank-you-container {
-      text-align: center;
-      background: white;
-      padding: 3rem;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      z-index: 10;
+
+    .checkmark {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
     }
 
-    .thank-you-container h1 {
-      font-size: 2.5rem;
-      color: #4caf50;
-      margin-bottom: 1rem;
+    .checkmark svg {
+      width: 100%;
+      height: 100%;
     }
 
-    .thank-you-container p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
+    h1 {
       color: #333;
+      font-size: 2rem;
+      margin-bottom: 10px;
     }
 
-    .thank-you-container a {
-      display: inline-block;
-      padding: 0.8rem 2rem;
-      background-color: #4caf50;
+    p {
+      color: #555;
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    .btn {
+      margin-top: 25px;
+      padding: 12px 24px;
+      background-color: #10b981;
       color: white;
-      text-decoration: none;
+      border: none;
       border-radius: 8px;
       font-size: 1rem;
-      transition: background 0.3s ease;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
     }
 
-    .thank-you-container a:hover {
-      background-color: #43a047;
+    .btn:hover {
+      background-color: #0e9e6e;
     }
 
-    /* Balloons animation */
-    .balloon {
-      position: absolute;
-      bottom: -0px;
-      width: 60px;
-      height: 80px;
-      background-color: #ff5252;
-      border-radius: 60% 60% 60% 60%;
-      animation: floatUp 6s ease-in-out infinite;
-      z-index: 1;
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
-
-    .balloon::after {
-      content: "";
-      position: absolute;
-      bottom: -20px;
-      left: 50%;
-      width: 2px;
-      height: 20px;
-      background-color: #555;
-      transform: translateX(-50%);
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-120vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    .balloon:nth-child(1) { left: 10%; background-color: #f06292; animation-delay: 0s; }
-    .balloon:nth-child(2) { left: 25%; background-color: #ba68c8; animation-delay: 1s; }
-    .balloon:nth-child(3) { left: 40%; background-color: #4dd0e1; animation-delay: 2s; }
-    .balloon:nth-child(4) { left: 60%; background-color: #ffd54f; animation-delay: 1.5s; }
-    .balloon:nth-child(5) { left: 80%; background-color: #81c784; animation-delay: 0.5s; }
-
     /*footer*/
 .footer {
     background-color: #0e0e0e;
