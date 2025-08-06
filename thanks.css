@@ -53,7 +53,7 @@ body {
       font-weight: bold;
       color: #964B00;
     }
-    
+
     nav {
       display: flex;
       gap: 1rem;
@@ -146,6 +146,7 @@ body {
   position: relative;
   z-index: 1;
 }
+
 .checkmark {
   width: 100px;
   height: 100px;
@@ -207,7 +208,7 @@ canvas {
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
-    
+
 }
 
 .footer-links {
