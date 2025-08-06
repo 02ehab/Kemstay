@@ -135,19 +135,17 @@ body {
 /*hero*/
 
 
-   body {
-  font-family: 'Cairo', sans-serif;
-  background: #f7fdfc;
+   .wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 1rem;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
-
 .checkmark {
   width: 100px;
   height: 100px;
