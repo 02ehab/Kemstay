@@ -28,48 +28,53 @@
     </form>
 
     <!-- Register Form -->
-    <form id="registerForm" class="hidden">
-      <h2>إنشاء حساب في Kemstay</h2>
-      
-      <label for="fullname">الاسم الكامل</label>
-      <input type="text" id="fullname" required>
+<form id="registerForm" class="hidden" enctype="multipart/form-data">
+  <h2>إنشاء حساب في Kemstay</h2>
 
-      <label for="governorate">المحافظة</label>
-      <select id="governorate" required>
-        <option value="">اختر المحافظة</option>
-        <option value="القاهرة">القاهرة</option>
-        <option value="الجيزة">الجيزة</option>
-        <option value="الإسكندرية">الإسكندرية</option>
-        <option value="أسيوط">أسيوط</option>
-        <option value="الشرقية">الشرقية</option>
-        <option value="الدقهلية">الدقهلية</option>
-        <option value="الغربية">الغربية</option>
-        <option value="سوهاج">سوهاج</option>
-        <option value="قنا">قنا</option>
-        <option value="المنيا">المنيا</option>
-        <option value="البحيرة">البحيرة</option>
-      </select>
+  <label for="fullname">الاسم الكامل</label>
+  <input type="text" id="fullname" required>
 
-      <label for="phone">رقم الموبايل</label>
-      <input type="tel" id="phone" required pattern="[0-9]{10,15}">
+  <label for="governorate">المحافظة</label>
+  <select id="governorate" required>
+    <option value="">اختر المحافظة</option>
+    <option value="القاهرة">القاهرة</option>
+    <option value="الجيزة">الجيزة</option>
+    <!-- ... باقي المحافظات -->
+  </select>
 
-      <label for="email">البريد الإلكتروني</label>
-      <input type="email" id="email" required>
+  <label for="phone">رقم الموبايل</label>
+  <input type="tel" id="phone" required pattern="[0-9]{10,15}">
 
-      <label for="password">كلمة المرور</label>
-      <input type="password" id="password" required>
+  <label for="email">البريد الإلكتروني</label>
+  <input type="email" id="email" required>
 
-      <label for="accountType">نوع الحساب</label>
-      <select id="accountType" required>
-        <option value="">اختر نوع الحساب</option>
-        <option value="tenant">مستأجر</option>
-        <option value="owner">مالك</option>
-        <option value="agent">وسيط معتمد</option>
-      </select>
+  <label for="password">كلمة المرور</label>
+  <input type="password" id="password" required>
 
-      <button type="submit" id="signup-btn">إنشاء حساب</button>
-      <div class="switch">لديك حساب بالفعل؟ <a href="#" onclick="toggleForm()">تسجيل الدخول</a></div>
-    </form>
+  <label for="accountType">نوع الحساب</label>
+  <select id="accountType" required>
+    <option value="">اختر نوع الحساب</option>
+    <option value="renter">مستأجر</option>
+    <option value="owner">مالك</option>
+    <option value="broker">وسيط معتمد</option>
+  </select>
+
+  <!-- ✅ KYC إضافات -->
+  <label for="nationalId">رقم الهوية</label>
+  <input type="text" id="nationalId" required pattern="[0-9]{10,20}">
+
+  <label for="idCardFront">صورة البطاقة الأمامية</label>
+  <input type="file" id="idCardFront" accept="image/*" required>
+
+  <label for="selfiePhoto">صورة شخصية (اختياري)</label>
+  <input type="file" id="selfiePhoto" accept="image/*">
+
+  <label for="birthdate">تاريخ الميلاد</label>
+  <input type="date" id="birthdate" required>
+
+  <button type="submit" id="signup-btn">إنشاء حساب</button>
+  <div class="switch">لديك حساب بالفعل؟ <a href="#" onclick="toggleForm()">تسجيل الدخول</a></div>
+</form>
   </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script type="module" src="login.js" defer></script>
