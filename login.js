@@ -1,11 +1,9 @@
 // auth.js
 import { supabase } from './supabase.js';
 
-// تأكد من تعريف عناصر الفورم
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 
-// تبديل بين الفورمات (نسخة تعمل من HTML onclick)
 window.toggleForm = function () {
   loginForm.classList.toggle('hidden');
   registerForm.classList.toggle('hidden');
@@ -21,13 +19,39 @@ loginForm.addEventListener('submit', async function(e) {
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-  console.error('Supabase error:', error);
-  alert("❌ فشل: " + error.message);
-}
- else {
+    console.error('Supabase error:', error);
+    alert("❌ فشل: " + error.message);
+  } else {
+    const user = data.user;
+
+    const userType = user.user_metadata?.accountType || "guest";
+    const profileName = user.user_metadata?.name || "اسم غير معروف";
+    const profileCity = user.user_metadata?.governorate || "غير محددة";
+    const joinDate = user.created_at ? user.created_at.split("T")[0] : "غير محدد";
+
+    // حفظ البيانات في localStorage
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("userEmail", email);
-    window.location.href = "profile.html";
+    localStorage.setItem("profileName", profileName);
+    localStorage.setItem("profileCity", profileCity);
+    localStorage.setItem("joinDate", joinDate);
+    localStorage.setItem("userType", userType);
+
+    // التوجيه حسب نوع الحساب
+    switch (userType.toLowerCase()) {
+      case "renter":
+        window.location.href = "tenant_profile.html";
+        break;
+      case "owner":
+        window.location.href = "landlord_profile.html";
+        break;
+      case "broker":
+        window.location.href = "broker_profile.html";
+        break;
+      default:
+        window.location.href = "profile.html"; // fallback
+        break;
+    }
   }
 });
 
@@ -43,21 +67,20 @@ registerForm.addEventListener("submit", async function(e) {
   const accountType = document.getElementById('accountType').value;
 
   const { data, error } = await supabase.auth.signUp({
-  email,
-  password,
-  options: {
-    data: { name, governorate, phone, accountType }
+    email,
+    password,
+    options: {
+      data: { name, governorate, phone, accountType }
+    }
+  });
+
+  if (error) {
+    console.error(error);
+    alert("❌ فشل التسجيل: " + error.message);
+  } else {
+    alert("✅ تم التسجيل! تحقق من بريدك الإلكتروني.");
+    window.location.href = "login.html"; // توجيه لتسجيل الدخول بدلًا من profile.html
   }
-});
-
-if (error) {
-  console.error(error);
-  alert("❌ فشل التسجيل: " + error.message);
-} else {
-  alert("✅ تم التسجيل! تحقق من بريدك الإلكتروني.");
-  window.location.href = "profile.html";
-}
-
 });
 
 // نسيت كلمة المرور
