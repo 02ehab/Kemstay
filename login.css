@@ -10,7 +10,6 @@ body {
   margin: 0;
   align-items: center;
  /* background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;*/
- padding: 2rem 1rem;
 }
 
 .glass {
@@ -86,11 +85,26 @@ body {
       display: none;
     }
 
-    @media (max-width: 480px) {
-      .form-container {
-        padding: 20px;
-        border-radius: 10px;
-      }
+  @media (max-width: 480px) {
+  .form-container {
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  input, select {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
     }
   
+
 
