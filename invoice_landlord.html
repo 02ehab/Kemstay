@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>فاتورة المضيف - Kemstay</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 2em;
+    }
+
+    .invoice {
+      max-width: 650px;
+      margin: auto;
+      background: #fff;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .invoice h1 {
+      text-align: center;
+      color: #2a2a2a;
+    }
+
+    .invoice p {
+      font-size: 1rem;
+      margin: 0.5em 0;
+    }
+
+    .section {
+      margin-top: 1.5em;
+    }
+
+    .total {
+      margin-top: 2em;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #008080;
+      text-align: center;
+    }
+
+    .download-btn {
+      display: block;
+      margin: 2em auto 0;
+      padding: 0.7em 1.5em;
+      background-color: #008080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .download-btn:hover {
+      background-color: #006666;
+    }
+
+    .serial-box {
+      margin-top: 1em;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    #qrcode {
+      margin: 1em auto 0;
+      width: fit-content;
+    }
+
+    .section .line {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .section .line p {
+      margin: 0.3em 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="invoice">
+    <h1>فاتورة المضيف</h1>
+
+    <div class="serial-box">
+      <p><strong>رقم الفاتورة:</strong> <span id="invoiceSerial">INV-20250807-H001</span></p>
+      <div id="qrcode"></div>
+    </div>
+
+    <div class="section">
+      <p><strong>اسم المضيف:</strong> فاطمة خالد</p>
+      <p><strong>اسم الشقة:</strong> شقة فاخرة في جدة</p>
+    </div>
+
+    <div class="section">
+      <p><strong>تاريخ تسجيل الدخول:</strong> 2025-08-10</p>
+      <p><strong>تاريخ تسجيل المغادرة:</strong> 2025-08-15</p>
+      <p><strong>عدد الليالي:</strong> 5</p>
+    </div>
+
+    <div class="section">
+      <div class="line">
+        <p>سعر الليلة:</p>
+        <p>400 جنيه</p>
+      </div>
+      <div class="line">
+        <p>الإجمالي الأساسي:</p>
+        <p>2000 جنيه</p>
+      </div>
+      <div class="line">
+        <p>العمولة (10٪):</p>
+        <p>200 جنيه</p>
+      </div>
+      <div class="line">
+        <p>الضريبة (5٪):</p>
+        <p>100 جنيه</p>
+      </div>
+    </div>
+
+    <div class="total">
+      صافي المبلغ للمضيف: 1700 جنيه
+    </div>
+
+    <button class="download-btn" onclick="window.print()">تحميل الفاتورة</button>
+  </div>
+
+  <!-- QR Code script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const serial = document.getElementById("invoiceSerial").innerText;
+    new QRCode(document.getElementById("qrcode"), {
+      text: serial,
+      width: 128,
+      height: 128,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+  </script>
+</body>
+</html>
