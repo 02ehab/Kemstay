@@ -8,9 +8,9 @@ body {
   line-height: 1.6;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  justify-content: center;
   align-items: center;
  /* background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;*/
+ padding: 2rem 1rem;
 }
 
 .glass {
@@ -93,3 +93,4 @@ body {
       }
     }
   
+
