@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="landlord_profile.css">
+  <link rel="stylesheet" href="chatbot.css">
+  <title>Kemstay | منصة السكن للمغتربين</title>
+
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+
+     <div class="logo">Kemstay</div>
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- القائمة الأفقية (للكمبيوتر) -->
+  <nav class="main-nav">
+    <a href="index.html">الرئيسية</a>
+    <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
+    <a href="notifications.html">الاشعارات</a>
+    <a href="chat.html">الدردشة </a>
+<a href="login.html" class="auth-link" id="authLinkDesktop">تسجيل الدخول</a>
+  </nav>
+
+  <!-- القائمة الجانبية (للموبايل) -->
+  <div id="sideMenu" class="side-menu">
+    <button class="close-btn" onclick="closeMenu()">✖</button>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
+      <a href="notifications.html">الاشعارات</a>
+    <a href="chat.html">الدردشة </a>
+<a href="login.html" class="auth-link" id="authLinkMobile">تسجيل الدخول</a>
+    </nav>
+  </div>
+
+  </header>
+  
+  <div class="profile-container">
+    <div class="profile-card">
+      <img src="home.jpg" alt="الصورة الشخصية" class="profile-img" />
+      <h2>ايهاب عبداللاه</h2>
+      <p>البريد: ehab@kemstay.com</p>
+      <p>المدينة: القاهرة</p>
+      <p>النوع: صاحب عقار</p>
+      <p>تاريخ الانضمام: يناير 2025</p>
+      <div class="profile-actions">
+        <button class="add-unit-btn" onclick="openUnitTypePopup()">إضافة وحدة</button>
+       <button class="edit-btn" onclick="goToEditProfile()">تعديل البيانات</button>
+        <button class="logout-btn" onclick="location.href='login.html'">تسجيل الخروج</button>
+      </div>
+    </div>
+  </div>
+
+<div id="unitTypePopup" class="popup-overlay hidden">
+  <div class="popup-content">
+    <h3>اختر نوع الوحدة</h3>
+    <button onclick="redirectTo('add_apartments.html')">شقة</button>
+    <button onclick="redirectTo('add_hostels.html')">هوستيل</button>
+    <button onclick="closeUnitTypePopup()">إلغاء</button>
+  </div>
+</div>
+
+<section class="referral-section">
+  <h2>دعوة الأصدقاء (Referral)</h2>
+  <p>شارك رابط الإحالة الخاص بك مع أصدقائك، واحصل على مكافآت عند تسجيلهم!</p>
+
+  <div class="referral-box">
+    <input type="text" id="referralLink" readonly value="https://kemstay.com/signup?ref=USER_ID">
+    <button onclick="copyReferral()">نسخ الرابط</button>
+  </div>
+
+  <!-- (اختياري) عرض عدد الإحالات -->
+  <!-- <p>عدد الإحالات الناجحة: <strong>3</strong></p> -->
+</section>
+
+<section class="profile-sections-row">
+
+  <!-- الوحدات المضافة -->
+  <div class="accordion-card added-units-card">
+<div class="accordion-header added-units-header" onclick="window.location.href='added_units.html'">
+  <h3>الوحدات المضافة</h3>
+  <span class="arrow-icon" id="arrow-addedUnits"></span>
+</div>
+      <span class="arrow-icon" id="arrow-addedUnits"></span>
+    </div>
+  </section>
+
+  <section class="profile-sections-row">
+
+    <!-- الوحدات المحجوزة -->
+    <div class="accordion-card booked-units-card">
+      <div class="accordion-header booked-units-header" onclick="window.location.href='booked_units.html'">
+        <h3>الوحدات المحجوزة</h3>
+        <span class="arrow-icon" id="arrow-bookedUnits"></span>
+      </div>
+    </div>
+
+    <div class="stats-container">
+  <div class="stat-card">
+    <h3>📦 عدد الحجوزات</h3>
+    <p id="bookingCount">0</p>
+  </div>
+  <div class="stat-card">
+    <h3>💰 إجمالي الأرباح</h3>
+    <p id="totalEarnings">0 ريال</p>
+  </div>
+  <div class="stat-card">
+    <h3>👁️ عدد الزيارات</h3>
+    <p id="viewCount">0 زيارة</p>
+  </div>
+  <div class="stat-card">
+    <h3>🏠 الوحدات النشطة</h3>
+    <p id="activeUnits">0</p>
+  </div>
+</div>
+  </section>
+<!-- 
+<div id="chatbot-container">
+  
+ <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
+
+  <div id="chatPopup" class="chatbot-popup hidden">
+    <div class="chatbot-header">
+      <span>Kemstay  🤖</span>
+      <button onclick="toggleChatbox()">✖</button>
+    </div>
+    <div class="chatbot-messages" id="chatMessages">
+      <p>👋 مرحبًا بك! كيف يمكنني مساعدتك؟</p>
+    </div>
+    <input
+      type="text"
+      id="chatInput"
+      placeholder="اكتب رسالتك..."
+      onkeydown="if(event.key==='Enter') sendChatMessage()"
+    />
+    <button onclick="sendChatMessage()">إرسال</button>
+  </div>
+  -->
+  
+ <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+        <ul class="footer-links">
+            <li><a href="privacy.html">سياسة الخصوصية</a></li>
+            <li><a href="faq.html">الأسئلة الشائعة</a></li>
+            <li><a href="blog.html">المدونة</a></li>
+            <li><a href="terms.html">الشروط والأحكام</a></li>
+        </ul>
+        <p class="footer-copy">© 2025 Kemstay. جميع الحقوق محفوظة.</p>
+    </div>
+</footer>
+
+
+</body>
+  <script src="landlord_profile.js"></script>
+
+</html>
