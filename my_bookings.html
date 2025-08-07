@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>Kemstay | حجوزاتي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="my_booking.css">
+</head>
+<body>
+
+  <header>
+    <h1>📅 حجوزاتي</h1>
+  </header>
+
+  <main class="bookings-container">
+
+    <!-- كارت حجز -->
+    <div class="booking-card">
+      <h3>شقة فاخرة في التجمع الخامس</h3>
+      <p>📍 <strong>الموقع:</strong> القاهرة، التجمع</p>
+      <p>📅 <strong>من:</strong> 2025-08-10 &nbsp; <strong>إلى:</strong> 2025-08-15</p>
+      <p>🛏️ <strong>عدد الأيام:</strong> 5</p>
+      <p>💰 <strong>السعر الكلي:</strong> 2500 جنيه</p>
+      <button onclick="goToInvoice()">🧾 طباعة الفاتورة</button>
+    </div>
+
+    <!-- كارت آخر -->
+    <div class="booking-card">
+      <h3>فيلا بمسبح خاص في الساحل الشمالي</h3>
+      <p>📍 <strong>الموقع:</strong> الساحل الشمالي، مارينا</p>
+      <p>📅 <strong>من:</strong> 2025-09-01 &nbsp; <strong>إلى:</strong> 2025-09-05</p>
+      <p>🛏️ <strong>عدد الأيام:</strong> 4</p>
+      <p>💰 <strong>السعر الكلي:</strong> 6000 جنيه</p>
+      <button onclick="goToInvoice()">🧾 طباعة الفاتورة</button>
+    </div>
+
+  </main>
+
+  <script>
+    function goToInvoice() {
+      window.location.href = "invoice.html";
+    }
+  </script>
+</body>
+</html>
