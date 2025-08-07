@@ -26,7 +26,17 @@
         <button class="contact">تواصل</button>
       </div>
     </div>
-
+<!-- Modal for Rejection Reason -->
+<div id="rejectionModal" class="modal hidden">
+  <div class="modal-content">
+    <h3>سبب الرفض</h3>
+    <textarea id="rejectionText" placeholder="اكتب سبب الرفض هنا..." rows="4"></textarea>
+    <div class="modal-actions">
+      <button id="submitRejection" class="submit-reason">إرسال</button>
+      <button id="cancelRejection" class="cancel">إلغاء</button>
+    </div>
+  </div>
+</div>
     <!-- تكرار لكروت الطلبات -->
     <div class="request-card">
       <h3>طلب من: سارة علي</h3>
@@ -40,6 +50,6 @@
     </div>
 
   </div>
-
+<script src="requests.js"></script>
 </body>
 </html>
