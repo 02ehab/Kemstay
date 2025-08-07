@@ -1,0 +1,95 @@
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+.requests-container {
+  display: flex;
+  flex-wrap: wrap; /* يجعل الكروت تنتقل لسطر جديد إذا لم يكن هناك مساحة */
+  gap: 1em;
+  padding: 1em;
+  justify-content: center;
+}
+
+.request-card {
+  background: white;
+  padding: 1.2em;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: fit-content;
+  min-width: 270px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.request-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.request-card p {
+  margin: 0.4em 0;
+  font-size: 14px;
+}
+
+.status {
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.status.pending {
+  background-color: #ffecb3;
+  color: #b08900;
+}
+
+.status.approved {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+}
+
+.status.rejected {
+  background-color: #ffcdd2;
+  color: #c62828;
+}
+
+.actions {
+  margin-top: 1em;
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.actions button {
+  padding: 0.4em 1em;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.accept {
+  background-color: #28a745;
+  color: white;
+}
+
+.reject {
+  background-color: #dc3545;
+  color: white;
+}
+
+.contact {
+  background-color: #007bff;
+  color: white;
+}
