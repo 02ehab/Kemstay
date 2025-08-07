@@ -1,0 +1,64 @@
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+.bookings-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+  padding: 1em;
+}
+
+.booking-card {
+  background: white;
+  padding: 1.2em;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  width: fit-content;
+  min-width: 260px;
+  max-width: 320px;
+  flex: 0 1 auto;
+}
+
+.booking-card:hover {
+  transform: translateY(-3px);
+}
+
+.booking-card h3 {
+  margin: 0 0 0.5em 0;
+  color: #007bff;
+}
+
+.booking-card p {
+  margin: 0.3em 0;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.booking-card button {
+  margin-top: 1em;
+  padding: 0.5em 1.2em;
+  font-size: 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.booking-card button:hover {
+  background-color: #218838;
+}
