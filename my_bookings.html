@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>عرض الوحدة - Kemstay</title>
+  <title> حجوزاتي - Kemstay</title>
   <link rel="stylesheet" href="my_bookings.css" />
    <link rel="stylesheet" href="chatbot.css" />
 </head>
@@ -38,52 +38,30 @@
 
   </header>
 
-  
-  <div class="requests-container">
+  <main class="bookings-container">
 
-    <!-- كارت طلب -->
-    <div class="request-card">
-      <h3>طلب من: أحمد محمد</h3>
-      <p>الوحدة: شقة في القاهرة - الزمالك</p>
-      <p>التواريخ: 15 سبتمبر - 20 سبتمبر</p>
-      <p>المدة: 5 أيام</p>
-      <p>الحالة: <span class="status pending">قيد الانتظار</span></p>
-      <div class="actions">
-        <button class="accept">قبول</button>
-        <button class="reject">رفض</button>
-        <button class="contact">تواصل</button>
-      </div>
-    </div>
-    <div class="rejection-reason hidden">
-  <label>سبب الرفض:</label>
-  <textarea rows="2" placeholder="أدخل السبب هنا..."></textarea>
-  <button class="submit-reason">إرسال</button>
-</div>
+    <!-- كارت حجز -->
+    <div class="booking-card">
+      <h3>شقة فاخرة في التجمع الخامس</h3>
+      <p>📍 <strong>الموقع:</strong> القاهرة، التجمع</p>
+      <p>📅 <strong>من:</strong> 2025-08-10 &nbsp; <strong>إلى:</strong> 2025-08-15</p>
+      <p>🛏️ <strong>عدد الأيام:</strong> 5</p>
+      <p>💰 <strong>السعر الكلي:</strong> 2500 جنيه</p>
+      <button id="printBtn">🧾 طباعة الفاتورة</button>
 
-    <!-- تكرار لكروت الطلبات -->
-    <div class="request-card">
-      <h3>طلب من: سارة علي</h3>
-      <p>الوحدة: استوديو في الإسكندرية - سموحة</p>
-      <p>التواريخ: 1 أكتوبر - 3 أكتوبر</p>
-      <p>المدة: 2 يوم</p>
-      <p>الحالة: <span class="status approved">تم القبول</span></p>
-      <div class="actions">
-        <button class="contact">تواصل</button>
-      </div>
     </div>
 
-  </div>
-<!-- Modal for Rejection Reason -->
-<div id="rejectionModal" class="modal hidden">
-  <div class="modal-content">
-    <h3>سبب الرفض</h3>
-    <textarea id="rejectionText" placeholder="اكتب سبب الرفض هنا..." rows="4"></textarea>
-    <div class="modal-actions">
-      <button id="submitRejection" class="submit-reason">إرسال</button>
-      <button id="cancelRejection" class="cancel">إلغاء</button>
+     <!-- كارت حجز -->
+    <div class="booking-card">
+      <h3>شقة فاخرة في التجمع الخامس</h3>
+      <p>📍 <strong>الموقع:</strong> القاهرة، التجمع</p>
+      <p>📅 <strong>من:</strong> 2025-08-10 &nbsp; <strong>إلى:</strong> 2025-08-15</p>
+      <p>🛏️ <strong>عدد الأيام:</strong> 5</p>
+      <p>💰 <strong>السعر الكلي:</strong> 2500 جنيه</p>
+      <button id="printBtn">🧾 طباعة الفاتورة</button>
+
     </div>
-  </div>
-</div>
+  </main>
 
 <!--
 <div id="chatbot-container">
