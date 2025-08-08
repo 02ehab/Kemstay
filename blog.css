@@ -1,0 +1,115 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+  color: #333;
+  padding-bottom: 70px; /* عشان الفوتر ما يغطيش المحتوى */
+}
+
+/* الهيدر */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  flex-direction: row-reverse; /* اللوجو يسار والروابط يمين */
+}
+.logo {
+  font-size: 20px;
+}
+.nav {
+  display: flex;
+  gap: 15px;
+}
+.nav a {
+  color: white;
+  text-decoration: none;
+}
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* الهيرو */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 20px;
+}
+.hero .post-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  flex: 1 1 calc(50% - 15px); /* 2 كروت في الصف */
+  display: flex;
+  gap: 15px;
+}
+.hero .post-card img {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+}
+.post-content {
+  padding: 15px;
+  flex: 1;
+}
+.post-content p {
+  cursor: pointer;
+  color: #007BFF;
+}
+
+/* الفوتر */
+.footer {
+  background: #222;
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+
+/* الموبايل */
+@media (max-width: 768px) {
+  /* القائمة المنسدلة */
+  .nav {
+    display: none;
+    flex-direction: column;
+    background: #333;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 200px;
+  }
+  .nav a {
+    padding: 10px;
+    border-bottom: 1px solid #444;
+  }
+  .menu-toggle {
+    display: block;
+  }
+
+  /* الكروت في الموبايل */
+  .hero {
+    flex-direction: column;
+  }
+  .hero .post-card {
+    flex: 1 1 100%;
+    flex-direction: column;
+  }
+  .hero .post-card img {
+    width: 100%;
+    height: auto;
+  }
+}
