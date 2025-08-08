@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> حجوزاتي - Kemstay</title>
+  <title>عرض الوحدة - Kemstay</title>
   <link rel="stylesheet" href="my_bookings.css" />
    <link rel="stylesheet" href="chatbot.css" />
 </head>
@@ -38,28 +38,76 @@
 
   </header>
 
-  <div class="bookings-header">
-    <h1>حجوزاتي</h1>
+  
+  <div class="requests-container">
+
+    <!-- كارت طلب -->
+    <div class="request-card">
+      <h3>طلب من: أحمد محمد</h3>
+      <p>الوحدة: شقة في القاهرة - الزمالك</p>
+      <p>التواريخ: 15 سبتمبر - 20 سبتمبر</p>
+      <p>المدة: 5 أيام</p>
+      <p>الحالة: <span class="status pending">قيد الانتظار</span></p>
+      <div class="actions">
+        <button class="accept">قبول</button>
+        <button class="reject">رفض</button>
+        <button class="contact">تواصل</button>
+      </div>
+    </div>
+    <div class="rejection-reason hidden">
+  <label>سبب الرفض:</label>
+  <textarea rows="2" placeholder="أدخل السبب هنا..."></textarea>
+  <button class="submit-reason">إرسال</button>
+</div>
+
+    <!-- تكرار لكروت الطلبات -->
+    <div class="request-card">
+      <h3>طلب من: سارة علي</h3>
+      <p>الوحدة: استوديو في الإسكندرية - سموحة</p>
+      <p>التواريخ: 1 أكتوبر - 3 أكتوبر</p>
+      <p>المدة: 2 يوم</p>
+      <p>الحالة: <span class="status approved">تم القبول</span></p>
+      <div class="actions">
+        <button class="contact">تواصل</button>
+      </div>
+    </div>
+
   </div>
-
-  <main class="bookings-container" id="bookingsList">
-    <div class="booking-card">
-      <h3>شقة مفروشة في الرياض</h3>
-      <p>من: 2025-09-01</p>
-      <p>إلى: 2025-09-10</p>
-      <p>الإجمالي: 4000 ريال</p>
-      <button class="invoice-btn" onclick="printInvoice(1)">🧾 طباعة الفاتورة</button>
+<!-- Modal for Rejection Reason -->
+<div id="rejectionModal" class="modal hidden">
+  <div class="modal-content">
+    <h3>سبب الرفض</h3>
+    <textarea id="rejectionText" placeholder="اكتب سبب الرفض هنا..." rows="4"></textarea>
+    <div class="modal-actions">
+      <button id="submitRejection" class="submit-reason">إرسال</button>
+      <button id="cancelRejection" class="cancel">إلغاء</button>
     </div>
+  </div>
+</div>
 
-    <div class="booking-card">
-      <h3>غرفة بوسط القاهرة</h3>
-      <p>من: 2025-10-05</p>
-      <p>إلى: 2025-10-12</p>
-      <p>الإجمالي: 2100 جنيه</p>
-      <button class="invoice-btn" onclick="printInvoice(2)">🧾 طباعة الفاتورة</button>
+<!--
+<div id="chatbot-container">
+  
+ <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
+
+  
+  <div id="chatPopup" class="chatbot-popup hidden">
+    <div class="chatbot-header">
+      <span>Kemstay  🤖</span>
+      <button onclick="toggleChatbox()">✖</button>
     </div>
-  </main>
-
+    <div class="chatbot-messages" id="chatMessages">
+      <p>👋 مرحبًا بك! كيف يمكنني مساعدتك؟</p>
+    </div>
+    <input
+      type="text"
+      id="chatInput"
+      placeholder="اكتب رسالتك..."
+      onkeydown="if(event.key==='Enter') sendChatMessage()"
+    />
+    <button onclick="sendChatMessage()">إرسال</button>
+  </div>
+ -->
   <footer class="footer">
     <div class="footer-container">
         <ul class="footer-links">
