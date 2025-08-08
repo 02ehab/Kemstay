@@ -1,3 +1,6 @@
+// add_apartments.js
+import { supabase } from './supabase.js';
+
 function openMenu() {
   document.getElementById("sideMenu").classList.add("open");
 }
@@ -6,14 +9,26 @@ function closeMenu() {
   document.getElementById("sideMenu").classList.remove("open");
 }
 
-// التحقق من تسجيل الدخول
-document.addEventListener("DOMContentLoaded", () => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-  if (!isLoggedIn) {
+document.addEventListener("DOMContentLoaded", async () => {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
     window.location.href = "login.html";
     return;
   }
+
+  document.querySelectorAll(".auth-link").forEach(link => {
+    link.textContent = "الملف الشخصي";
+    link.href = "profile.html";
+  });
+
+    
+// تحقق من حالة تسجيل الدخول من localStorage
+document.addEventListener("DOMContentLoaded", () => {
   const authLinks = document.querySelectorAll(".auth-link");
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  if (authLinks.length === 0) return; // ما فيش عناصر، نخرج بأمان
+
   authLinks.forEach(link => {
     if (isLoggedIn === "true") {
       link.textContent = "الملف الشخصي";
@@ -23,8 +38,34 @@ document.addEventListener("DOMContentLoaded", () => {
       link.href = "login.html";
     }
   });
+});
 
-  // Multi-step form with localStorage step persistence
+
+//وقت تسجيل الدخول يظهر ملفي ويختفي تسجيل الدخول
+document.addEventListener("DOMContentLoaded", function () {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+  const authButtons = document.getElementById("authButtons");
+  const sideAuthButtons = document.getElementById("sideAuthButtons");
+
+  const profileLink = document.getElementById("profileLink");
+  const profileLinkMobile = document.getElementById("profileLinkMobile");
+
+  if (isLoggedIn) {
+    if (authButtons) authButtons.style.display = "none";
+    if (sideAuthButtons) sideAuthButtons.style.display = "none";
+
+    if (profileLink) profileLink.style.display = "inline-block";
+    if (profileLinkMobile) profileLinkMobile.style.display = "inline-block";
+  } else {
+    if (authButtons) authButtons.style.display = "flex";
+    if (sideAuthButtons) sideAuthButtons.style.display = "flex";
+
+    if (profileLink) profileLink.style.display = "none";
+    if (profileLinkMobile) profileLinkMobile.style.display = "none";
+  }
+});
+
   const steps = document.querySelectorAll(".step");
   const progressBar = document.getElementById("progressBar");
   const prevBtn = document.getElementById("prevBtn");
@@ -32,27 +73,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const submitBtn = document.getElementById("submitBtn");
   const form = document.getElementById("multiForm");
   const LS_KEY = "kemstay_apartment_step";
-  let currentStep = 0;
-
-  // Restore step from localStorage
-  const savedStep = parseInt(localStorage.getItem(LS_KEY), 10);
-  if (!isNaN(savedStep) && savedStep >= 0 && savedStep < steps.length) {
-    currentStep = savedStep;
-  }
+  let currentStep = parseInt(localStorage.getItem(LS_KEY)) || 0;
 
   function showStep(index) {
-    steps.forEach((step, i) => {
-      step.classList.toggle("active", i === index);
-    });
+    steps.forEach((step, i) => step.classList.toggle("active", i === index));
     if (prevBtn) prevBtn.disabled = index === 0;
     if (nextBtn) nextBtn.style.display = index === steps.length - 1 ? "none" : "inline-block";
     if (submitBtn) submitBtn.style.display = index === steps.length - 1 ? "inline-block" : "none";
-    if (progressBar) progressBar.style.width = `${(index + 1) / steps.length * 100}%`;
-    // Save step to localStorage
+    if (progressBar) progressBar.style.width = `${((index + 1) / steps.length) * 100}%`;
     localStorage.setItem(LS_KEY, index);
   }
 
-  
   function validateStep(index) {
     const inputs = steps[index].querySelectorAll("input, select, textarea");
     for (let input of inputs) {
@@ -64,114 +95,117 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
-  if (nextBtn) {
-    nextBtn.addEventListener("click", function () {
-      if (validateStep(currentStep)) {
-        currentStep++;
-        if (currentStep >= steps.length) currentStep = steps.length - 1;
-        showStep(currentStep);
+  // تعريف دالة nextStep لاستخدامها من HTML
+  window.nextStep = function (stepChange) {
+    if (stepChange === 1 && !validateStep(currentStep)) return;
+    currentStep = Math.min(Math.max(currentStep + stepChange, 0), steps.length - 1);
+    showStep(currentStep);
+  };
+
+  // رفع الصور إلى Supabase Storage
+  async function uploadImages(userId) {
+    const imagesInput = document.getElementById("imagesInput");
+    const files = imagesInput.files;
+    const uploadedUrls = [];
+
+    for (let file of files) {
+      const timestamp = Date.now();
+      const filePath = `${userId}/${timestamp}_${file.name}`;
+
+      const { error: uploadError } = await supabase
+        .storage
+        .from('apartments-images')
+        .upload(filePath, file);
+
+      if (uploadError) {
+        console.error("❌ Storage upload error:", uploadError.message);
+        throw uploadError;
       }
-    });
+
+      const { data: urlData } = supabase
+        .storage
+        .from('apartments-images')
+        .getPublicUrl(filePath);
+
+      uploadedUrls.push(urlData.publicUrl);
+    }
+
+    return uploadedUrls;
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener("click", function () {
-      currentStep--;
-      if (currentStep < 0) currentStep = 0;
-      showStep(currentStep);
-    });
-  }
-
-  // Add availability date validation and save data on submit
+  // عند الضغط على "إضافة"
   if (form) {
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
       if (!validateStep(currentStep)) return;
 
-      // Validate all availability date ranges
+      // تحقق من التواريخ
       let validDates = true;
       document.querySelectorAll(".availability-group").forEach(group => {
         const from = new Date(group.querySelector("input[name='availableFrom[]']").value);
         const to = new Date(group.querySelector("input[name='availableTo[]']").value);
-        if (from > to) {
-          validDates = false;
-        }
+        if (from > to) validDates = false;
       });
-      if (!validDates) {
-        alert("تاريخ البداية يجب أن يكون قبل تاريخ النهاية في جميع الفترات");
+      if (!validDates) return alert("تاريخ البداية يجب أن يكون قبل النهاية");
+
+      // رفع الصور
+      let uploadedImageUrls = [];
+      try {
+        uploadedImageUrls = await uploadImages(user.id);
+      } catch (err) {
+        alert("حدث خطأ أثناء رفع الصور. الرجاء المحاولة مجددًا.");
         return;
       }
 
-      // Save data
+      // جمع البيانات
       const data = {
-        unit_type: document.getElementById("unit_type").value,
-        category: document.getElementById("category").value,
-        occupants: document.getElementById("occupants").value,
-        furnishStatus: document.querySelector("input[name='furnishStatus']:checked").value,
-        description: document.querySelector("textarea[name='description']").value,
-        address: document.getElementById("address").value,
-        city: document.getElementById("city").value,
-        street: document.getElementById("street").value,
-        building: document.getElementById("building").value,
-        floor: document.getElementById("floor").value,
-        nearby: document.getElementById("nearby").value,
-        landmark: document.getElementById("landmark").value,
-        locationLink: document.getElementById("locationLink").value,
-        price: document.getElementById("price").value,
-        pricingType: document.getElementById("pricingType").value,
+        
+        unit_type: document.getElementById("unit_type").value.trim(),
+        category: document.getElementById("category").value.trim(),
+        occupants: parseInt(document.getElementById("occupants").value) || 1,
+        furnish_status: document.querySelector("input[name='furnishStatus']:checked")?.value || '',
+        description: document.querySelector("textarea[name='description']").value.trim(),
+        address: document.getElementById("address").value.trim(),
+        city: document.getElementById("city").value.trim(),
+        street: document.getElementById("street").value.trim(),
+        building: document.getElementById("building").value.trim(),
+        floor: document.getElementById("floor").value.trim(),
+        nearby: document.getElementById("nearby").value.trim(),
+        landmark: document.getElementById("landmark").value.trim(),
+        location_link: document.getElementById("locationLink").value.trim(),
+        price: parseFloat(document.getElementById("price").value) || 0,
+        pricing_type: document.getElementById("pricingType").value.trim(),
         services: {
-          available: [...document.querySelectorAll("#availableServicesList input")].map(i => i.value),
-          extra: [...document.querySelectorAll("#extraServicesList input")].map(i => i.value),
-          owner: [...document.querySelectorAll("#ownerConditionsList input")].map(i => i.value),
+          available: [...document.querySelectorAll("#availableServicesList input")].map(i => i.value.trim()).filter(Boolean),
+          extra: [...document.querySelectorAll("#extraServicesList input")].map(i => i.value.trim()).filter(Boolean),
+          owner: [...document.querySelectorAll("#ownerConditionsList input")].map(i => i.value.trim()).filter(Boolean),
         },
         availability: [...document.querySelectorAll(".availability-group")].map(group => ({
           from: group.querySelector("input[name='availableFrom[]']").value,
-          to: group.querySelector("input[name='availableTo[]']").value
-        }))
+          to: group.querySelector("input[name='availableTo[]']").value,
+        })),
+        images: uploadedImageUrls,
+        user_id: user.id,
+        created_at: new Date().toISOString()
       };
 
-      // Prepare new apartment object
-      const newApartment = {
-        id: Date.now(),
-        type: data.unit_type,
-        category: data.category,
-        occupants: data.occupants,
-        furnishStatus: data.furnishStatus,
-        description: data.description,
-        address: data.address,
-        city: data.city,
-        street: data.street,
-        building: data.building,
-        floor: data.floor,
-        nearby: data.nearby,
-        landmark: data.landmark,
-        locationLink: data.locationLink,
-        price: data.price,
-        pricingType: data.pricingType,
-        services: data.services,
-        availability: data.availability,
-        images: [], // Image upload handling can be added here
-        userId: "defaultUser" // Placeholder userId, can be replaced with actual user info
-      };
-
-      // Get existing apartments or empty array
-      const apartments = JSON.parse(localStorage.getItem("allApartments") || "[]");
-
-      // Add new apartment
-      apartments.push(newApartment);
-
-      // Save back to localStorage
-      localStorage.setItem("allApartments", JSON.stringify(apartments));
+      const { error } = await supabase.from('apartments').insert(data);
+      if (error) {
+        console.error("❌ Error saving:", error.message);
+        alert("حدث خطأ أثناء الحفظ.");
+        return;
+      }
 
       localStorage.removeItem(LS_KEY);
+      alert("تمت إضافة الوحدة بنجاح!");
       window.location.href = "thanks.html";
     });
   }
 
   showStep(currentStep);
 
-  // Add landlord condition/service
-  window.addService = function(type) {
+  // إضافة خدمة
+  window.addService = function (type) {
     const container = document.createElement('div');
     container.className = 'service-item';
 
@@ -198,8 +232,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Add availability group
-  window.addAvailability = function() {
+  // إضافة فترة إتاحة
+  window.addAvailability = function () {
     const container = document.getElementById("availabilityContainer");
 
     const group = document.createElement("div");
@@ -220,19 +254,9 @@ document.addEventListener("DOMContentLoaded", () => {
     container.appendChild(group);
   };
 
-  window.removeAvailability = function(button) {
+  // حذف فترة الإتاحة
+  window.removeAvailability = function (button) {
     const group = button.closest(".availability-group");
     group.remove();
   };
 });
-
-let apartments = JSON.parse(localStorage.getItem("allApartments")) || [];
-apartments.push({
-  id: Date.now(),
-  title: "شقتي الجديدة",
-  price: 3000,
-  location: "القاهرة",
-  userId: currentUserId, // لازم يكون مسجل عند تسجيل الدخول
-  image: "image_url.jpg"
-});
-localStorage.setItem("allApartments", JSON.stringify(apartments));
