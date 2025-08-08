@@ -3,260 +3,213 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>اضافة الوحدة - Kemstay</title>
+  <title>إضافة وحدة - Kemstay</title>
   <link rel="stylesheet" href="add_apartments.css" />
   <link rel="stylesheet" href="chatbot.css" />
 </head>
 <body>
-    <header>
+  <header>
+    <div class="logo">Kemstay</div>
+    <button class="menu-toggle" onclick="openMenu()">☰</button>
 
-     <div class="logo">Kemstay</div>
-  <button class="menu-toggle" onclick="openMenu()">☰</button>
-
-  <!-- القائمة الأفقية (للكمبيوتر) -->
-  <nav class="main-nav">
-    <a href="index.html">الرئيسية</a>
-    <a href="apartments.html">الشقق</a>
-      <a href="hostels.html">هوستيل</a>
-    <a href="notifications.html">الاشعارات</a>
-    <a href="chat.html">الدردشة </a>
-<a href="login.html" class="auth-link" id="authLinkDesktop">تسجيل الدخول</a>
-  </nav>
-
-  <!-- القائمة الجانبية (للموبايل) -->
-  <div id="sideMenu" class="side-menu">
-    <button class="close-btn" onclick="closeMenu()">✖</button>
-    <nav>
+    <!-- القائمة الأفقية (للكمبيوتر) -->
+    <nav class="main-nav">
       <a href="index.html">الرئيسية</a>
       <a href="apartments.html">الشقق</a>
       <a href="hostels.html">هوستيل</a>
-      <a href="notifications.html">الاشعارات</a>
-    <a href="chat.html">الدردشة </a>
-<a href="login.html" class="auth-link" id="authLinkMobile">تسجيل الدخول</a>
+      <a href="notifications.html">الإشعارات</a>
+      <a href="chat.html">الدردشة</a>
+      <a href="login.html" class="auth-link" id="authLinkDesktop">تسجيل الدخول</a>
     </nav>
-  </div>
 
+    <!-- القائمة الجانبية (للموبايل) -->
+    <div id="sideMenu" class="side-menu">
+      <button class="close-btn" onclick="closeMenu()">✖</button>
+      <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="apartments.html">الشقق</a>
+        <a href="hostels.html">هوستيل</a>
+        <a href="notifications.html">الإشعارات</a>
+        <a href="chat.html">الدردشة</a>
+        <a href="login.html" class="auth-link" id="authLinkMobile">تسجيل الدخول</a>
+      </nav>
+    </div>
   </header>
-  
-<div class="wrapper">  
-<div class="container">
-    <h2>إضافة وحدة جديدة</h2>
 
-    <!-- Progress bar -->
-    <div class="progress">
-      <div id="progressBar" class="progress-bar"></div>
-    </div>
+  <div class="wrapper">
+    <div class="container">
+      <h2>إضافة وحدة جديدة</h2>
 
-    <form id="multiForm" enctype="multipart/form-data">
-      <!-- Step 1 -->
-     <div class="step active">
-  <h3>بيانات أساسية</h3>
-
-  <label for="unit_type">نوع الوحدة:</label>
-  <select name="unit_type" id="unit_type" required>
-    <option value="">اختر</option>
-    <option value="apartment">شقة</option>
-    <option value="room">غرفة</option>
-    <option value="room">استديو</option>
-  </select>
-
-  <label for="category">التصنيف:</label>
-  <select name="category" id="category" required>
-    <option value="">اختر</option>
-    <option value="residential">سكني</option>
-    <option value="commercial">تجاري</option>
-  </select>
-
-  <label for="occupants">عدد الأفراد:</label>
-  <input type="number" name="occupants" id="occupants" required>
-
-  <div class="furnish-options">
-    <label class="radio-option">
-      <input type="radio" name="furnishStatus" value="مفروشة" checked>
-      مفروشة
-    </label>
-    <label class="radio-option">
-      <input type="radio" name="furnishStatus" value="غير مفروشة">
-      غير مفروشة
-    </label>
-  </div>
-</div>
-
-
-
-     <!-- Step 2 -->
-<div class="step">
-  <h3>الوصف والخدمات</h3>
-
-  <label>وصف الوحدة:</label>
-  <textarea name="description" required></textarea>
-
-  <div class="services-section">
-
-    <!-- القسم الأول: الخدمات المتوفرة -->
-    <div class="service-category">
-      <h4>الخدمات المتوفرة:</h4>
-      <div id="availableServicesList"></div>
-      <button type="button" onclick="addService('available')">＋ إضافة خدمة</button>
-    </div>
-
-    <!-- القسم الثالث: الخدمات الإضافية -->
-    <div class="service-category">
-      <h4>الخدمات الإضافية:</h4>
-      <div id="extraServicesList"></div>
-      <button type="button" onclick="addService('extra')">＋ إضافة خدمة</button>
-    </div>
-
-    <!-- القسم الرابع: شروط المالك -->
-    <div class="service-category">
-      <h4>شروط المالك:</h4>
-      <div id="ownerConditionsList"></div>
-      <button type="button" onclick="addService('owner')">＋ إضافة شرط</button>
-    </div>
-
-  </div>
-</div>
-
-
-      <!-- Step 3 -->
-    <div class="step">
-      <div class="form-group">
-  <label for="address">العنوان:</label>
-  <input type="text" id="address" name="address" placeholder="أدخل عنوان الوحدة" required>
-</div>
-<div class="form-group">
-  <label for="city">المدينة:</label>
-  <input type="text" id="city" name="city" placeholder="أدخل اسم المدينة" required>
-
-  <label for="street">الشارع:</label>
-  <input type="text" id="street" name="street" placeholder="أدخل اسم الشارع" required>
-
-  <label for="building">رقم العقار:</label>
-  <input type="text" id="building" name="building" placeholder="أدخل رقم العقار" required>
-
-  <label for="floor">رقم الدور:</label>
-  <input type="text" id="floor" name="floor" placeholder="أدخل رقم الدور" required>
-
-  <label for="nearby"> قريبة من:</label>
-  <input type="text" id="nearby" name="nearby" placeholder="  قريبة من" required>
-
-  <label for="landmark">علامة مميزة :</label>
-  <input type="text" id="landmark" name="landmark" placeholder="  علامة مميزة" required>
-
-
-  <label for="locationLink">رابط الموقع على الخريطة:</label>
-  <input type="url" id="locationLink" name="locationLink" placeholder="أدخل رابط Google Maps" required>
-</div>
-
-    </div>
-
-    <!-- Step 4: السعر والإتاحة -->
-<div class="step">
-  <h3>السعر والإتاحة</h3>
-
-  <!-- السعر -->
-  <div class="form-group">
-    <label for="price">السعر  (بالجنيه):</label>
-    <input type="number" id="price" name="price" min="0" placeholder="أدخل السعر" required>
-  </div>
-
-  <!-- نوع التسعير -->
-  <div class="form-group">
-    <label for="pricingType">نوع التسعير:</label>
-    <select id="pricingType" name="pricingType" required>
-      <option value="">اختر نوع التسعير</option>
-      <option value="nightly">لكل ليلة</option>
-      <option value="weekly">لكل أسبوع</option>
-      <option value="monthly">لكل شهر</option>
-      <option value="per_person">لكل شخص</option>
-    </select>
-  </div>
-
-  <!-- الإتاحة -->
-  <div id="availabilityContainer">
-  <div class="availability-group">
-    <div class="form-group">
-      <label>متاح من:</label>
-      <input type="date" name="availableFrom[]" required>
-    </div>
-
-    <div class="form-group">
-      <label>متاح حتى:</label>
-      <input type="date" name="availableTo[]" required>
-    </div>
-  </div>
-</div>
-
-<!-- زر الإضافة -->
-<button type="button" onclick="addAvailability()">＋ إضافة فترة إتاحة</button>
-
-</div>
-
-      <!-- Step 5 -->
-<div class="step">
-  <h3>الصور والموافقة</h3>
-
-  <label>رفع الصور:</label>
-<input type="file" name="images" id="imagesInput" multiple accept="image/*" required>
-  <div id="imagesPreview" class="images-preview"></div>
-  <button type="button" onclick="removeImage()">حذف الصورة</button>
-
-  <div class="terms-container">
-    <label class="custom-checkbox">
-      <input type="checkbox" name="agree" required>
-      <span class="checkmark"></span>
-      أوافق على <a href="contract.html" target="_blank">العقد</a> و
-      <a href="terms.html" target="_blank">الشروط والأحكام</a>
-    </label>
-  </div>
-</div>
-
-
-
-      <!-- Navigation buttons -->
-      <div class="buttons">
-        <button type="button" id="prevBtn" onclick="nextStep(-1)" disabled>السابق</button>
-        <button type="button" id="nextBtn" onclick="nextStep(1)">التالي</button>
-        <button type="submit" id="submitBtn" style="display:none;">إضافة</button>
+      <!-- Progress bar -->
+      <div class="progress">
+        <div id="progressBar" class="progress-bar"></div>
       </div>
-    </form>
-  </div>
-</div>
 
-<!--
-<div id="chatbot-container">
- <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
+      <form id="multiForm" enctype="multipart/form-data">
+        <!-- Step 1 -->
+        <div class="step active">
+          <h3>بيانات أساسية</h3>
 
-  <div id="chatPopup" class="chatbot-popup hidden">
-    <div class="chatbot-header">
-      <span>Kemstay  🤖</span>
-      <button onclick="toggleChatbox()">✖</button>
+          <label for="unit_type">نوع الوحدة:</label>
+          <select name="unit_type" id="unit_type" required>
+            <option value="">اختر</option>
+            <option value="apartment">شقة</option>
+            <option value="room">غرفة</option>
+            <option value="studio">استديو</option>
+          </select>
+
+          <label for="category">التصنيف:</label>
+          <select name="category" id="category" required>
+            <option value="">اختر</option>
+            <option value="residential">سكني</option>
+            <option value="commercial">تجاري</option>
+          </select>
+
+          <label for="occupants">عدد الأفراد:</label>
+          <input type="number" name="occupants" id="occupants" placeholder="عدد الأفراد" required>
+
+          <div class="furnish-options">
+            <label class="radio-option">
+              <input type="radio" name="furnishStatus" value="مفروشة" checked>
+              مفروشة
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="furnishStatus" value="غير مفروشة">
+              غير مفروشة
+            </label>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step">
+          <h3>الوصف والخدمات</h3>
+
+          <label for="description">وصف الوحدة:</label>
+          <textarea name="description" id="description" placeholder="أدخل وصفًا مختصرًا للوحدة" aria-label="وصف الوحدة" required></textarea>
+
+          <div class="services-section">
+            <div class="service-category">
+              <h4>الخدمات المتوفرة:</h4>
+              <div id="availableServicesList"></div>
+              <button type="button" onclick="addService('available')">＋ إضافة خدمة</button>
+            </div>
+
+            <div class="service-category">
+              <h4>الخدمات الإضافية:</h4>
+              <div id="extraServicesList"></div>
+              <button type="button" onclick="addService('extra')">＋ إضافة خدمة</button>
+            </div>
+
+            <div class="service-category">
+              <h4>شروط المالك:</h4>
+              <div id="ownerConditionsList"></div>
+              <button type="button" onclick="addService('owner')">＋ إضافة شرط</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step">
+          <h3>العنوان والموقع</h3>
+
+          <label for="address">العنوان:</label>
+          <input type="text" id="address" name="address" placeholder="أدخل عنوان الوحدة" aria-label="العنوان" required>
+
+          <label for="city">المدينة:</label>
+          <input type="text" id="city" name="city" placeholder="أدخل اسم المدينة" aria-label="المدينة" required>
+
+          <label for="street">الشارع:</label>
+          <input type="text" id="street" name="street" placeholder="أدخل اسم الشارع" aria-label="الشارع" required>
+
+          <label for="building">رقم العقار:</label>
+          <input type="text" id="building" name="building" placeholder="أدخل رقم العقار" aria-label="رقم العقار" required>
+
+          <label for="floor">رقم الدور:</label>
+          <input type="text" id="floor" name="floor" placeholder="أدخل رقم الدور" aria-label="رقم الدور" required>
+
+          <label for="nearby">قريبة من:</label>
+          <input type="text" id="nearby" name="nearby" placeholder="أدخل معلم قريب" aria-label="قريبة من" required>
+
+          <label for="landmark">علامة مميزة:</label>
+          <input type="text" id="landmark" name="landmark" placeholder="أدخل علامة مميزة" aria-label="علامة مميزة" required>
+
+          <label for="locationLink">رابط الموقع على الخريطة:</label>
+          <input type="url" id="locationLink" name="locationLink" placeholder="أدخل رابط Google Maps" aria-label="رابط الموقع" required>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step">
+          <h3>السعر والإتاحة</h3>
+
+          <label for="price">السعر (بالجنيه):</label>
+          <input type="number" id="price" name="price" min="0" placeholder="أدخل السعر" aria-label="السعر" required>
+
+          <label for="pricingType">نوع التسعير:</label>
+          <select id="pricingType" name="pricingType" aria-label="نوع التسعير" required>
+            <option value="">اختر نوع التسعير</option>
+            <option value="nightly">لكل ليلة</option>
+            <option value="weekly">لكل أسبوع</option>
+            <option value="monthly">لكل شهر</option>
+            <option value="per_person">لكل شخص</option>
+          </select>
+
+          <div id="availabilityContainer">
+            <div class="availability-group">
+              <label for="availableFrom1">متاح من:</label>
+              <input type="date" id="availableFrom1" name="availableFrom[]" aria-label="متاح من" required>
+
+              <label for="availableTo1">متاح حتى:</label>
+              <input type="date" id="availableTo1" name="availableTo[]" aria-label="متاح حتى" required>
+            </div>
+          </div>
+
+          <button type="button" onclick="addAvailability()">＋ إضافة فترة إتاحة</button>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step">
+          <h3>الصور والموافقة</h3>
+
+          <label for="imagesInput">رفع الصور:</label>
+          <input type="file" name="images" id="imagesInput" multiple accept="image/*" title="اختر صورًا متعددة" required>
+
+          <div id="imagesPreview" class="images-preview"></div>
+          <button type="button" onclick="removeImage()">حذف الصور</button>
+
+          <div class="terms-container">
+            <label class="custom-checkbox">
+              <input type="checkbox" name="agree" required>
+              <span class="checkmark"></span>
+              أوافق على <a href="contract.html" target="_blank">العقد</a> و
+              <a href="terms.html" target="_blank">الشروط والأحكام</a>
+            </label>
+          </div>
+        </div>
+
+        <!-- أزرار التنقل -->
+        <div class="buttons">
+          <button type="button" id="prevBtn" onclick="nextStep(-1)" disabled>السابق</button>
+          <button type="button" id="nextBtn" onclick="nextStep(1)">التالي</button>
+          <button type="submit" id="submitBtn" style="display:none;">إضافة</button>
+        </div>
+      </form>
     </div>
-    <div class="chatbot-messages" id="chatMessages">
-      <p>👋 مرحبًا بك! كيف يمكنني مساعدتك؟</p>
-    </div>
-    <input
-      type="text"
-      id="chatInput"
-      placeholder="اكتب رسالتك..."
-      onkeydown="if(event.key==='Enter') sendChatMessage()"
-    />
-    <button onclick="sendChatMessage()">إرسال</button>
   </div>
--->
+
   <footer class="footer">
     <div class="footer-container">
-        <ul class="footer-links">
-            <li><a href="privacy.html">سياسة الخصوصية</a></li>
-            <li><a href="faq.html">الأسئلة الشائعة</a></li>
-            <li><a href="blog.html">المدونة</a></li>
-            <li><a href="terms.html">الشروط والأحكام</a></li>
-        </ul>
-        <p class="footer-copy">© 2025 Kemstay. جميع الحقوق محفوظة.</p>
+      <ul class="footer-links">
+        <li><a href="privacy.html">سياسة الخصوصية</a></li>
+        <li><a href="faq.html">الأسئلة الشائعة</a></li>
+        <li><a href="blog.html">المدونة</a></li>
+        <li><a href="terms.html">الشروط والأحكام</a></li>
+      </ul>
+      <p class="footer-copy">© 2025 Kemstay. جميع الحقوق محفوظة.</p>
     </div>
-</footer>
+  </footer>
 
-  <script src="add_apartments.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script type="module" src="add_apartments.js" defer></script>
   <script src="chatbot.js"></script>
 </body>
 </html>
