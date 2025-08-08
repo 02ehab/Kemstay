@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>داشبورد التحكم في البوستات</title>
+  <link rel="stylesheet" href="blog_admin.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">لوحة التحكم</div>
+    <nav class="nav">
+      <button id="newPostBtn" class="btn primary">إضافة بوست جديد</button>
+      <button id="refreshBtn" class="btn">تحديث</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- الفورم لإضافة / تعديل -->
+    <section class="editor-section card" id="editorSection">
+      <h2 id="editorTitle">إضافة بوست جديد</h2>
+
+      <div class="form-row">
+        <label>الصورة الرئيسية</label>
+        <input type="file" id="mainImageInput" accept="image/*">
+        <div class="img-preview" id="mainImgPreview" aria-hidden="true"></div>
+      </div>
+
+      <div class="form-row">
+        <label>العنوان</label>
+        <input type="text" id="postTitle" placeholder="اكتب عنوان البوست">
+      </div>
+
+      <div class="form-row">
+        <label>الوصف (محرر)</label>
+        <div class="editor-toolbar">
+          <button data-cmd="bold" title="عريض"><b>B</b></button>
+          <button data-cmd="italic" title="مائل"><i>I</i></button>
+          <button data-cmd="underline" title="تسطير"><u>U</u></button>
+          <button id="insertImageBtn" title="أدخل صورة داخل الوصف">إدراج صورة</button>
+          <input type="file" id="inlineImageInput" accept="image/*" multiple style="display:none;">
+          <button data-cmd="undo" title="تراجع">↺</button>
+        </div>
+        <div id="editor" class="editor" contenteditable="true" placeholder="اكتب وصف البوست هنا — يمكنك لصق صور أو إدراجها"></div>
+      </div>
+
+      <div class="form-actions">
+        <button id="saveBtn" class="btn primary">حفظ</button>
+        <button id="cancelBtn" class="btn">إلغاء</button>
+      </div>
+    </section>
+
+    <!-- قائمة البوستات -->
+    <section class="list-section card">
+      <h2>قائمة البوستات</h2>
+      <div id="postsContainer" class="posts-grid">
+        <!-- بطاقات البوستات ستظهر هنا -->
+      </div>
+      <div id="noPosts" class="muted">لا توجد بوستات بعد — أضف بوست جديد.</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>مدونتك — لوحة التحكم</small>
+  </footer>
+
+  <script src="blog_admin.js"></script>
+</body>
+</html>
