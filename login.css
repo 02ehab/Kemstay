@@ -1,4 +1,3 @@
-
 body {
   display: flex;
   flex-direction: column;
@@ -8,8 +7,20 @@ body {
   line-height: 1.6;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
+  justify-content: center;
   align-items: center;
- /* background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;*/
+  animation: fadeInBody 1s ease-in-out;
+}
+
+@keyframes fadeInBody {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .glass {
@@ -22,79 +33,203 @@ body {
   animation: fadeIn 1s ease-in-out;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
-    .form-container {
-      background-color: #fff;
-      padding: 25px 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-     width: 90%;
-max-width: 600px;
-      border: 1px solid #ddd;
-    }
+.form-container {
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 550px;
+  border: 1px solid #ddd;
+  animation: fadeInUp 0.8s ease-out;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #222;
-    }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      margin-top: 15px;
-      color: #333;
-    }
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+}
 
-    input, select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 15px;
-    }
+label {
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 15px;
+  color: #333;
+}
 
-    button {
-      width: 100%;
-      margin-top: 25px;
-      padding: 12px;
-      background-color: #1e90ff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+input, select {
+  width: 100%;
+   max-width: 100%;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border 0.3s ease;
+}
 
-    button:hover {
-      background-color: #187bcd;
-    }
+input:focus, select:focus {
+  outline: none;
+  border-color: #7b57ff;
+  box-shadow: 0 0 0 2px rgba(123, 87, 255, 0.2);
+}
 
-    .switch {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 14px;
-    }
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+  background-color: #21242a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-    .switch a {
-      color: #007bff;
-      cursor: pointer;
-    }
+button:hover {
+  background-color: #2e2f31;
+}
 
-    .hidden {
-      display: none;
-    }
+.switch {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
 
-  @media (max-width: 480px) {
+.switch a {
+  color: #007bff;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.switch a:hover {
+  color: #0056b3;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 480px) {
   .form-container {
-    padding: 15px;
+    padding: 20px;
     border-radius: 10px;
-    max-width: 100%;
-    width: 100%;
   }
 
-    }
-  
+  input, select, button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}
+
+form, fieldset {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
 
 
+.terms-container {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #444;
+  animation: fadeIn 0.8s ease-in-out;
+}
 
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.custom-checkbox .checkmark {
+  height: 18px;
+  width: 18px;
+  border-radius: 4px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  display: inline-block;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.custom-checkbox input:checked + .checkmark {
+  background-color: #21242a;
+  border-color: #21242a;
+}
+
+.custom-checkbox .checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.custom-checkbox input:checked + .checkmark::after {
+  display: block;
+}
+
+.custom-checkbox a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.custom-checkbox a:hover {
+  text-decoration: underline;
+}
+
+/* أنيميشن fadeIn */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
