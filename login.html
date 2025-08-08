@@ -20,7 +20,6 @@
       <label for="loginPassword">كلمة المرور</label>
       <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
 
-      <!-- رابط نسيت كلمة المرور -->
       <a href="#" id="forgot-password-link" style="display: block; margin-top: 10px; font-size: 14px; color: #007bff; text-align: left;">نسيت كلمة المرور؟</a>
 
       <button type="submit" id="login-btn">تسجيل الدخول</button>
@@ -28,54 +27,68 @@
     </form>
 
     <!-- Register Form -->
-<form id="registerForm" class="hidden" enctype="multipart/form-data">
-  <h2>إنشاء حساب في Kemstay</h2>
+    <form id="registerForm" class="hidden" enctype="multipart/form-data">
+      <h2>إنشاء حساب في Kemstay</h2>
 
-  <label for="fullname">الاسم الكامل</label>
-  <input type="text" id="fullname" required>
+      <!-- نوع الحساب أولاً -->
+      <label for="accountType">نوع الحساب</label>
+      <select id="accountType" required>
+        <option value="">اختر نوع الحساب</option>
+        <option value="renter">مستأجر</option>
+        <option value="owner">مالك</option>
+        <option value="broker">وسيط معتمد</option>
+      </select>
 
-  <label for="governorate">المحافظة</label>
-  <select id="governorate" required>
-    <option value="">اختر المحافظة</option>
-    <option value="القاهرة">القاهرة</option>
-    <option value="الجيزة">الجيزة</option>
-    <!-- ... باقي المحافظات -->
-  </select>
+      <fieldset id="userFields" disabled>
+        <label for="fullname">الاسم الكامل</label>
+        <input type="text" id="fullname" required>
 
-  <label for="phone">رقم الموبايل</label>
-  <input type="tel" id="phone" required pattern="[0-9]{10,15}">
+        <label for="governorate">المحافظة</label>
+        <select id="governorate" required>
+          <option value="">اختر المحافظة</option>
+          <option value="القاهرة">القاهرة</option>
+          <option value="الجيزة">الجيزة</option>
+        </select>
 
-  <label for="email">البريد الإلكتروني</label>
-  <input type="email" id="email" required>
+        <label for="phone">رقم الموبايل</label>
+        <input type="tel" id="phone" required pattern="[0-9]{10,15}">
 
-  <label for="password">كلمة المرور</label>
-  <input type="password" id="password" required>
+        <label for="email">البريد الإلكتروني</label>
+        <input type="email" id="email" required>
 
-  <label for="accountType">نوع الحساب</label>
-  <select id="accountType" required>
-    <option value="">اختر نوع الحساب</option>
-    <option value="renter">مستأجر</option>
-    <option value="owner">مالك</option>
-    <option value="broker">وسيط معتمد</option>
-  </select>
+        <label for="password">كلمة المرور</label>
+        <input type="password" id="password" required>
 
-  <!-- ✅ KYC إضافات -->
-  <label for="nationalId">رقم الهوية</label>
-  <input type="text" id="nationalId" required pattern="[0-9]{10,20}">
+        <div id="kyc-fields" style="display: none;">
+          <label for="nationalId">الرقم القومي</label>
+          <input type="text" id="nationalId" pattern="[0-9]{10,20}">
 
-  <label for="idCardFront">صورة البطاقة الأمامية</label>
-  <input type="file" id="idCardFront" accept="image/*" required>
+          <label for="idCardFront">صورة البطاقة (الوجه الأمامي)</label>
+          <input type="file" id="idCardFront" accept="image/*">
 
-  <label for="selfiePhoto">صورة شخصية (اختياري)</label>
-  <input type="file" id="selfiePhoto" accept="image/*">
+          <label for="idCardBack">صورة البطاقة (الوجه الخلفي)</label>
+          <input type="file" id="idCardBack" accept="image/*">
 
-  <label for="birthdate">تاريخ الميلاد</label>
-  <input type="date" id="birthdate" required>
+          <label for="birthdate">تاريخ الميلاد</label>
+          <input type="date" id="birthdate">
+        </div>
 
-  <button type="submit" id="signup-btn">إنشاء حساب</button>
-  <div class="switch">لديك حساب بالفعل؟ <a href="#" onclick="toggleForm()">تسجيل الدخول</a></div>
-</form>
+        <div class="terms-container">
+  <label class="custom-checkbox">
+    <input type="checkbox" name="agree" required>
+    <span class="checkmark"></span>
+    أوافق على
+    <a href="terms.html" target="_blank">الشروط والأحكام</a>
+  </label>
+</div>
+
+
+        <button type="submit" id="signup-btn">إنشاء حساب</button>
+        <div class="switch">لديك حساب بالفعل؟ <a href="#" onclick="toggleForm()">تسجيل الدخول</a></div>
+      </fieldset>
+    </form>
   </div>
+  
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script type="module" src="login.js" defer></script>
 </body>
