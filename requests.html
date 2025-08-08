@@ -1,16 +1,44 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>Kemstay | الطلبات</title>
-  <link rel="stylesheet" href="requests.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> الطلبات - Kemstay</title>
+  <link rel="stylesheet" href="requests.css" />
+   <link rel="stylesheet" href="chatbot.css" />
 </head>
 <body>
+     <header>
 
-  <header>
-    <h1>الطلبات الواردة</h1>
+     <div class="logo">Kemstay</div>
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- القائمة الأفقية (للكمبيوتر) -->
+  <nav class="main-nav">
+    <a href="index.html">الرئيسية</a>
+    <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
+    <a href="notifications.html">الاشعارات</a>
+    <a href="chat.html">الدردشة </a>
+<a href="login.html" class="auth-link" id="authLinkDesktop">تسجيل الدخول</a>
+  </nav>
+
+  <!-- القائمة الجانبية (للموبايل) -->
+  <div id="sideMenu" class="side-menu">
+    <button class="close-btn" onclick="closeMenu()">✖</button>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="apartments.html">الشقق</a>
+      <a href="hostels.html">هوستيل</a>
+      <a href="notifications.html">الاشعارات</a>
+    <a href="chat.html">الدردشة </a>
+<a href="login.html" class="auth-link" id="authLinkMobile">تسجيل الدخول</a>
+    </nav>
+  </div>
+
   </header>
 
+  
   <div class="requests-container">
 
     <!-- كارت طلب -->
@@ -26,17 +54,12 @@
         <button class="contact">تواصل</button>
       </div>
     </div>
-<!-- Modal for Rejection Reason -->
-<div id="rejectionModal" class="modal hidden">
-  <div class="modal-content">
-    <h3>سبب الرفض</h3>
-    <textarea id="rejectionText" placeholder="اكتب سبب الرفض هنا..." rows="4"></textarea>
-    <div class="modal-actions">
-      <button id="submitRejection" class="submit-reason">إرسال</button>
-      <button id="cancelRejection" class="cancel">إلغاء</button>
-    </div>
-  </div>
+    <div class="rejection-reason hidden">
+  <label>سبب الرفض:</label>
+  <textarea rows="2" placeholder="أدخل السبب هنا..."></textarea>
+  <button class="submit-reason">إرسال</button>
 </div>
+
     <!-- تكرار لكروت الطلبات -->
     <div class="request-card">
       <h3>طلب من: سارة علي</h3>
@@ -50,6 +73,54 @@
     </div>
 
   </div>
-<script src="requests.js"></script>
+<!-- Modal for Rejection Reason -->
+<div id="rejectionModal" class="modal hidden">
+  <div class="modal-content">
+    <h3>سبب الرفض</h3>
+    <textarea id="rejectionText" placeholder="اكتب سبب الرفض هنا..." rows="4"></textarea>
+    <div class="modal-actions">
+      <button id="submitRejection" class="submit-reason">إرسال</button>
+      <button id="cancelRejection" class="cancel">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<!--
+<div id="chatbot-container">
+  
+ <div class="chatbot-icon" onclick="toggleChatbox()">💬</div>
+
+  
+  <div id="chatPopup" class="chatbot-popup hidden">
+    <div class="chatbot-header">
+      <span>Kemstay  🤖</span>
+      <button onclick="toggleChatbox()">✖</button>
+    </div>
+    <div class="chatbot-messages" id="chatMessages">
+      <p>👋 مرحبًا بك! كيف يمكنني مساعدتك؟</p>
+    </div>
+    <input
+      type="text"
+      id="chatInput"
+      placeholder="اكتب رسالتك..."
+      onkeydown="if(event.key==='Enter') sendChatMessage()"
+    />
+    <button onclick="sendChatMessage()">إرسال</button>
+  </div>
+ -->
+  <footer class="footer">
+    <div class="footer-container">
+        <ul class="footer-links">
+            <li><a href="privacy.html">سياسة الخصوصية</a></li>
+            <li><a href="faq.html">الأسئلة الشائعة</a></li>
+            <li><a href="blog.html">المدونة</a></li>
+            <li><a href="terms.html">الشروط والأحكام</a></li>
+        </ul>
+        <p class="footer-copy">© 2025 Kemstay. جميع الحقوق محفوظة.</p>
+    </div>
+</footer>
+
+  <script src="requests.js"></script>
+  <script src="chatbot.js"></script>
 </body>
 </html>
