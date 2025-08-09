@@ -8,23 +8,36 @@
 </head>
 <body>
 
-  <!-- الهيدر -->
-  <header class="header">
-    <div class="logo">مدونتي</div>
-    <nav class="nav" id="navMenu">
-      <a href="#">الصفحة الرئيسية</a>
-      <a href="#">المضيف</a>
-      <a href="#">المستأجر</a>
-      <a href="#">الوسيط</a>
-      <a href="#">من نحن</a>
+ <header>
+
+     <div class="logo">Kemblog</div>
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- القائمة الأفقية (للكمبيوتر) -->
+  <nav class="main-nav">
+    <a href="index.html">الرئيسية</a>
+    <a href="about.html">من نحن </a>
+<!--<a href="login.html" class="auth-link" id="authLinkDesktop">تسجيل الدخول</a>
+  </nav>
+-->
+  <!-- القائمة الجانبية (للموبايل) -->
+  <div id="sideMenu" class="side-menu">
+    <button class="close-btn" onclick="closeMenu()">✖</button>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+    <a href="about.html">من نحن </a>
+<!--<a href="login.html" class="auth-link" id="authLinkMobile">تسجيل الدخول</a>
     </nav>
-    <div class="menu-toggle" id="menuToggle">&#9776;</div>
+  </div>
+-->
   </header>
+
 <main>
   <!-- الهيرو -->
   <section class="hero">
+     <div class="posts-grid">
     <div class="post-card">
-      <img src="ehab2.jpg" alt="صورة البوست">
+      <img src="home.jpg" alt="صورة البوست">
       <div class="post-content">
         <h2>عنوان البوست</h2>
         <p onclick="window.location.href='post.html'">
@@ -33,7 +46,7 @@
       </div>
     </div>
      <div class="post-card">
-      <img src="ehab2.jpg" alt="صورة البوست">
+      <img src="home.jpg" alt="صورة البوست">
       <div class="post-content">
         <h2>عنوان البوست</h2>
         <p onclick="window.location.href='post.html'">
@@ -41,16 +54,27 @@
         </p>
       </div>
     </div>
+    </div>
   </section>
 
 </main>
 
-  <!-- الفوتر -->
+   <!-- Footer -->
   <footer class="footer">
-    <a href="#">سياسة الاستخدام</a>
-    <a href="#">التواصل معنا</a>
-  </footer>
+    <div class="footer-container">
+        <ul class="footer-links">
+            <li><a href="privacy.html">سياسة الخصوصية</a></li>
+            <li><a href="faq.html">الأسئلة الشائعة</a></li>
+            <li><a href="index.html">منصة كيم </a></li>
+            <li><a href="terms.html">الشروط والأحكام</a></li>
+        </ul>
+        <p class="footer-copy">© 2025 Kemstay. جميع الحقوق محفوظة.</p>
+    </div>
+</footer>
 
-  <script src="blog.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script type="module" src="supabase.js"></script>
+<script type="module" src="blog.js"></script>
+
 </body>
 </html>
