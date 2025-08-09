@@ -1,10 +1,10 @@
-/* Reset and base styles */
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
+/* Header*/
+*{
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 html, body {
   height: 100%;
   margin: 0;
@@ -18,14 +18,10 @@ body {
   color: #333;
   line-height: 1.6;
   direction: rtl;
-  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;
+  /*  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center fixed;*/
+
 }
 
-main {
-  flex: 1; /* يسمح للمحتوى بالتمدد */
-}
-
-/* Glass effect */
 .glass {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 20px;
@@ -36,51 +32,44 @@ main {
   animation: fadeIn 1s ease-in-out;
 }
 
-/* Header */
-header {
+    header {
   background-color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* ظل أعمق */
   padding: 1rem 2rem;
-  margin: 20px auto;
+  margin: 20px auto; /* يبعد الهيدر عن حواف الصفحة */
   width: 95%;
   max-width: 1200px;
-  border-radius: 10px;
+  border-radius: 10px; /* حواف دائرية */
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  direction: rtl; /* اتجاه الهيدر rtl */
+  direction: ltr; /* تُغيّرها للعربي إذا أردت */
   z-index: 10;
-  position: relative;
-  background: rgba(255, 255, 255, 0.9);
+position: relative; /* لو عايز تضمن أن الهيدر فوق المحتوى */
+  /* لو عايز تأثير زجاجي */
+background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  
 }
 
-/* الشعار إلى اليسار */
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #964B00;
-  order: 1; /* ترتيب في الفلكس */
-  margin-left: auto; /* يدفع اللوجو لليسار */
-}
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #964B00;
+    }
+    
+    nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
 
-/* القائمة على اليمين */
-nav {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  order: 2;
-  margin-right: auto; /* يدفع القائمة لليمين */
-}
-
-nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
-
-/* زر قائمة الموبايل */
-.menu-toggle {
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+     .menu-toggle {
   display: none;
   background: none;
   border: none;
@@ -88,7 +77,6 @@ nav a {
   cursor: pointer;
 }
 
-/* القائمة الجانبية (الموبايل) */
 .side-menu {
   display: none;
   position: fixed;
@@ -97,8 +85,8 @@ nav a {
   width: 70%;
   max-width: 300px;
   height: 100%;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
+  backdrop-filter: blur(12px); /* لو عايز تأثير زجاجي */
   -webkit-backdrop-filter: blur(12px);
   box-shadow: -2px 0 10px rgba(0,0,0,0.2);
   padding: 2rem 1rem;
@@ -134,60 +122,117 @@ nav a {
   display: flex;
 }
 
-/* استجابة الموبايل */
 @media (max-width: 600px) {
   header > nav {
-    display: none; /* إخفاء القائمة الأصلية على الشاشات الصغيرة */
+    display: none; /* إخفاء القائمة الأصلية فقط على الشاشات الصغيرة */
   }
 
   .menu-toggle {
     display: block;
   }
 
+
   nav:not(.side-menu nav) {
     display: none; /* إخفاء القائمة العادية على الموبايل */
   }
 }
 
-/* الفوتر */
+
+    /* المحتوى */
+
+    .article-container {
+      width: 100%;
+      max-width: 900px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      padding: 1.5rem 2rem;
+      margin-bottom: 3rem;
+      margin: 20px auto; /* يبعد المحتوى عن حواف الصفحة */
+      direction: rtl; /* لتغيير اتجاه النصوص */
+    }
+    .article-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    #articleTitle {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #4b2c0a;
+    }
+    .article-content {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #444;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: #007BFF;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+  /*footer*/
 .footer {
-  background-color: #0e0e0e;
-  color: #999;
-  padding: 40px 20px;
-  text-align: center;
-  border-radius: 3px;
-  /* أزلت margin-top لكي لا يبتعد الفوتر عن أسفل الصفحة */
+    background-color: #0e0e0e;
+    color: #999;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 50px;
+    border-radius: 3px;
+    
 }
 
 .footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
+    
 }
 
 .footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 15px 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .footer-links li a {
-  color: #999;
-  text-decoration: none;
-  font-size: 14px;
-  transition: 0.3s;
+    color: #999;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
 }
 
 .footer-links li a:hover {
-  color: #fff;
-  text-decoration: underline;
+    color: #fff;
+    text-decoration: underline;
 }
 
 .footer-copy {
-  font-size: 12px;
-  color: #666;
-  margin-top: 10px;
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
 }
+
+
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      nav.main-nav {
+        display: none;
+      }
+    }
