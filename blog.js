@@ -33,10 +33,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="post-card">
         ${post.main_image_url ? `<img src="${post.main_image_url}" alt="${post.title}">` : ''}
         <div class="post-content">
-          <h2>${post.title}</h2>
-          <p onclick="window.location.href='post.html?id=${post.id}'">
+          <h2><a href="article_view.html?id=${post.id}">${post.title}</a></h2>
+          <p>
             ${post.content.replace(/<[^>]*>?/gm, '').slice(0, 100)}...
           </p>
+          <a href="article_view.html?id=${post.id}" class="read-more">اقرأ المزيد</a>
         </div>
       </div>
     `).join('');
