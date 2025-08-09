@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kemograghy — المنصة للمصورين</title>
+<link rel="stylesheet" href="photographers.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand">
+      <span class="logo">📸</span>
+      <span class="brand-name">Kemograghy</span>
+    </div>
+    <nav class="nav">
+      <a href="login.html" class="btn small">تسجيل / دخول</a>
+      <a href="photographers_list.html" class="btn primary">اعثر على مصور</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1>احجز مصور محترف بسرعة وسهولة</h1>
+      <p>خدمة Kemograghy تخدم منصة Kemstay — احصل على مصور للعقار، جلسات، أو فعاليات.</p>
+
+      <form id="home-search" class="search-bar" onsubmit="event.preventDefault(); location.href='photographers.html'">
+        <input type="text" placeholder="ابحث عن مدينة (مثال: الرياض)" id="search-city">
+        <select id="search-type">
+          <option value="">كل أنواع التصوير</option>
+          <option value="property">تصوير عقاري</option>
+          <option value="portrait">جلسات شخصية</option>
+          <option value="event">فعاليات</option>
+        </select>
+        <button class="btn primary" type="submit">ابحث الآن</button>
+      </form>
+
+      <p class="muted">يمكنك تصفح المصورين، مشاهدة معرض أعمالهم، وحجز الموعد المناسب - كل ذلك بدون تعقيد.</p>
+    </div>
+  </section>
+
+  <section class="features container">
+    <div class="feature">
+      <h3>بسيط</h3>
+      <p>واجهة واضحة للحجز في دقائق.</p>
+    </div>
+    <div class="feature">
+      <h3>موثوق</h3>
+      <p>ملفات شخصية وتقييمات لأعمال المصورين.</p>
+    </div>
+    <div class="feature">
+      <h3>متكامل مع Kemstay</h3>
+      <p>اختر مصور عند حجز عقار لإظهار صور أفضل.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© <span id="year"></span> Kemograghy — جميع الحقوق محفوظة</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
