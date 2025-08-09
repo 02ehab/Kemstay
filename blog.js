@@ -1,10 +1,10 @@
 import { supabase } from './supabase.js';
 
-function openMenu() {
+window.openMenu = function() {
   document.getElementById("sideMenu").classList.add("open");
 }
 
-function closeMenu() {
+window.closeMenu = function() {
   document.getElementById("sideMenu").classList.remove("open");
 }
 
