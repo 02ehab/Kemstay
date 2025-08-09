@@ -1,0 +1,37 @@
+:root{
+  --primary:#007bff;
+  --dark:#0b2340;
+  --muted:#6b7280;
+  --bg:#f6f8fb;
+  --card:#ffffff;
+}
+
+*{box-sizing:border-box}
+body{font-family:"Tajawal",system-ui,Arial,sans-serif;background:var(--bg);margin:0;color:var(--dark);line-height:1.4}
+.container{max-width:1100px;margin:0 auto;padding:18px}
+.site-header{background:var(--primary);color:#fff;box-shadow:0 2px 8px rgba(2,6,23,0.08)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.logo{font-size:24px}
+.brand-name{font-size:20px}
+.nav a{color:#fff;text-decoration:none;margin-left:8px}
+.btn{background:transparent;border:1px solid rgba(0,0,0,0.08);padding:8px 12px;border-radius:8px;cursor:pointer;color:var(--dark);text-decoration:none}
+.btn:hover{opacity:.95}
+.btn.primary{background:var(--primary);color:#fff;border:none}
+.btn.small{padding:6px 8px;font-size:13px}
+.hero{padding:36px 0;background:linear-gradient(90deg, rgba(0,123,255,0.08), rgba(255,255,255,0));margin-bottom:10px}
+.hero-inner{text-align:center}
+.hero h1{margin:0 0 8px;font-size:28px}
+.muted{color:var(--muted)}
+.features{display:flex;gap:16px;justify-content:space-between;margin-top:18px}
+.feature{background:var(--card);padding:16px;border-radius:10px;flex:1;box-shadow:0 6px 18px rgba(15,15,15,0.04);text-align:center}
+.site-footer{background:#111827;color:#fff;padding:12px;margin-top:30px}
+.center-vertical{min-height:70vh;display:flex;align-items:center;justify-content:center}
+.card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 16px rgba(10,10,10,0.04)}
+.auth-card{max-width:420px;width:100%}
+input[type="text"], input[type="email"], input[type="password"], select, input[type="date"], input[type="time"]{
+  width:100%;padding:10px;border-radius:8px;border:1px solid #e5e7eb;margin-top:6px
+}
+label{display:block;margin-top:8px;font-size:14px}
+a{color:inherit}
+@media (max-width:900px){ .features{flex-direction:column} .header-inner{padding:10px} }
