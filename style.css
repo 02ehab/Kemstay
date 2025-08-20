@@ -364,41 +364,53 @@ background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
    
     /* الخدمات*/
     .services-section {
-  padding: 3rem 1rem;
-  background-color: #f9f9f9;
+  padding: 60px 20px;
   text-align: center;
 }
 
 .services-title {
   font-size: 2rem;
-  color: var(--primary, #010101);
-  margin-bottom: 2rem;
+  margin-bottom: 30px;
+  color: #333;
 }
 
 .services-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
 }
 
 .service-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 120px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.service-item:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .service-icon {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 0.75rem;
+  width: 120px;
+  height: auto;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.service-item:hover .service-icon {
+  transform: rotate(-5deg) scale(1.1);
 }
 
 .service-name {
-  font-size: 1rem;
-  color: #333;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
 }
+
 
 /*عرض شقق مميزة */
 
@@ -540,3 +552,4 @@ background: rgba(255, 255, 255, 0.9); /* لو الخلفية شفافة */
     color: #666;
     margin-top: 10px;
 }
+
